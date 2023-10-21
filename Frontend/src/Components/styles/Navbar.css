@@ -1,0 +1,17 @@
+.navbar-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .navbar-list a {
+    text-decoration: none;
+    color: #000;
+    margin: 0 10px;
+  }
+  
+  /* button {
+    
+  } */
