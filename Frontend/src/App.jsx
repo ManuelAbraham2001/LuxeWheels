@@ -18,16 +18,22 @@ function App() {
     <html className= {bodyClassName}>
       <div className="App">
         <Navbar/>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/contacto" element={<Contact />} />
-          <Route path="/favs" element={<Favs />} />
-          <Route path="/detail/:id" element={<Detail />} />
-        </Routes>
-        <Footer/>
+
+
       </div>
     </html>  
   );
 }
 
 export default App;
+
+/*
+<Routes>
+<Route path="/" element={<Home />}/>
+<Route path="/contacto" element={<Contact />} />
+<Route path="/favs" element={<Favs />} />
+<Route path="/detail/:id" element={<Detail />} />
+</Routes>
+
+<Footer/>
+*/

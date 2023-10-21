@@ -16,19 +16,26 @@ const Navbar = () => {
   const bodyClassName = `body ${state.theme}`
   return (
     
-      <nav className='nav'>
-      <ul className="navbar-list">
-      <img src="/DH.ico" alt="DH" />
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/contacto">Contacto</Link></li>
-      <li><Link to="/favs">Favs</Link></li>
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <button onClick={toggleTheme}>Change theme</button>
-      </ul>
-      </nav>
+    <nav className="navbar">
+      <Link to="/">
+        <div className="logo-container">
+          <img className="logo" src='/images/Logo_dark1.png' alt="Autos de alquiler" />
+        </div>
+
+      </Link>
+
+      <div class='burger-menu'>
+            <img src='/images/icon-hamburger.svg'/>
+      </div>
+
+      <div className='right-block'>
+          <button className='nav-button'>Crear cuenta</button>
+          <button className='nav-button'>Iniciar sesión</button>
+      </div>
+    </nav>
     
   )
 }
 
 export default Navbar
+
