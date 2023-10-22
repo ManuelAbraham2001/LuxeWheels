@@ -9,8 +9,9 @@ const Home = () => {
   const {state} = useDentiStates()
 
   return (
-    <main className="" >
+    <main className="main" >
       <h1>Home</h1>
+      
       <div className='card-grid'>
         {state.dentistas.map(dentista => (<Card dentista={dentista} key={dentista.id}/>))}
       </div>

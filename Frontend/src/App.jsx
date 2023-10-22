@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Detail from "./Routes/Detail";
 import { useDentiStates } from "./Context/Context";
+import Card from "./Components/Card";
 
 
 
@@ -18,6 +19,8 @@ function App() {
     <html className= {bodyClassName}>
       <div className="App">
         <Navbar/>
+        <Home/>
+        <Footer/>
 
 
       </div>

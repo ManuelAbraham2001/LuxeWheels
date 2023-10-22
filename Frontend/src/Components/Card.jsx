@@ -32,6 +32,7 @@ const Card = ({ dentista }) => {
         <button onClick={addFav} className="favButton">{findDentista ? '🌟' : '⭐'}</button>
         {/* () => setFavs((prevFavs) => [...prevFavs, odontologo]) */}
     </div>
+    
   );
 };
 
