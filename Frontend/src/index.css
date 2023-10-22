@@ -54,10 +54,11 @@ footer {
   height: 40px;
   margin-top: 1rem;
   background: #FFBE3F;
+  box-sizing: border-box;
 }
 
 footer > img{
-  width: 200px;
+  width: 30px;
   margin: 0px;
   padding: 3px;
   box-sizing: border-box;

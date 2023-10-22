@@ -19,7 +19,7 @@ function App() {
     <html className= {bodyClassName}>
       <div className="App">
         <Navbar/>
-        <Home/>
+       <Home/>
         <Footer/>
 
 

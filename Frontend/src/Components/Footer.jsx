@@ -1,13 +1,14 @@
 import React from 'react'
-import "./styles/Footer.css"
+
+
 
 
 
 const Footer = () => {
   return (
     <footer className='footer'>
-        <p>Powered by</p>
-        <img src="/images/DH.png" alt='DH-logo' />
+        <p>Copyright</p>
+        
         <img className='icon' src="/images/ico-facebook.png" alt='facebook-logo' />
         <img  className='icon'src="/images/ico-instagram.png" alt='instagram-logo' />
         <img  className='icon'src="/images/ico-tiktok.png" alt='tiktok-logo' />

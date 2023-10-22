@@ -10,8 +10,7 @@ const Home = () => {
 
   return (
     <main className="main" >
-      <h1>Home</h1>
-      <h1>Home</h1>
+    
       
       <div className='buscador'>
 <div className='buscar'>
