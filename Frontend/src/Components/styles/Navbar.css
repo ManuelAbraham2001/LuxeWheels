@@ -6,6 +6,8 @@
 
 
   .navbar {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     z-index: 1000; 
@@ -33,7 +35,7 @@
   height: 44px;
   top: 24px;
   left: 1048px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px;
 }
 
@@ -45,6 +47,7 @@
 
 
 .logo-container {
+  
   width: 110px;
   height: 110px;
 }
