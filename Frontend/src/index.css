@@ -20,8 +20,6 @@ code {
 nav{
   display: flex;
   width: 100vw;
-  justify-content: space-around;
-  padding: 5px;
   background: #FFBE3F;
 
 }
