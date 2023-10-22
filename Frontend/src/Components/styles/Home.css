@@ -23,10 +23,68 @@
   justify-content: center;
   }
 
-  #buscador{
-    display: flex;
+  main{
+  display:flexbox;
+  align-items: center;
+
+  }
+
+  .buscador{
+    margin-top: -21px;
+    background-color: black;
+    display:flex;
+    width: 100%;
+    height: 100%;
+    padding: .400rem 2.25rem .375rem .75rem;
+    line-height: 2.5;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
     justify-content: center;
-    width: 100px;
+   
+    
+    
+    }
+    .btn-buscar{
+      border-radius: .25rem;
+      background-color: #ced4da;
+      height: 30px;
+      width:100px;
+      font-size: 16px;
+    }
+    #buscar{
+      height: 25px;
+      border-radius: .25rem;
+      border: 1px solid #ced4da;
+      
+    
+    }
+    #reco{
+      width:170px;
+      height: 25px;
+      border-radius: .25rem;
+      text-align: center;
+      border: 1px solid #ced4da;
+      margin-left: 10px; 
+       
+      
+    }
+    #cate{
+      width:110px;
+      height: 25px;
+      text-align: center;
+      border-radius: .25rem;
+      border: 1px solid #ced4da;
+      margin-left: 10px; 
 
     }
+
     
+    @media (max-width: 768px){
+      .buscador{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-content: space-between;
+        
+      }
+    }
