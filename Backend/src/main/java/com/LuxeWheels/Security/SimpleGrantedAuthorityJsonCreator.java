@@ -1,4 +1,4 @@
-package com.manu.clinica.dental.Security;
+package com.LuxeWheels.Security;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package com.manu.clinica.dental.Security;
+package com.LuxeWheels.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -65,20 +65,8 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(a ->
-                        a.requestMatchers("/usuarios/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/odontologos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/odontologos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/odontologos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/odontologos/**").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.POST, "/pacientes/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/pacientes/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/pacientes/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/pacientes/**").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers(HttpMethod.POST, "/turnos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT, "/turnos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/turnos/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/turnos/**").hasAnyRole("ADMIN", "USER")
-
+                        a.requestMatchers("/api/usuarios/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/rol/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
 
                 .build();
