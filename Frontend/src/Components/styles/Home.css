@@ -18,7 +18,7 @@
   border-radius: 5px;
   }
   
-  contenedor {
+  .contenedor {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -31,7 +31,7 @@
   }
 
   .buscador{
-    margin-top: -21px;
+    margin-top: 118px;
     background-color: black;
     display:flex;
     width: 100%;
@@ -41,6 +41,7 @@
     border: 1px solid #ced4da;
     border-radius: .25rem;
     justify-content: center;
+    box-sizing: border-box;
    
     
     
