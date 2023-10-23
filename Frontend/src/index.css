@@ -8,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #D7DBDD;
 }
 
 code {
@@ -44,8 +45,6 @@ a:hover{
 
 footer {
   display: flex;
-  justify-content: center;
-  text-align: center;
   padding: 2rem;
   position: relative;
   top:12rem;
@@ -55,6 +54,7 @@ footer {
   margin-top: 1rem;
   background: #FFBE3F;
   box-sizing: border-box;
+  
 }
 
 footer > img{
@@ -62,10 +62,16 @@ footer > img{
   margin: 0px;
   padding: 3px;
   box-sizing: border-box;
+  
 }
 footer > p{
   margin: 0;
-  padding-top: 0.7rem;
+  text-align: center;
+  
+}
+.iconos{
+  display: flex;
+  margin-left: 500px;
 }
 
 form{
@@ -78,10 +84,12 @@ form{
 }
 
 .icon{
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   display: flex;
-  justify-content: flex-start;
+  padding:3px ;
+
+  
 }
 
 .card{
