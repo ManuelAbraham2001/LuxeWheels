@@ -1,4 +1,4 @@
-package com.LuxeWheels.entities;
+package com.LuxeWheels.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
