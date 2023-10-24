@@ -1,0 +1,46 @@
+
+
+footer {
+    display: flex;
+    padding: 2rem;
+    position: relative;
+    top:12rem;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    margin-top: 1rem;
+    background: #FFBE3F;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #FFBE3F;
+}
+
+
+
+
+footer > img{
+    width: 30px;
+    margin: 0px;
+    padding: 3px;
+    box-sizing: border-box;
+    
+  }
+  footer > p{
+    margin: 0;
+    text-align: center;
+    
+  }
+
+  
+  .iconos {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }

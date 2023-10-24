@@ -6,6 +6,7 @@ import Favs from "./Routes/Favs";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Detail from "./Routes/Detail";
+import AddVehicleForm from "./Components/AddVehicleForm";
 import { useDentiStates } from "./Context/Context";
 import Card from "./Components/Card";
 
@@ -19,7 +20,13 @@ function App() {
     <html className= {bodyClassName}>
       <div className="App">
         <Navbar/>
-        <Home/>
+
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+        </Routes>    
+
+
         <Footer/>
 
 
