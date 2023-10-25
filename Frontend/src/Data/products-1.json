@@ -1,0 +1,218 @@
+[
+    { "id": 1,
+      "model": "Volkswagen Gol",
+      "brand": "Volkswagen",
+      "year": 2021,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Volkswagen Gol es un automóvil del segmento B que se produce en Brasil desde 1980."
+    },
+    {
+      "id": 2,
+      "model": "Renault Clio",
+      "brand": "Renault",
+      "year": 2022,
+      "category": "Compacto",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Renault Clio es un automóvil de turismo del segmento B producido por el fabricante francés Renault."
+    },
+    {
+      "id": 3,
+      "model": "Chevrolet Prisma",
+      "brand": "Chevrolet",
+      "year": 2020,
+      "category": "Sedan",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Chevrolet Prisma es un automóvil de turismo del segmento B producido por General Motors para Chevrolet."
+    },
+    {
+      "id": 4,
+      "model": "Fiat Cronos",
+      "brand": "Fiat",
+      "year": 2021,
+      "category": "Sedan",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Fiat Cronos es un automóvil del segmento B producido por el fabricante italiano Fiat."
+    },
+    {
+        "id": 5,
+      "model": "Ford Ka",
+      "brand": "Ford",
+      "year": 2022,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Ford Ka es un automóvil del segmento A que se produce en Brasil desde 1996."
+    },
+    {
+        "id": 6,
+      "model": "Peugeot 208",
+      "brand": "Peugeot",
+      "year": 2020,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Peugeot 208 es un automóvil del segmento B producido por el fabricante francés Peugeot."
+    },
+    {
+        "id": 7,
+      "model": "Toyota Etios",
+      "brand": "Toyota",
+      "year": 2021,
+      "category": "Sedan",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Toyota Etios es un automóvil del segmento B producido por la compañía japonesa Toyota desde 2010."
+    },
+    {
+        "id": 8,
+      "model": "Citroën C3",
+      "brand": "Citroën",
+      "year": 2023,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Citroën C3 es un automóvil del segmento B producido por la marca francesa Citroën desde 2002."
+    },
+    {
+        "id": 9,
+      "model": "Nissan March",
+      "brand": "Nissan",
+      "year": 2022,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Nissan March es un automóvil del segmento B producido por la marca japonesa Nissan desde 1982."
+    },
+    {
+        "id": 10,
+      "model": "Fiat Uno",
+      "brand": "Fiat",
+      "year": 2021,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Fiat Uno es un automóvil del segmento A producido por el fabricante italiano Fiat desde 1983."
+    },
+    {
+        "id": 11,
+      "model": "Chevrolet Onix",
+      "brand": "Chevrolet",
+      "year": 2022,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Chevrolet Onix es un automóvil del segmento B producido por la marca estadounidense Chevrolet desde 2012."
+    },
+    {
+        "id": 12,
+      "model": "Volkswagen Polo",
+      "brand": "Volkswagen",
+      "year": 2020,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Volkswagen Polo es un automóvil del segmento B producido por la marca alemana Volkswagen desde 1975."
+    },
+    {
+        "id": 13,
+      "model": "Renault Sandero",
+      "brand": "Renault",
+      "year": 2021,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Renault Sandero es un automóvil de turismo del segmento B producido por el fabricante francés Renault."
+    },
+    {
+        "id": 14,
+      "model": "Ford Fiesta",
+      "brand": "Ford",
+      "year": 2022,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Ford Fiesta es un automóvil del segmento B producido por la compañía estadounidense Ford desde 1976."
+    },
+    {
+        "id": 15,
+      "model": "Peugeot 308",
+      "brand": "Peugeot",
+      "year": 2020,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Peugeot 308 es un automóvil del segmento C producido por el fabricante francés Peugeot desde 2007."
+    },
+    {
+        "id": 16,
+      "model": "Honda Fit",
+      "brand": "Honda",
+      "year": 2021,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Honda Fit es un automóvil del segmento B producido por el fabricante japonés Honda desde 2001."
+    },
+    {
+        "id": 17,
+      "model": "Toyota Yaris",
+      "brand": "Toyota",
+      "year": 2023,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Toyota Yaris es un automóvil del segmento B producido por la compañía japonesa Toyota desde 1999."
+    },
+    {
+        "id": 18,
+      "model": "Citroën C4",
+      "brand": "Citroën",
+      "year": 2022,
+      "category": "Hatchback",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Citroën C4 es un automóvil del segmento C producido por la marca francesa Citroën desde 2004."
+    },
+    {
+        "id": 19,
+      "model": "Nissan Versa",
+      "brand": "Nissan",
+      "year": 2021,
+      "category": "Sedan",
+      "images": ["https://picsum.photos/200/200"],
+      "description": "El Nissan Versa es un automóvil de turismo del segmento B producido por la marca japonesa Nissan desde 2004."
+    },
+    {
+        "id": 20,
+        "model": "Jeep Renegade",
+        "brand": "Jeep",
+        "year": 2022,
+        "category": "SUV",
+        "images": ["https://picsum.photos/200/200"],
+        "description": "El Jeep Renegade es un SUV compacto producido por la marca estadounidense Jeep desde 2014."
+      },
+      {
+        "id": 21,
+        "model": "Ford EcoSport",
+        "brand": "Ford",
+        "year": 2021,
+        "category": "SUV",
+        "images": ["https://picsum.photos/200/200"],
+        "description": "La Ford EcoSport es un SUV subcompacto producido por la compañía estadounidense Ford desde 2003."
+      },
+      {
+        "id": 22,
+        "model": "Chevrolet Tracker",
+        "brand": "Chevrolet",
+        "year": 2023,
+        "category": "SUV",
+        "images": ["https://picsum.photos/200/200"],
+        "description": "El Chevrolet Tracker es un SUV subcompacto producido por la marca estadounidense Chevrolet desde 2013."
+      },
+      {
+        "id": 23,
+        "model": "Volkswagen T-Cross",
+        "brand": "Volkswagen",
+        "year": 2022,
+        "category": "SUV",
+        "images": ["https://picsum.photos/200/200"],
+        "description": "El Volkswagen T-Cross es un SUV subcompacto producido por la marca alemana Volkswagen desde 2018."
+      },
+      {
+        "id": 24,
+        "model": "Renault Duster",
+        "brand": "Renault",
+        "year": 2021,
+        "category": "SUV",
+        "images": ["https://picsum.photos/200/200"],
+        "description": "La Renault Duster es un SUV compacto producido por el fabricante francés Renault desde 2010."
+      }
+  ]
+  

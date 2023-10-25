@@ -1,0 +1,20 @@
+[
+    {
+
+    "id": 1,
+    "title": "KIA RÍO",
+    "description": "La gama de motores del Kia Rio está compuesta por tres propulsores de gasolina. El motor de acceso es un 1,2 atmosférico de cuatro cilindros que desarrolla 84",
+    "image": ""
+  },
+  {
+    "id": 2,
+    "title": "CHEVROLET ONIX ",
+    "description": "Motor 1.3L de 3 cilindros normalmente aspirado · 101 HP de potencia · 96 lb-pie de torque · Transmisión manual de 5 velocidades · Luces delanteras de halógeno",
+    "image": "" },
+  {
+    "id": 3,
+    "title": "SUZUKI CELERIO",
+    "description": "El Suzuki Celerio sólo está disponible con un único motor, un 1.0 atmosférico de gasolina, de tres cilindros. Este motor desarrolla 68 CV y un par máximo de 90.",
+    "image": "" }
+  
+]
