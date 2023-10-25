@@ -16,17 +16,12 @@ code {
     monospace;
 }
 
-
-
-nav{
-  display: flex;
-  width: 100vw;
-  background: #FFBE3F;
-
+.main-container {
+  padding: 20px;
 }
 
 
-
+ 
 h1{
   text-align: center;
 }
@@ -43,44 +38,12 @@ a:hover{
   color: rgb(136, 136, 136);
 } 
 
-footer {
-  display: flex;
-  padding: 2rem;
-  position: relative;
-  top:12rem;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  margin-top: 1rem;
-  background: #FFBE3F;
-  box-sizing: border-box;
-  
-}
 
-footer > img{
-  width: 30px;
-  margin: 0px;
-  padding: 3px;
-  box-sizing: border-box;
-  
-}
-footer > p{
-  margin: 0;
-  text-align: center;
-  
-}
+
+
 .iconos{
   display: flex;
   margin-left: 500px;
-}
-
-form{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 300px;
-  height: 100px;
-  margin: 0 auto;
 }
 
 .icon{
@@ -107,13 +70,10 @@ form{
 }
 
 .card-grid{
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-  width: 90vw;
-  height: auto;
-  flex-wrap: wrap;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 25% 25%;
+  place-items: center;
+  justify-content: center;
 }
 
 .card-image{
@@ -159,4 +119,3 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
 }
-

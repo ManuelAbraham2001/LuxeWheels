@@ -9,37 +9,40 @@ const Home = () => {
   const {state} = useDentiStates()
 
   return (
-    <main className="main" >
-    
-      
-      <div className='buscador'>
-<div className='buscar'>
-  
-        <input type='text' placeholder='Escribe aquí...' id='buscar'/>
-        <button className='btn-buscar'><strong>Buscar</strong></button>
+    <main className="main-container">
+
+      <div className="buscador">
+
+        <div className="buscar">
+          <input type="text" placeholder="Escribe aquí..." id="buscar" />
+          <button className="btn-buscar">
+            <strong>Buscar</strong>
+          </button>
+        </div>
+
+        <div>
+          <select name="recomendacion" id="reco">
+            <option value="seleccion">Recomendaciones</option>
+          </select>
         </div>
         
-        <div >
-        <select name="recomendacion" id="reco">
-          <option value="seleccion">Recomendaciones</option>
-        </select>
+        <div className="Categorias">
+          <select name="categoria" id="cate">
+            <option value="seleccion">Categorías</option>
+          </select>
         </div>
-        <div className='Categorias'>
-        <select name="categoria" id="cate">
-          <option value="seleccion">Categorías</option>
-        </select>
-        </div>
-        
-        
 
       </div>
       
-      
-      <div className='card-grid'>
-        {state.dentistas.map(dentista => (<Card dentista={dentista} key={dentista.id}/>))}
+      <div className="card-grid">
+        {state.dentistas.map((dentista) => (
+          <Card dentista={dentista} key={dentista.id} />
+          
+        ))}
+        
       </div>
     </main>
-  )
+  );
 }
 
 export default Home
