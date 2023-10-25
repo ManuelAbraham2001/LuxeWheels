@@ -7,7 +7,7 @@ footer {
     top:12rem;
     bottom: 0;
     width: 100%;
-    height: 40px;
+    height: 60px;
     margin-top: 1rem;
     background: #FFBE3F;
     box-sizing: border-box;
@@ -18,16 +18,7 @@ footer {
 }
 
 
-
-
-footer > img{
-    width: 30px;
-    margin: 0px;
-    padding: 3px;
-    box-sizing: border-box;
-    
-  }
-  footer > p{
+footer > p{
     margin: 0;
     text-align: center;
     
@@ -43,4 +34,15 @@ footer > img{
     width: 30px;
     height: 30px;
     margin-right: 10px;
+  }
+  .logo-container {
+  
+    width: 110px;
+    height: 110px;
+  }
+  
+  .logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
   }
