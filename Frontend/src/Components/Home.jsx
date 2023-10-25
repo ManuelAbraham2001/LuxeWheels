@@ -33,11 +33,13 @@ const Home = () => {
         </div>
 
       </div>
-
+      
       <div className="card-grid">
         {state.dentistas.map((dentista) => (
           <Card dentista={dentista} key={dentista.id} />
+          
         ))}
+        
       </div>
     </main>
   );
