@@ -24,7 +24,7 @@ const Navbar = () => {
 
       </Link>
 
-      <div class='burger-menu'>
+      <div className='burger-menu'>
             <img src='/images/icon-hamburger.svg'/>
       </div>
 

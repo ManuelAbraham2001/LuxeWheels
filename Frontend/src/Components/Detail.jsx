@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import Gallery from "./Gallery";
 
 
 
@@ -8,6 +8,7 @@ const Detail = () => {
   return (
     <div className="main-container">
       <h2>modelo</h2>
+      <Gallery/>
       <p>descripcion</p>
     </div>
   );
