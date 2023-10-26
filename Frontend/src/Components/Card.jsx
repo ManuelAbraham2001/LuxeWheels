@@ -1,31 +1,19 @@
-
-
-
 import React, { useEffect, useState } from "react";
-import jsonData from '../Data/products-1.json';
 import { Link } from "react-router-dom";
-import { useDentiStates } from '../Context/Context'
 
-const Card = () => {
-  const [randomCard, setRandomCard] = useState(null);
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * jsonData.length);
-    const selectedCard = jsonData[randomIndex];
-    setRandomCard(selectedCard);
-  }, []);
+const Card = ({auto}) => {
 
   return (
     <div>
-      {randomCard && (
-        <div key={randomCard.id} className="card">
-          <img src={randomCard.images[0]} alt={randomCard.model} />
+      {auto && (
+        <div key={auto.id} className="card">
+          <img src={auto.images[0]} alt={auto.model} />
           <div className="card-content">
-            <h3>{randomCard.model}</h3>
-            <Link to={`/detail/${randomCard.id}`}>
+            <h3>{auto.model}</h3>
+            <Link to={`/detail/${auto.id}`}>
               <button>Ver más</button>
             </Link>
-            <p>{randomCard.description}</p>
+            <p>{auto.description}</p>
           </div>
         </div>
       )}

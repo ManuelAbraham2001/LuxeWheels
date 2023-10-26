@@ -20,13 +20,9 @@ code {
   padding: 20px;
 }
 
-
- 
 h1{
   text-align: center;
 }
-
-
 
 a{
   color: #000;
@@ -37,9 +33,6 @@ a{
 a:hover{
   color: rgb(136, 136, 136);
 } 
-
-
-
 
 .iconos{
   display: flex;
