@@ -4,8 +4,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  margin: 10px;
-  width: 200px; /* Ancho de la tarjeta */
+  margin: 20px;
+  width: 350px; /* Ancho de la tarjeta */
   text-align: center;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22,6 +22,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
   }
 
   main{
@@ -95,6 +96,16 @@
       margin-left: 10px; 
 
     }
+    .btn-detail{
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 150px;
+      font-size: 16px;
+     }
 
     
     @media (max-width: 768px){

@@ -23,7 +23,8 @@ const Card = () => {
           <div className="card-content">
             <h3>{randomCard.model}</h3>
             <Link to={`/detail/${randomCard.id}`}>
-              <button>Ver más</button>
+              <button className="btn-detail"><strong>Detalles</strong></button>
+             
             </Link>
             <p>{randomCard.description}</p>
           </div>
