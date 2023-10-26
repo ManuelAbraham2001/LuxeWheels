@@ -4,7 +4,7 @@
       "brand": "Volkswagen",
       "year": 2021,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://i0.wp.com/www.motorwebargentina.com/wp-content/uploads/2020/04/Volkswagen-gol-trendline-1.jpg?fit=1200%2C800&ssl=1"],
       "description": "El Volkswagen Gol es un automóvil del segmento B que se produce en Brasil desde 1980."
     },
     {
@@ -13,7 +13,7 @@
       "brand": "Renault",
       "year": 2022,
       "category": "Compacto",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/2MMyp/s1/renault-clio-1.0.jpg"],
       "description": "El Renault Clio es un automóvil de turismo del segmento B producido por el fabricante francés Renault."
     },
     {
@@ -22,7 +22,7 @@
       "brand": "Chevrolet",
       "year": 2020,
       "category": "Sedan",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://fotos.perfil.com/2018/12/01/trim/1280/720/5-chevrolet-prisma.jpg"],
       "description": "El Chevrolet Prisma es un automóvil de turismo del segmento B producido por General Motors para Chevrolet."
     },
     {
@@ -31,7 +31,7 @@
       "brand": "Fiat",
       "year": 2021,
       "category": "Sedan",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/W4gE1/s1/fiat-cronos-2018.jpg"],
       "description": "El Fiat Cronos es un automóvil del segmento B producido por el fabricante italiano Fiat."
     },
     {
@@ -40,7 +40,7 @@
       "brand": "Ford",
       "year": 2022,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/KNV4Q/s1/critica-ford-ka-freestyle.webp"],
       "description": "El Ford Ka es un automóvil del segmento A que se produce en Brasil desde 1996."
     },
     {
@@ -49,7 +49,7 @@
       "brand": "Peugeot",
       "year": 2020,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://acroadtrip.blob.core.windows.net/catalogo-imagenes/xl/RT_V_13a028d0467e4ca78d0102ea504c7741.jpg"],
       "description": "El Peugeot 208 es un automóvil del segmento B producido por el fabricante francés Peugeot."
     },
     {
@@ -58,7 +58,7 @@
       "brand": "Toyota",
       "year": 2021,
       "category": "Sedan",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://media.toyota.com.ar/8e6bfd8e-bd0f-427c-895e-43aacd0fc52d.png"],
       "description": "El Toyota Etios es un automóvil del segmento B producido por la compañía japonesa Toyota desde 2010."
     },
     {
@@ -67,7 +67,7 @@
       "brand": "Citroën",
       "year": 2023,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.actualidadmotor.com/wp-content/uploads/2022/02/Citroen-C3-Portada-2048x1229.jpg"],
       "description": "El Citroën C3 es un automóvil del segmento B producido por la marca francesa Citroën desde 2002."
     },
     {
@@ -76,7 +76,7 @@
       "brand": "Nissan",
       "year": 2022,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.lavoz.com.ar/resizer/84-6GZDYF9Ztt08Ua--3k4xHW1w=/980x640/smart/filters:quality(75):format(webp)/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/NYC4L6UB2ZGY5DWD4XMOOKKPKY.jpg"],
       "description": "El Nissan March es un automóvil del segmento B producido por la marca japonesa Nissan desde 1982."
     },
     {
@@ -85,7 +85,7 @@
       "brand": "Fiat",
       "year": 2021,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/X40Ek/s1/todo-sobre-el-restyling-del-fiat-uno-2015.webp"],
       "description": "El Fiat Uno es un automóvil del segmento A producido por el fabricante italiano Fiat desde 1983."
     },
     {
@@ -94,7 +94,7 @@
       "brand": "Chevrolet",
       "year": 2022,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.chevrolet.com.ar/content/dam/chevrolet/mercosur/argentina/espanol/index/cars/2020-onix-premier/mov/14-images/onix-turbo-hb.png?imwidth=960"],
       "description": "El Chevrolet Onix es un automóvil del segmento B producido por la marca estadounidense Chevrolet desde 2012."
     },
     {
@@ -103,7 +103,7 @@
       "brand": "Volkswagen",
       "year": 2020,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/nO4JG/s3/lanzamiento-volkswagen-polo-2022.jpg"],
       "description": "El Volkswagen Polo es un automóvil del segmento B producido por la marca alemana Volkswagen desde 1975."
     },
     {
@@ -112,7 +112,7 @@
       "brand": "Renault",
       "year": 2021,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.carone.com.ar/wp-content/uploads/2021/12/renault-2022-sandero-rojo.png"],
       "description": "El Renault Sandero es un automóvil de turismo del segmento B producido por el fabricante francés Renault."
     },
     {
@@ -121,7 +121,7 @@
       "brand": "Ford",
       "year": 2022,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.cronista.com/files/image/312/312517/5ffe37a878142.jpg"],
       "description": "El Ford Fiesta es un automóvil del segmento B producido por la compañía estadounidense Ford desde 1976."
     },
     {
@@ -130,7 +130,7 @@
       "brand": "Peugeot",
       "year": 2020,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://www.lavoz.com.ar/resizer/Opo2nDpHnPGBWPG2uTP-R_esNTg=/980x640/smart/filters:quality(75):format(webp)/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/QIMYNQHYZNC3NH4M4BL353INZE.jpg"],
       "description": "El Peugeot 308 es un automóvil del segmento C producido por el fabricante francés Peugeot desde 2007."
     },
     {
@@ -139,7 +139,7 @@
       "brand": "Honda",
       "year": 2021,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://cdn.motor1.com/images/mgl/PENNW/s3/lanzamiento-honda-fit-iii-2019.jpg"],
       "description": "El Honda Fit es un automóvil del segmento B producido por el fabricante japonés Honda desde 2001."
     },
     {
@@ -148,7 +148,7 @@
       "brand": "Toyota",
       "year": 2023,
       "category": "Hatchback",
-      "images": ["https://picsum.photos/200/200"],
+      "images": ["https://media.toyota.com.ar/4bd389a4-a8e1-4a7a-98f6-a5d40ff7410b.png"],
       "description": "El Toyota Yaris es un automóvil del segmento B producido por la compañía japonesa Toyota desde 1999."
     },
     {
