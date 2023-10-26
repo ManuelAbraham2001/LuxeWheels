@@ -14,25 +14,23 @@ import { useDentiStates } from "./Context/Context";
 
 function App() {
 
-  const { state } = useDentiStates(); 
+  const { state } = useDentiStates();
   const bodyClassName = `body ${state.theme}`
   return (
-    <html className= {bodyClassName}>
-      <div className="App">
-        <Navbar/>
+    <div className="App">
+      <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/admin/addproduct" element={<AddVehicleForm />} />
-          <Route path='/detail/:id' element={<Detail/>}/>
-        </Routes>    
-
-
-        <Footer/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+        <Route path='/detail/:id' element={<Detail />} />
+      </Routes>
 
 
-      </div>
-    </html>  
+      <Footer />
+
+
+    </div>
   );
 }
 
