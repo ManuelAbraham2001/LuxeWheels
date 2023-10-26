@@ -1,7 +1,9 @@
 import React from 'react'
 import Card from './Card'
 import { useDentiStates } from '../Context/Context'
+import { Link } from "react-router-dom";
 import "./styles/Home.css"
+
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
@@ -42,9 +44,6 @@ const Home = () => {
         
         
       </div>
-      
-  
-
     </main>
   );
 }

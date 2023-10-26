@@ -5,10 +5,10 @@ import Contact from "./Routes/Contact";
 import Favs from "./Routes/Favs";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Detail from "./Routes/Detail";
+import Detail from "./Components/Detail";
 import AddVehicleForm from "./Components/AddVehicleForm";
 import { useDentiStates } from "./Context/Context";
-import Card from "./Components/Card";
+
 
 
 
@@ -24,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+          <Route path='/detail/:id' element={<Detail/>}/>
         </Routes>    
 
 
