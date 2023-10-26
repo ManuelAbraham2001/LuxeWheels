@@ -1,0 +1,57 @@
+/* Contenedor del formulario */
+.sectionAddVehicle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-bottom: 20px; /* Deja espacio para el footer */
+  }
+  
+  .add-vehicle-container {
+    background: #FFBE3F; /* Fondo amarillo */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .add-vehicle-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Títulos centrados */
+  }
+  
+  /* Estilo para etiquetas y campos */
+  .label-field {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center; /* Títulos centrados */
+  }
+  
+  /* Estilo para campos de texto y textarea */
+  .input-field {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Estilo para el botón */
+  .submit-button {
+    background: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  /* Estilo para el botón "Elegir archivos" */
+.file-input-button {
+    display: block;
+    margin: 0 auto; /* Centra horizontalmente */
+  }
+  .submit-button:hover {
+    background: #000000;
+  }

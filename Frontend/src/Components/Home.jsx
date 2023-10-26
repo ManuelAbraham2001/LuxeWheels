@@ -3,6 +3,7 @@ import Card from './Card'
 import { useDentiStates } from '../Context/Context'
 import { Link } from "react-router-dom";
 import "./styles/Home.css"
+import Modal from './AddModal'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -10,8 +11,10 @@ const Home = () => {
 
   const {state} = useDentiStates()
 
+
+
   return (
-    <main className="main-container">
+    <main>
 
       <div className="buscador">
 
