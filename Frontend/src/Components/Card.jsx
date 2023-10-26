@@ -1,9 +1,10 @@
 
+
+
 import React, { useEffect, useState } from "react";
 import jsonData from '../Data/products-1.json';
 import { Link } from "react-router-dom";
 import { useDentiStates } from '../Context/Context'
-
 
 const Card = () => {
   const [randomCard, setRandomCard] = useState(null);
