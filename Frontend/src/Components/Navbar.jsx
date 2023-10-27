@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import './styles/Navbar.css';
-import { useDentiStates } from '../Context/Context';
+/*import { useDentiStates } from '../Context/Context';*/
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
 
-  const { state, dispatch } = useDentiStates(); 
+  /*const { state, dispatch } = useDentiStates(); 
 
   // Función para cambiar el tema
   const toggleTheme = () => {
     dispatch({ type: 'SWITCH_THEME' }); // Activa la acción SWITCH_THEME del contexto
 };
-  const bodyClassName = `body ${state.theme}`
+  const bodyClassName = `body ${state.theme}`*/
   return (
     
     <nav className="navbar">

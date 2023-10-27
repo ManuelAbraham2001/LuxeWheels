@@ -1,11 +1,12 @@
 
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
-import Contact from "./Routes/Contact";
-import Favs from "./Routes/Favs";
+/*import Contact from "./Routes/Contact";
+import Favs from "./Routes/Favs";*/
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Detail from "./Components/Detail";
+import AdminForm from "./Components/AdminForm";
 import AddVehicleForm from "./Components/AddVehicleForm";
 import { useDentiStates } from "./Context/Context";
 import Admin from "./Components/Admin";
@@ -16,8 +17,8 @@ import AdminListVehicles from "./Components/AdminListVehicles";
 
 function App() {
 
-  const { state } = useDentiStates();
-  const bodyClassName = `body ${state.theme}`
+  /*const { state } = useDentiStates();*/
+  /*const bodyClassName = `body ${state.theme}`*/
   return (
     <div className="App">
       <Navbar />
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
         <Route path='/detail/:id' element={<Detail />} />
+        <Route path="/admin" element={<AdminForm />} />
       </Routes>
 
 

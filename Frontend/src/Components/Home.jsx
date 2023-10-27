@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card'
-import { useDentiStates } from '../Context/Context'
+import { useRentacarStates } from '../Context/Context'
 import { Link } from "react-router-dom";
 import "./styles/Home.css"
 import Modal from './AddModal'
 import jsonData from '../Data/products-1.json';
+
+// Por ahora mandamos todo a localStorage
+
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -19,6 +22,22 @@ function getRandomObjects(jsonData, count) {
 
 const Home = () => {
 
+// Por ahora mandamos todo a localStorage
+
+const { state, dispatch } = useRentacarStates();
+
+
+
+useEffect(() => {
+
+
+ // console.log('Datos en useEffect:', state.vehicles);
+
+  // Guardar datos en localStorage
+  localStorage.setItem('local_vehicles', JSON.stringify(state.vehicles));
+}, [state.vehicles]);
+
+
   const [randomCard, setRandomObjects] = useState([]);
 
   useEffect(() => {
@@ -26,9 +45,9 @@ const Home = () => {
     setRandomObjects(randomCard);
   }, []);
 
-  console.log(randomCard);
+  /*console.log(randomCard);*/
 
-  const { state } = useDentiStates()
+
 
 
   return (
