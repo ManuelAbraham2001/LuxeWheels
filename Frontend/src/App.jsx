@@ -8,6 +8,8 @@ import Navbar from "./Components/Navbar";
 import Detail from "./Components/Detail";
 import AddVehicleForm from "./Components/AddVehicleForm";
 import { useDentiStates } from "./Context/Context";
+import Admin from "./Components/Admin";
+import AdminListVehicles from "./Components/AdminListVehicles";
 
 
 
@@ -22,6 +24,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
         <Route path='/detail/:id' element={<Detail />} />
       </Routes>

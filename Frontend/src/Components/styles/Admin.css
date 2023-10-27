@@ -1,0 +1,30 @@
+.admin-menu {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menu-option {
+    background-color: #FFBE3F;
+    padding: 50px 100px;
+    border-radius: 20px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.mobile-device {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .admin-menu {
+        display: none;
+    }
+
+    .mobile-device {
+        display: block;
+    }
+}

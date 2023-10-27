@@ -1,0 +1,14 @@
+.card-content button{
+    width: 100%;
+    background-color: #FFBE3F;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+}
+.card-content button:hover{
+    cursor: pointer;
+}

@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding-top: 120px;
@@ -20,35 +19,37 @@ code {
   padding: 20px;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-a{
+a {
   color: #000;
   text-decoration: none;
-  margin: 5px;
   cursor: pointer;
 }
-a:hover{
-  color: rgb(136, 136, 136);
-} 
 
-.iconos{
+a:hover {
+  color: rgb(136, 136, 136);
+}
+
+textarea {
+  resize: none;
+}
+
+.iconos {
   display: flex;
   margin-left: 500px;
 }
 
-.icon{
+.icon {
   width: 30px;
   height: 30px;
   display: flex;
-  padding:3px ;
-
-  
+  padding: 3px;
 }
 
-.card{
+.card {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -58,18 +59,18 @@ a:hover{
   border: 0.5px solid rgb(136, 136, 136);
 }
 
-.card:hover{
+.card:hover {
   border: 0.5px solid rgb(206, 217, 142);
 }
 
-.card-grid{
+.card-grid {
   display: grid;
   grid-template-columns: 25% 25%;
   place-items: center;
   justify-content: center;
 }
 
-.card-image{
+.card-image {
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
@@ -79,15 +80,16 @@ a:hover{
 }
 
 table {
- border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    display: table;
-    border: 1px solid #ccc;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  display: table;
+  border: 1px solid #ccc;
 
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -97,18 +99,31 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.dark{
+.dark {
   background-color: #12121296;
   color: white;
 
 }
-.dark > a {
+
+.dark>a {
   color: white;
 }
 
-.divDetail{
+.divDetail {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+
+
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: 25%;
+    place-items: center;
+    justify-content: center;
+  }
 }

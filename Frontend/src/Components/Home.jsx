@@ -62,14 +62,14 @@ const Home = () => {
         ))}
       </div>
 
-      <Link to="/admin/addproduct">
+      {/* <Link to="/admin/addproduct">
         <div className="add-product-button">
           <img
             src='../../public/images/add-product-button.png'
             alt="Agregar Producto"
           />
         </div>
-      </Link>
+      </Link> */}
 
     </main>
   );
