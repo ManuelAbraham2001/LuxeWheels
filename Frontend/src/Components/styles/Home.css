@@ -3,14 +3,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-<<<<<<< HEAD
   margin: 20px;
   width: 350px; /* Ancho de la tarjeta */
-=======
-  margin: 10px;
-  width: 200px;
-  /* Ancho de la tarjeta */
->>>>>>> 9e797e20fccc61a518a72976cbecd00f340c6fd4
   text-align: center;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,12 +21,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-<<<<<<< HEAD
   
   }
-=======
-}
->>>>>>> 9e797e20fccc61a518a72976cbecd00f340c6fd4
 
 main {
   display: flexbox;
@@ -119,7 +109,6 @@ main {
     justify-content: center;
     justify-content: space-between;
 
-<<<<<<< HEAD
     }
     .btn-detail{
       background-color: black;
@@ -142,7 +131,4 @@ main {
         
       }
     }
-=======
   }
-}
->>>>>>> 9e797e20fccc61a518a72976cbecd00f340c6fd4

@@ -1,15 +1,18 @@
 import axios from 'axios'
 import {useContext, createContext, useState, useReducer, useEffect} from 'react'
+import dataJson from '../Data/products-1.json'
 
-const DentiStates = createContext()
+const RentacarStates = createContext()
 
 
 const reducer = (state, action) => {
     switch(action.type){
-        case 'GET_DENTISTAS':
-            return {...state, dentistas: action.payload}
-        case 'GET_DENTISTA':
-            return {...state, dentista: action.payload}
+        case 'GET_VEHICLES':
+            return {...state, vehicles: action.payload}
+        case 'GET_VEHICLE':
+            return {...state, vehicle: action.payload}
+        case 'ADD_VEHICLE':
+                return { ...state, vehicles: [...state.vehicles, action.payload] };    
         case 'ADD_FAV':
             return {...state, favs: [...state.favs, action.payload]}
         case 'DELETE_FAV':
@@ -26,26 +29,36 @@ const localFavs = JSON.parse(localStorage.getItem('favs'))
 const initialFavState = localFavs ? localFavs : []
 
 
+
+
 const initialState = {
-    dentistas: [],
-    dentista: {},
+    list: [],
+    vehicles: [],
+    vehicle: [],
+    add_vehicles: [],
     favs: initialFavState,
-    theme: ''
+    theme: "lightTheme"
 }
 
 
 const Context = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
-    // const [dentistas, setDentista] = useState([])
-    // const [favs, setFavs] = useState(initialFavState)
-    //const [theme, setTheme] = useState(true) --> Modo oscuro
-    
-    const url = 'https://jsonplaceholder.typicode.com/users'
+
+    //const [favs, setFavs] = useState(initialFavState)
+
+
+
 
     useEffect(() => {
-        axios(url)
-        .then(res => dispatch({type: 'GET_DENTISTAS', payload: res.data}))
-    }, [])
+
+          dispatch({ type: 'GET_VEHICLES', payload: dataJson });
+
+          localStorage.setItem('local_vehicles', JSON.stringify(dataJson));
+        
+
+
+    }, [dispatch]);
+  
 
     useEffect(() => {
         localStorage.setItem('favs', JSON.stringify(state.favs))
@@ -53,12 +66,12 @@ const Context = ({children}) => {
 
 
     return (
-        <DentiStates.Provider value={{state,dispatch}}>
+        <RentacarStates.Provider value={{state,dispatch}}>
             {children}
-        </DentiStates.Provider>
+        </RentacarStates.Provider>
     )
 }
 
 export default Context
 
-export const useDentiStates = () => useContext(DentiStates)
+export const useRentacarStates = () => useContext(RentacarStates)

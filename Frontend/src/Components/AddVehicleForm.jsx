@@ -1,10 +1,16 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './styles/AddVehicleForm.css'
+import { useParams } from 'react-router-dom'
+import { useRentacarStates } from '../Context/Context';
+import { Link } from 'react-router-dom';
 
-const AddVehicleForm = ({ onAddVehicle }) => {
+
+
+const AddVehicleForm = () => {
+  const { state, dispatch } = useRentacarStates();
   const [model, setModel] = useState('');
   const [brand, setBrand] = useState('');
   const [year, setYear] = useState('');
@@ -12,40 +18,48 @@ const AddVehicleForm = ({ onAddVehicle }) => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState('');
 
+
+
+
   const handleAddVehicle = () => {
-    // Validar y enviar datos al servidor
     if (model && brand && year && category && description) {
       const newVehicle = {
         model,
         brand,
         year,
         category,
-        images,
-        description
+        images: images.map((image) => URL.createObjectURL(image)), 
+        description,
       };
 
-      // Llamamos a la función prop onAddVehicle para simular la adición del nuevo vehículo
-      onAddVehicle(newVehicle);
 
-      // Restablecemos el formulario
+      //console.log('Datos del nuevo vehículo:', newVehicle);
+
+      dispatch({ type: 'ADD_FAV', payload: newVehicle });
+
+
+      const updatedData = [...state.vehicle, newVehicle];
+      localStorage.setItem('favs', JSON.stringify(updatedData));
+
       setModel('');
       setBrand('');
       setYear('');
       setCategory('');
       setImages([]);
       setDescription('');
+
     }
   };
 
   // Manejar la carga de imágenes
 const handleImageChange = (e) => {
-  const newImages = Array.from(e.target.files); // Utiliza "Array.from"
+  const newImages = Array.from(e.target.files); 
   setImages([...images, ...newImages]);
 };
 
   function generateYearOptions() {
     const currentYear = new Date().getFullYear();
-    const startYear = 1900; // Puedes cambiar este valor si es necesario
+    const startYear = 1900; 
     const years = [];
 
     for (let year = currentYear; year >= startYear; year--) {
@@ -63,6 +77,10 @@ const handleImageChange = (e) => {
 
     <section className='sectionAddVehicle'>
       <div className='add-vehicle-container'>
+      <Link to="/admin">
+          <button className="submit-button">Ir a Administración</button>
+      </Link>
+
         <h2>Agregar Vehículo</h2>
         <form className='add-vehicle-form'>
           <label className="label-field">Modelo:</label>
@@ -129,6 +147,10 @@ const handleImageChange = (e) => {
             Agregar vehículo
           </button>
         </form>
+        <br>
+        </br>
+
+
       </div>
     </section>
 
