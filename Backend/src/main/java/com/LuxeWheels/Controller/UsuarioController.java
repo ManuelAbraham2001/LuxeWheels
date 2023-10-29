@@ -1,8 +1,10 @@
 package com.LuxeWheels.Controller;
 
+import com.LuxeWheels.Dto.JwtResponse;
 import com.LuxeWheels.Dto.LoginDTO;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
+import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 import com.LuxeWheels.Security.JwtUtil;
 import com.LuxeWheels.Service.UsuarioService;
@@ -38,13 +40,13 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) throws RolNotFoundException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.crear(usuario));
+    public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException, UsuarioNotFoundException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(usuario));
     }
 
     @GetMapping({"/{id}"})
     public ResponseEntity<?> getUsuario(@PathVariable Long id) throws UsuarioNotFoundException {
-        return ResponseEntity.ok(this.service.listarUsuario(id));
+        return ResponseEntity.ok(service.listarUsuario(id));
     }
 
     @PostMapping({"/login"})
@@ -52,9 +54,7 @@ public class UsuarioController {
         Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtil.generarToken(authentication);
-        Map<String, String> response = new HashMap();
-        response.put("type", "Bearer");
-        response.put("token", token);
-        return ResponseEntity.ok().body(response);
+        JwtResponse jwtResponse = new JwtResponse(token);
+        return ResponseEntity.ok().body(jwtResponse);
     }
 }

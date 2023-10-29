@@ -8,12 +8,15 @@ package com.LuxeWheels.Service;
 import com.LuxeWheels.Entity.Rol;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
+import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 import com.LuxeWheels.Repository.RolRepository;
 import com.LuxeWheels.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -24,7 +27,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Usuario crear(Usuario usuario) throws RolNotFoundException {
+    public Usuario crear(Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException {
+
+        Optional<String> documentoDB = usuarioRepository.findDocumentoByDocumento(usuario.getDocumento());
+        if (documentoDB.isPresent()) {
+            throw new UsuarioAlreadyExistException("El documento ya está en uso");
+        }
+
+        Optional<String> emailDB = usuarioRepository.findEmailByEmail(usuario.getEmail());
+        if (emailDB.isPresent()) {
+            throw new UsuarioAlreadyExistException("El correo electrónico ya está en uso");
+        }
+
         usuario.getRoles().add(rolRepository.getRolByName("ROLE_USER").orElseThrow(() -> new RolNotFoundException("El rol no existe")));
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);

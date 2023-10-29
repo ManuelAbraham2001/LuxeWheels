@@ -1,2 +1,17 @@
-package com.LuxeWheels.Service;public interface VehiculoService {
+package com.LuxeWheels.Service;
+
+import com.LuxeWheels.Dto.CrearVehiculoDTO;
+import com.LuxeWheels.Entity.Marca;
+import com.LuxeWheels.Entity.Vehiculo;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface VehiculoService {
+    Vehiculo crear(CrearVehiculoDTO vehiculoDTO, MultipartFile[] fotos);
+    List<Vehiculo> listarTodo();
+    Optional<Vehiculo> buscarVehiculoPorId(Long id);
+    List<Vehiculo> buscarVehiculosPorMarca(String marca);
 }

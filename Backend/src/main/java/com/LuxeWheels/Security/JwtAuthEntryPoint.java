@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -37,7 +36,6 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
                 } else {
                     sendUnauthorizedError(response, authException.getMessage());
                 }
-
             }
         } else {
             sendUnauthorizedError(response, authException.getMessage());

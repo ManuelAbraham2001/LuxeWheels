@@ -1,2 +1,38 @@
-package com.LuxeWheels.Entity;public class Foto {
+package com.LuxeWheels.Entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Entity
+@Getter
+@Setter
+public class Foto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String url;
+    @ManyToOne
+    @JoinColumn(name = "modelo_id")
+    @JsonIgnore
+    private Modelo modelo;
+
+    public Foto() {
+    }
+
+    public Foto(String url, Modelo modelo) {
+        this.url = url;
+        this.modelo = modelo;
+    }
+
+    public Foto(Long id, String url) {
+        this.id = id;
+        this.url = url;
+    }
+
+    public Foto(String url) {
+        this.url = url;
+    }
 }

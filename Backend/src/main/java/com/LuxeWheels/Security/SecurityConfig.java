@@ -67,6 +67,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(a ->
                         a.requestMatchers("/api/usuarios/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/rol/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/vehiculos/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/vehiculos/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/foto/**").permitAll()
+
                                 .anyRequest().authenticated())
 
                 .build();
