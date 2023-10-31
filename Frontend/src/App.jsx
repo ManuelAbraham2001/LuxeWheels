@@ -8,7 +8,6 @@ import Navbar from "./Components/Navbar";
 import Detail from "./Components/Detail";
 import AdminForm from "./Components/AdminForm";
 import AddVehicleForm from "./Components/AddVehicleForm";
-import { useDentiStates } from "./Context/Context";
 import Admin from "./Components/Admin";
 import AdminListVehicles from "./Components/AdminListVehicles";
 
