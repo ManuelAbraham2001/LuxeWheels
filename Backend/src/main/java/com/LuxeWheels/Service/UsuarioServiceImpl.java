@@ -5,6 +5,7 @@
 
 package com.LuxeWheels.Service;
 
+import com.LuxeWheels.Dto.UsuarioDTO;
 import com.LuxeWheels.Entity.Rol;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,6 +49,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public Usuario listarUsuario(Long id) throws UsuarioNotFoundException {
         return buscarUsuarioPorId(id);
+    }
+
+    @Override
+    public UsuarioDTO listarUsuarioPorEmail(String email) throws UsuarioNotFoundException {
+
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new UsuarioNotFoundException("No se encontro el usuario"));
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getTelefono(), usuario.getDocumento(), usuario.getRoles());
+
+        return usuarioDTO;
+    }
+
+    @Override
+    public List<UsuarioDTO> listarUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<UsuarioDTO> usuarioDTOS = new ArrayList<>();
+        for (Usuario u : usuarios) {
+            UsuarioDTO usuarioDTO = new UsuarioDTO(u.getId(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFechaNacimiento(), u.getTelefono(), u.getDocumento(), u.getRoles());
+            usuarioDTOS.add(usuarioDTO);
+        }
+
+        return usuarioDTOS;
     }
 
     public void actualizarUsuario(Usuario usuario) throws UsuarioNotFoundException {

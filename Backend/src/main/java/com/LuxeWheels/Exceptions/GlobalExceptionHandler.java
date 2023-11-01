@@ -13,11 +13,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({UsuarioNotFoundException.class})
     private ResponseEntity<?> usuarioNotFound(UsuarioNotFoundException e, WebRequest request) {
-        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({RolNotFoundException.class})
     private ResponseEntity<?> rolNotFound(RolNotFoundException e, WebRequest request) {
-        return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({UsuarioAlreadyExistException.class})
+    private ResponseEntity<?> usuarioAlreadyExist(UsuarioAlreadyExistException e, WebRequest request) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler({UsuarioAlreadyAdmin.class})
+    private ResponseEntity<?> usuarioAlreadyAdmin(UsuarioAlreadyAdmin e, WebRequest request) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 }

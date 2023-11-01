@@ -65,12 +65,10 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(a ->
-                        a.requestMatchers("/api/usuarios/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/rol/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/api/vehiculos/**").permitAll()
+                        a.requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/rol/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/vehiculos/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/vehiculos/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/foto/**").permitAll()
-
                                 .anyRequest().authenticated())
 
                 .build();

@@ -1,60 +1,41 @@
 package com.LuxeWheels.Controller;
 
-import com.LuxeWheels.Dto.JwtResponse;
-import com.LuxeWheels.Dto.LoginDTO;
-import com.LuxeWheels.Entity.Usuario;
-import com.LuxeWheels.Exceptions.RolNotFoundException;
-import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 import com.LuxeWheels.Security.JwtUtil;
 import com.LuxeWheels.Service.UsuarioService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import java.util.HashMap;
-import java.util.Map;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"/api/usuarios"})
 public class UsuarioController {
     @Autowired
     private UsuarioService service;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
     @Autowired
     private JwtUtil jwtUtil;
 
     public UsuarioController() {
     }
 
-    @PostMapping
-    public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException, UsuarioNotFoundException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(usuario));
-    }
-
-    @GetMapping({"/{id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUsuario(@PathVariable Long id) throws UsuarioNotFoundException {
         return ResponseEntity.ok(service.listarUsuario(id));
     }
 
-    @PostMapping({"/login"})
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) throws JsonProcessingException {
-        Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtil.generarToken(authentication);
-        JwtResponse jwtResponse = new JwtResponse(token);
-        return ResponseEntity.ok().body(jwtResponse);
+    @GetMapping("/userinfo")
+    public ResponseEntity<?> getUserInfo(@RequestHeader("Authorization") String token) throws UsuarioNotFoundException {
+        Claims claims = jwtUtil.getClaims(token.substring(7));
+        String email = claims.getSubject();
+        return ResponseEntity.ok(service.listarUsuarioPorEmail(email));
+
     }
+
+    @GetMapping("/allusers")
+    public ResponseEntity<?> listarTodosLosUsuarios(){
+        return ResponseEntity.ok(service.listarUsuarios());
+    }
+
 }
