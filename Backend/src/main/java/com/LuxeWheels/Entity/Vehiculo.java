@@ -17,9 +17,6 @@ public class Vehiculo {
     @ManyToOne
     @JoinColumn(name = "anio_id")
     private Anio anio;
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
     private String patente;
     private Double precio;
     private String descripcion;
@@ -27,20 +24,18 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(Modelo modelo, Anio anio, Categoria categoria, String patente, Double precio, String descripcion) {
+    public Vehiculo(Modelo modelo, Anio anio, String patente, Double precio, String descripcion) {
         this.modelo = modelo;
         this.anio = anio;
-        this.categoria = categoria;
         this.patente = patente;
         this.precio = precio;
         this.descripcion = descripcion;
     }
 
-    public Vehiculo(Long id, Modelo modelo, Anio anio, Categoria categoria, String patente, Double precio) {
+    public Vehiculo(Long id, Modelo modelo, Anio anio, String patente, Double precio) {
         this.id = id;
         this.modelo = modelo;
         this.anio = anio;
-        this.categoria = categoria;
         this.patente = patente;
         this.precio = precio;
     }

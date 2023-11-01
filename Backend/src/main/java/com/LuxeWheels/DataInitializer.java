@@ -68,5 +68,14 @@ public class DataInitializer implements CommandLineRunner {
             marcaRepository.save(new Marca(marca));
         }
 
+        Categoria compacto = categoriaRepository.findByCategoria("Compactos");
+        Marca fiat = marcaRepository.findByMarca("fiat");
+        Modelo modelo = new Modelo("Uno", fiat, compacto);
+        modeloRepository.save(modelo);
+        Modelo uno = modeloRepository.findByModelo("Uno");
+        Anio anio = anioRepository.findByAnio(2015);
+
+        vehiculoRepository.save(new Vehiculo(uno, anio, "abe123", 2000d, "auto 1"));
+
     }
 }

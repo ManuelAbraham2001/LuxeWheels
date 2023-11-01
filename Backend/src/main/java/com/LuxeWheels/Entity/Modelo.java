@@ -29,6 +29,10 @@ public class Modelo {
     @OneToMany(mappedBy = "modelo")
     private List<Foto> fotos;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     public Modelo() {
     }
 
@@ -39,6 +43,12 @@ public class Modelo {
     public Modelo(String modelo, Marca marca) {
         this.modelo = modelo;
         this.marca = marca;
+    }
+
+    public Modelo(String modelo, Marca marca, Categoria categoria) {
+        this.modelo = modelo;
+        this.marca = marca;
+        this.categoria = categoria;
     }
 
     public Modelo(String modelo, Marca marca, List<Vehiculo> vehiculos, List<Foto> fotos) {

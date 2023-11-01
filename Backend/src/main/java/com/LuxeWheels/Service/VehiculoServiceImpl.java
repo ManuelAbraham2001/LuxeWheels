@@ -1,7 +1,6 @@
 package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.CrearVehiculoDTO;
-import com.LuxeWheels.Entity.Foto;
 import com.LuxeWheels.Entity.Modelo;
 import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Repository.AnioRepository;
@@ -47,7 +46,7 @@ public class VehiculoServiceImpl implements VehiculoService{
             fotoService.cargarFotoModelo(foto, modelo);
         }
 
-        Vehiculo vehiculo = new Vehiculo(modelo, anioRepository.findByAnio(vehiculoDTO.getAnio()), categoriaRepository.findByCategoria(vehiculoDTO.getCategoria()), vehiculoDTO.getPatente(), vehiculoDTO.getPrecio(), vehiculoDTO.getDescripcion());
+        Vehiculo vehiculo = new Vehiculo(modelo, anioRepository.findByAnio(vehiculoDTO.getAnio()), vehiculoDTO.getPatente(), vehiculoDTO.getPrecio(), vehiculoDTO.getDescripcion());
 
         return vehiculoRepository.save(vehiculo);
     }

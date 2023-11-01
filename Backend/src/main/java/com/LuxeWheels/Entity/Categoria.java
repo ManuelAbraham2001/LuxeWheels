@@ -19,7 +19,7 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     @JsonIgnore
-    private List<Vehiculo> vehiculos;
+    private List<Modelo> modelos    ;
 
     public Categoria() {
     }
