@@ -10,6 +10,7 @@ import AdminForm from "./Components/AdminForm";
 import AddVehicleForm from "./Components/AddVehicleForm";
 import Admin from "./Components/Admin";
 import AdminListVehicles from "./Components/AdminListVehicles";
+import ListUsers from "./Components/ListUsers";
 
 
 
@@ -25,7 +26,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />
+        <Route path="/admin/listUsers" element={<ListUsers />} />
+        <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />/
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
         <Route path='/detail/:id' element={<Detail />} />
         <Route path="/admin" element={<AdminForm />} />

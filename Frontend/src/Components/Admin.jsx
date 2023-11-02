@@ -18,6 +18,11 @@ const Admin = () => {
                         <h2>Ver Vehiculos</h2>
                     </div>
                     </a>
+                    <a href="/admin/listUsers">
+                    <div className="menu-option">
+                        <h2>Ver Usuarios</h2>
+                    </div>
+                    </a>
                 </div>
                 <div className="mobile-device">
                     <span>Sitio no disponible</span>

@@ -22,10 +22,21 @@ const AdminListVehicles = () => {
     }, [])
 
     const handleEliminar = id => {
-        console.log(id);
+
+        const isConfirmed = confirm("Estas seguro que deseas eliminar el auto?")
+
+        if(isConfirmed){
+            fetch(`http://localhost:8080/api/vehiculos/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn0se1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dIiwiZXNBZG1pbiI6dHJ1ZSwic3ViIjoiYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNjk4ODgyMTAzLCJleHAiOjE2OTk4ODIxMDN9.eYcOThi6SuRJqs_N781gtca0cJ9x6Tpj11HMeKjEdWLX2AjEgnUY7b3U75R5UjkkUSopoohX9nRBMwNXGMOjUA"
+                }
+            })
+        }else{
+            return;
+        }
     }
 
-    vehicles.map(v => console.log(v.marca))
     
     return (
         <>
