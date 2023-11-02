@@ -6,7 +6,8 @@ import Favs from "./Routes/Favs";*/
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Detail from "./Components/Detail";
-import AdminForm from "./Components/AdminForm";
+import LoginForm from "./Components/LoginForm";
+import RegisterForm from "./Components/RegisterForm";
 import AddVehicleForm from "./Components/AddVehicleForm";
 import Admin from "./Components/Admin";
 import AdminListVehicles from "./Components/AdminListVehicles";
@@ -30,7 +31,8 @@ function App() {
         <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />/
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
         <Route path='/detail/:id' element={<Detail />} />
-        <Route path="/admin" element={<AdminForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
       </Routes>
 
 

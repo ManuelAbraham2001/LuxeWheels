@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { useRentacarStates } from '../Context/Context';
 import { Link } from 'react-router-dom';
 import "./styles/AdminForm.css"
@@ -32,5 +32,5 @@ const VehicleList = () => {
   );
 };
 
-export default VehicleList;
+export default VehicleList;*/
 
