@@ -5,6 +5,7 @@
 // App.jsx
 import { Route, Routes } from 'react-router-dom';
 import {AuthMiddleware} from './Middlewares/AuthMiddleware';
+import {GuestMiddleware} from './Middlewares/GuestMiddleware';
 import Home from './Components/Home';
 import LoginForm from './Components/LoginForm';
 import RegisterForm from "./Components/RegisterForm";
@@ -32,9 +33,12 @@ const App = () => {
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
       </Route>
 
+      <Route element={ <GuestMiddleware />}>
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginForm />} />
+      </Route>      
+
       
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/login" element={<LoginForm />} />
     </Routes>
     <Footer />
     </div>
