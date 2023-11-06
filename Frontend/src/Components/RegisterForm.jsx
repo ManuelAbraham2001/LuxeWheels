@@ -10,60 +10,9 @@ const RegisterForm = () => {
   const [telefono, setTelefono] = useState('');
   const [documento, setDocumento] = useState('');
 
-  const [errors, setErrors] = useState({});
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    // Valida el nombre
-    if (nombre.length < 3) {
-      newErrors.nombre = 'Nombre debe tener al menos 3 caracteres';
-    }
-
-    // Valida el apellido
-    if (apellido.length < 3) {
-      newErrors.apellido = 'Apellido debe tener al menos 3 caracteres';
-    }
-
-    // Valida el email
-    const emailPattern = /\S+@\S+\.\S+/;
-    if (!emailPattern.test(email) || email.length < 8) {
-      newErrors.email = 'Email no válido';
-    }
-
-    // Valida la contraseña
-    if (password.length < 4) {
-      newErrors.password = 'Contraseña debe tener al menos 4 caracteres';
-    }
-
-    // Valida la fecha de nacimiento (asumiendo que fechaNac es una fecha en formato YYYY-MM-DD)
-    const birthDate = new Date(fechaNac);
-    const currentDate = new Date();
-    if (currentDate.getFullYear() - birthDate.getFullYear() < 18) {
-      newErrors.fechaNac = 'Debes ser mayor de 18 años';
-    }
-
-    // Valida el teléfono (requiere solo números y al menos 10 números)
-    const phonePattern = /^[0-9]+$/;
-    if (!phonePattern.test(telefono) || telefono.length < 10) {
-      newErrors.telefono = 'Teléfono no válido';
-    }
-
-    // Valida el documento (requiere solo números y al menos 8 números)
-    const documentoPattern = /^[0-9]+$/;
-    if (!documentoPattern.test(documento) || documento.length < 8) {
-      newErrors.documento = 'Documento debe tener al menos 8 números';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleRegister = () => {
-    if (validateForm()) {
-      // Lógica de registro aquí si la validación es exitosa
-      console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}`);
-    }
+    // Lógica de registro aquí
+    console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}`);
   };
 
   return (

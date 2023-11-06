@@ -1,57 +1,52 @@
 
-import { Route, Routes } from "react-router-dom";
-import Home from "./Components/Home";
-/*import Contact from "./Routes/Contact";
-import Favs from "./Routes/Favs";*/
+
+
+
+// App.jsx
+import { Route, Routes } from 'react-router-dom';
+import {AuthMiddleware} from './Middlewares/AuthMiddleware';
+import {GuestMiddleware} from './Middlewares/GuestMiddleware';
+import Home from './Components/Home';
+import LoginForm from './Components/LoginForm';
+import RegisterForm from "./Components/RegisterForm";
+import Admin from './Components/Admin';
+import ListUsers from './Components/ListUsers';
+import AdminListVehicles from './Components/AdminListVehicles';
+import AddVehicleForm from './Components/AddVehicleForm';
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Detail from "./Components/Detail";
-import LoginForm from "./Components/LoginForm";
-import RegisterForm from "./Components/RegisterForm";
-import AddVehicleForm from "./Components/AddVehicleForm";
-import Admin from "./Components/Admin";
-import AdminListVehicles from "./Components/AdminListVehicles";
-import ListUsers from "./Components/ListUsers";
+
+const App = () => {
 
 
-
-
-function App() {
-
-  /*const { state } = useDentiStates();*/
-  /*const bodyClassName = `body ${state.theme}`*/
   return (
     <div className="App">
-      <Navbar />
+    <Navbar />
+    <Routes>
+    
+      <Route path="/" element={<Home />} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <Route element={ <AuthMiddleware />}>
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/listUsers" element={<ListUsers />} />
-        <Route path="/admin/ListVehicles" element={<AdminListVehicles />} />/
+        <Route path="/admin/listusers" element={<ListUsers />} />
+        <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
-        <Route path='/detail/:id' element={<Detail />} />
-        <Route path="/login" element={<LoginForm />} />
+      </Route>
+
+      <Route element={ <GuestMiddleware />}>
         <Route path="/register" element={<RegisterForm />} />
-      </Routes>
+        <Route path="/login" element={<LoginForm />} />
+      </Route>      
 
-
-      <Footer />
-
-
+      
+    </Routes>
+    <Footer />
     </div>
   );
-}
+};
 
 export default App;
 
-/*
-<Routes>
-<Route path="/" element={<Home />}/>
-<Route path="/contacto" element={<Contact />} />
-<Route path="/favs" element={<Favs />} />
-<Route path="/detail/:id" element={<Detail />} />
-</Routes>
 
-<Footer/>
-*/
+
+    /*<Navbar isAuthenticated={isAuthenticated}/>*/
