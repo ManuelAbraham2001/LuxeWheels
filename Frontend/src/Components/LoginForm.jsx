@@ -11,23 +11,17 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
 
-
   const handleLogin = () => {
-    const isAuthenticationSuccessful = email === 'usuario@example.com' && password === '1234';
-
-    if (isAuthenticationSuccessful) {
+    // const isAuthenticationSuccessful = email === 'usuario@example.com' && password === '1234';
       // Cambia el estado de la sesión
       dispatch({ type: 'LOGIN',payload: {
         user: {
-          name: `${email}`,
-          lastname: 'Lastname' // para sacar del back
+          email: email,
+          password: password // para sacar del back
         },
       },});
       console.log(`Iniciar sesión con ${email} y ${password}`);
-      navigate('/admin');
-    } else {
-      console.log('Credenciales incorrectas.');
-    }
+
   };
 
   return (

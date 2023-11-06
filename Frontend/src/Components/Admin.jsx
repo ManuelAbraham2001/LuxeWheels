@@ -2,8 +2,6 @@ import React from 'react'
 import "./styles/Admin.css"
 
 const Admin = () => {
-
-
     return (
         <>
             <div className="admin-main">
@@ -14,14 +12,14 @@ const Admin = () => {
                         </div>
                     </a>
                     <a href="/admin/ListVehicles">
-                    <div className="menu-option">
-                        <h2>Ver Vehiculos</h2>
-                    </div>
+                        <div className="menu-option">
+                            <h2>Ver Vehiculos</h2>
+                        </div>
                     </a>
                     <a href="/admin/listUsers">
-                    <div className="menu-option">
-                        <h2>Ver Usuarios</h2>
-                    </div>
+                        <div className="menu-option">
+                            <h2>Ver Usuarios</h2>
+                        </div>
                     </a>
                 </div>
                 <div className="mobile-device">

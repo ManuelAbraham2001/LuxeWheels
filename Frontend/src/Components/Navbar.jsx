@@ -1,46 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles/Navbar.css";
 import { useRentacarStates } from '../Context/Context';
+import { jwtDecode } from "jwt-decode";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
   const navigate = useNavigate();
-
-
-
   const { state, dispatch } = useRentacarStates();
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(null)
+
+
+  const [ui, setUi] = useState(null)
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem('jwt')
+      const decoded = jwtDecode(token);
+      setUi(decoded.nombre)
+      setIsAuthenticated(true)
+      setIsAdmin(decoded.esAdmin)
+    } catch (error) {
+      console.log(error);
+    }
+  }, [])
 
 
   const getInitials = (fullName) => {
     if (!fullName) return '';
     return fullName.split(' ').map(word => word[0]).join('');
   };
-  
-  const ui = localStorage.getItem('user');
 
-  const userObj = ui ? JSON.parse(ui) : null;
-  const userInitials = userObj ? getInitials(`${userObj.name} ${userObj.lastname}`.toUpperCase()) : '';
-  
-  console.log(`Iniciales del usuario: ${userInitials}`);
-
-
-
-  const Auth = localStorage.getItem('isAuthenticated') === 'true'
-
-  const [isAuthenticated, setIsAuthenticated] = useState(Auth);
-
-  useEffect(() => {
-    setIsAuthenticated(Auth);
-  }, [Auth]);
-
+  const userObj = ui || null;
+  const userInitials = userObj ? getInitials(ui.toUpperCase()) : '';
 
   const handleLogout = () => {
     // Realiza las acciones de logout necesarias
-    dispatch({ type: "LOGOUT" });      
-    navigate('/');
-
+    dispatch({ type: "LOGOUT" });
+    window.location.replace("/")
   };
 
   return (
@@ -62,23 +61,16 @@ const Navbar = () => {
       <div className="right-block">
         {isAuthenticated ? (
           <>
-
-            <Link to="/admin" className="admin">
+            {isAdmin ? <Link to="/admin" className="admin">
               <button className="nav-button">Administración</button>
-            </Link>
+            </Link> : null}
 
             <button onClick={handleLogout} className="nav-button">
               Cerrar Sesión
             </button>
 
-            <span className="user-greeting">Hola, {userObj?.name || ''}</span>
-
-
-
-
+            <span className="user-greeting">Hola, {ui || ''}</span>
             <span className="user-initials">{userInitials}</span>
-
-            
           </>
         ) : (
           <>

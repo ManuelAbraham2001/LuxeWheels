@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {useContext, createContext, useState, useReducer, useEffect, useNavigate} from 'react'
+import { useContext, createContext, useState, useReducer, useEffect, useNavigate } from 'react'
 import dataJson from '../Data/products-1.json'
 
 const RentacarStates = createContext()
@@ -7,32 +7,45 @@ const RentacarStates = createContext()
 
 const reducer = (state, action) => {
 
-    switch(action.type){
+    switch (action.type) {
         case 'GET_VEHICLES':
-            return {...state, vehicles: action.payload}
+            return { ...state, vehicles: action.payload }
         case 'GET_VEHICLE':
-            return {...state, vehicle: action.payload}
+            return { ...state, vehicle: action.payload }
         case 'ADD_VEHICLE':
-                return { ...state, vehicles: [...state.vehicles, action.payload] };    
+            return { ...state, vehicles: [...state.vehicles, action.payload] };
         case 'ADD_FAV':
-            return {...state, favs: [...state.favs, action.payload]}
+            return { ...state, favs: [...state.favs, action.payload] }
         case 'DELETE_FAV':
-            return {...state, favs: state.favs.filter(fav => fav.id !== action.payload.id)}
+            return { ...state, favs: state.favs.filter(fav => fav.id !== action.payload.id) }
         case 'SWITCH_THEME':
-            return  {...state, theme: state.theme === '' ? 'dark' : '' };
+            return { ...state, theme: state.theme === '' ? 'dark' : '' };
         case 'LOGIN':
-                if (!state.isAuthenticated) {
-                    localStorage.setItem('isAuthenticated', true);
-                    localStorage.setItem('user', JSON.stringify(action.payload.user)); // Convierte a cadena
-                    return { ...state, isAuthenticated: true, user: action.payload.user};
-                }
 
-                return state;
+            fetch("http://localhost:8080/api/auth/login", {
+                method: 'POST',
+                body: JSON.stringify(action.payload.user),
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(res => res.json())
+                .then(data => {
+                    localStorage.setItem('jwt', data.token)
+                    if (!state.isAuthenticated) {
+                        return { ...state, isAuthenticated: true, user: action.payload.user };
+                    }
+                }).then(() => {
+                    window.location.href = '/';
+                })
+
+
+
+            return state;
         case 'LOGOUT':
-            localStorage.removeItem('isAuthenticated');
+            localStorage.removeItem('jwt');
             localStorage.removeItem('user');
-                return { ...state, isAuthenticated: false}; 
-                
+            return { ...state, isAuthenticated: false };
+
         default:
             throw new Error()
     }
@@ -52,12 +65,12 @@ const initialState = {
     add_vehicles: [],
     favs: initialFavState,
     isAuthenticated: false,
-    user: null, 
+    user: null,
     theme: "lightTheme"
 }
 
 
-const Context = ({children}) => {
+const Context = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     //const [favs, setFavs] = useState(initialFavState)
@@ -65,22 +78,22 @@ const Context = ({children}) => {
 
     useEffect(() => {
 
-          dispatch({ type: 'GET_VEHICLES', payload: dataJson });
+        dispatch({ type: 'GET_VEHICLES', payload: dataJson });
 
-          localStorage.setItem('local_vehicles', JSON.stringify(dataJson))
+        localStorage.setItem('local_vehicles', JSON.stringify(dataJson))
 
     }, [dispatch]);
 
 
-  
+
 
     useEffect(() => {
         localStorage.setItem('favs', JSON.stringify(state.favs))
-    },[state.favs])
+    }, [state.favs])
 
 
     return (
-        <RentacarStates.Provider value={{state,dispatch}}>
+        <RentacarStates.Provider value={{ state, dispatch }}>
             {children}
         </RentacarStates.Provider>
     )

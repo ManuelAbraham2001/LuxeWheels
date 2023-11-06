@@ -1,17 +1,12 @@
-
-
-
 import React, { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 
+export const AuthMiddleware = ({children, redirectTo='/login', isAuthenticated}) => {
 
+  // const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
-export const AuthMiddleware = ({children, redirectTo='/login'}) => {
-
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
 
