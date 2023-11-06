@@ -9,9 +9,10 @@ const RegisterForm = () => {
   const [telefono, setTelefono] = useState('');
   const [documento, setDocumento] = useState('');
 
+
   const handleRegister = () => {
-    // Lógica de registro aquí
-    console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}`);
+
+    console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}, ${categoria}`);
   };
 
   return (
