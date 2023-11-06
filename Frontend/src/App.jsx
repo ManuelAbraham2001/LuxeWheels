@@ -5,6 +5,7 @@
 // App.jsx
 import { Route, Routes } from 'react-router-dom';
 import { AuthMiddleware } from './Middlewares/AuthMiddleware';
+import { GuestMiddleware } from './Middlewares/GuestMiddleware';
 import Home from './Components/Home';
 import LoginForm from './Components/LoginForm';
 import RegisterForm from "./Components/RegisterForm";
@@ -21,29 +22,48 @@ const App = () => {
     const isAuthenticated = true ? localStorage.getItem('jwt') != null : false
 
     return (
-        <div className="App">
-            <Navbar />
-            <Routes>
+        isAuthenticated ?
+            <div className="App">
+                <Navbar />
+                <Routes>
 
-                <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home />} />
 
-                <Route element={<AuthMiddleware isAuthenticated={isAuthenticated} />}>
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="/admin/listusers" element={<ListUsers />} />
-                    <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
-                    <Route path="/admin/addproduct" element={<AddVehicleForm />} />
-                </Route>
+                    <Route element={<AuthMiddleware isAuthenticated={isAuthenticated} />}>
+                        <Route path="/admin" element={<Admin />} />
+                        <Route path="/admin/listusers" element={<ListUsers />} />
+                        <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
+                        <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+                    </Route>
+                    </Routes>
+                </div>
+                    :
+                    <div className="App">
+                        <Navbar />
+                        <Routes>
+
+                            <Route path="/" element={<Home />} />
+
+                            <Route element={<AuthMiddleware />}>
+                                <Route path="/admin" element={<Admin />} />
+                                <Route path="/admin/listusers" element={<ListUsers />} />
+                                <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
+                                <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+                            </Route>
+
+                            <Route element={<GuestMiddleware />}>
+                                <Route path="/register" element={<RegisterForm />} />
+                                <Route path="/login" element={<LoginForm />} />
+                            </Route>
 
 
-                <Route path="/register" element={<RegisterForm />} />
-                <Route path="/login" element={<LoginForm />} />
-            </Routes>
-            <Footer />
-        </div>
-    );
-};
+                        </Routes>
+                        <Footer />
+                    </div>
+                    
+)};
 
-export default App;
+                    export default App;
 
 
 
