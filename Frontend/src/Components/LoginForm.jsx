@@ -1,3 +1,5 @@
+
+import './styles/login.css'; // Importa los estilos CSS o SCSS según tu elección
 import React, { useState, useEffect } from 'react';
 import { useRentacarStates } from '../Context/Context'
 import  { useNavigate } from 'react-router-dom'
@@ -25,18 +27,31 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <label>Email:</label>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <br />
-      <label>Contraseña:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br />
-      <button onClick={handleLogin}>Iniciar Sesión</button>
+    <div className="background-image">
+      <div className="add-vehicle-container">
+        <div className="add-vehicle-form">
+          <h2>Iniciar Sesión</h2>
+          <label className="label-field">Email:</label>
+          <input
+            className="input-field"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="label-field">Contraseña:</label>
+          <input
+            className="input-field"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="submit-button" onClick={handleLogin}>
+            Iniciar Sesión
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default LoginForm;
-

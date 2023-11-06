@@ -1,0 +1,52 @@
+
+.background-image {
+    background: url('https://images.pexels.com/photos/5835304/pexels-photo-5835304.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  .add-vehicle-container-register {
+    background: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .add-vehicle-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center; 
+  }
+  
+
+  .label-field {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center; 
+  }
+  
+
+  .input-field {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+
+  .submit-button {
+    background: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background: #000000;
+  }
