@@ -20,9 +20,13 @@ const RegisterForm = () => {
       return regexEmail.test(email);
   }
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
     // Lógica de registro aquí
-    if(nombre.length > 4 && apellido.length > 4 && validarEmail(email) == true) {
+    e.preventDefault()
+    setEnviado(false)
+    setError(false)
+
+    if(nombre.length > 4 && apellido.length > 4 && validarEmail(email) == true && password.length >= 5) {
       setEnviado(true)
       setError(false)
   } else {
@@ -67,6 +71,7 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="password"
+            placeholder='la contraseña debe tener mas de 5 caracteres'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
