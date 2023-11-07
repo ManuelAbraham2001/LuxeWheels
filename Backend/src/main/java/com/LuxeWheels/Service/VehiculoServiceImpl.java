@@ -42,8 +42,12 @@ public class VehiculoServiceImpl implements VehiculoService{
 
         Modelo modelo = modeloRepository.findByModelo(vehiculoDTO.getModelo());
 
-        for (MultipartFile foto : fotos) {
-            fotoService.cargarFotoModelo(foto, modelo);
+        try{
+            for (MultipartFile foto : fotos) {
+                fotoService.cargarFotoModelo(foto, modelo);
+            }
+        }catch (RuntimeException e){
+            e.printStackTrace();
         }
 
         Vehiculo vehiculo = new Vehiculo(modelo, anioRepository.findByAnio(vehiculoDTO.getAnio()), vehiculoDTO.getPatente(), vehiculoDTO.getPrecio(), vehiculoDTO.getDescripcion());
@@ -59,5 +63,10 @@ public class VehiculoServiceImpl implements VehiculoService{
     @Override
     public List<Vehiculo> buscarVehiculosPorMarca(String marca) {
         return vehiculoRepository.buscarVehiculosPorMarca(marca);
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        vehiculoRepository.deleteById(id);
     }
 }

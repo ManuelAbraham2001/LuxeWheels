@@ -22,7 +22,7 @@ public class VehiculoController {
     }
 
     @PostMapping(consumes = {"multipart/form-data"})
-    public ResponseEntity<?> crear(@RequestParam("vehiculo") String json, @RequestParam("imagen") MultipartFile[] fotos) throws JsonProcessingException {
+    public ResponseEntity<?> crear(@RequestParam("vehiculo") String json, @RequestParam(value = "imagen", required = false) MultipartFile[] fotos) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         CrearVehiculoDTO crearVehiculoDTO = objectMapper.readValue(json, CrearVehiculoDTO.class);
         return ResponseEntity.ok(vehiculoService.crear(crearVehiculoDTO, fotos));
@@ -36,5 +36,11 @@ public class VehiculoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarVehiculoPorId(@PathVariable Long id){
         return ResponseEntity.ok(vehiculoService.buscarVehiculoPorId(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id){
+        vehiculoService.eliminar(id);
+        return ResponseEntity.ok().build();
     }
 }

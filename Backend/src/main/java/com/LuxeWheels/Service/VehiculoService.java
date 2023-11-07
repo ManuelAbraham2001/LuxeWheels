@@ -14,4 +14,5 @@ public interface VehiculoService {
     List<Vehiculo> listarTodo();
     Optional<Vehiculo> buscarVehiculoPorId(Long id);
     List<Vehiculo> buscarVehiculosPorMarca(String marca);
+    void eliminar(Long id);
 }
