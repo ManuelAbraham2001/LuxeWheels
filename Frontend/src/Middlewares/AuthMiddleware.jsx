@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
-export const AuthMiddleware = ({children, redirectTo='/login', isAuthenticated}) => {
-
-  // const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
+export const AuthMiddleware = ({children, redirectTo='/', isAuthenticated, isAdmin}) => {
 
   const navigate = useNavigate();
+  const path = useLocation()
 
-  useEffect(() => {
-
-    if (!isAuthenticated) {
-      // Si el usuario no está autenticado, redirigir a p´gina que viene desde redirectTo
-      navigate(redirectTo);
-    } 
-  }, [isAuthenticated, navigate]);
+  if(isAuthenticated && path.pathname.startsWith('/admin') && isAdmin){
+    return <Outlet></Outlet>
+  }else{
+    navigate(redirectTo);
+  }
 
   return children ? children : <Outlet />
 }
