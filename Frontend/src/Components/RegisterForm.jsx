@@ -10,8 +10,24 @@ const RegisterForm = () => {
   const [telefono, setTelefono] = useState('');
   const [documento, setDocumento] = useState('');
 
+  const [enviado, setEnviado] = useState(false);
+  const [errors, setError] =useState(false);
+
+  const validarEmail = (email) => {
+
+    const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+      return regexEmail.test(email);
+  }
+
   const handleRegister = () => {
     // Lógica de registro aquí
+    if(nombre.length > 4 && apellido.length > 4 && validarEmail(email) == true) {
+      setEnviado(true)
+      setError(false)
+  } else {
+      setError(true)
+  }
     console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}`);
   };
 
@@ -86,6 +102,8 @@ const RegisterForm = () => {
           <button className="submit-button" onClick={handleRegister}>
             Registrarse
           </button>
+          {enviado && <h3>Hola {nombre}! te has registrado correctamente!</h3>}
+          {errors && <h3 style={{color: 'red'}}>Por favor verifique los datos nuevamente</h3>}
         </div>
       </div>
     </div>
