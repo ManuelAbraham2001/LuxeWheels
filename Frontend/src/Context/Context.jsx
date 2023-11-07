@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext, createContext, useState, useReducer, useEffect, useNavigate } from 'react'
 import dataJson from '../Data/products-1.json'
+import { jwtDecode } from "jwt-decode";
 
 const RentacarStates = createContext()
 
@@ -53,10 +54,19 @@ const reducer = (state, action) => {
 }
 
 const localFavs = JSON.parse(localStorage.getItem('favs'))
+let isAdmin = null;
+
+
+try {
+    const token = localStorage.getItem('jwt')
+    const decoded = jwtDecode(token);
+    isAdmin = decoded.esAdmin
+} catch (error) {
+    console.log(error);
+}
+
+
 const initialFavState = localFavs ? localFavs : []
-
-
-
 
 const initialState = {
     list: [],
@@ -64,7 +74,8 @@ const initialState = {
     vehicle: [],
     add_vehicles: [],
     favs: initialFavState,
-    isAuthenticated: false,
+    isAdmin,
+    isAuthenticated: true ? localStorage.getItem('jwt') != null : false,
     user: null,
     theme: "lightTheme"
 }
