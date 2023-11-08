@@ -54,7 +54,7 @@ const AddVehicleForm = () => {
 
     console.log("enviando");
 
-    fetch("http://localhost:8080/api/vehiculos", {
+    fetch("http://3.135.246.162/api/vehiculos", {
       method: "POST",
       body: dataForm,
     })

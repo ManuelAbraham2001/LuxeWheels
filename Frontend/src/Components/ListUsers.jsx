@@ -7,7 +7,7 @@ const ListUsers = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/usuarios/allusers", {
+        fetch("http://3.135.246.162/api/usuarios/allusers", {
             method: "GET",
             headers: {
                 "content-type": "application/json",
@@ -28,7 +28,7 @@ const ListUsers = () => {
     const callApiAddRemoveRole = (user, id, roleToAdd) => {
         const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
     
-        fetch(`http://localhost:8080/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
+        fetch(`http://3.135.246.162/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
             method: "POST",
             headers: {
                 "authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn0se1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dIiwiZXNBZG1pbiI6dHJ1ZSwic3ViIjoiYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNjk4ODgyMTAzLCJleHAiOjE2OTk4ODIxMDN9.eYcOThi6SuRJqs_N781gtca0cJ9x6Tpj11HMeKjEdWLX2AjEgnUY7b3U75R5UjkkUSopoohX9nRBMwNXGMOjUA"

@@ -23,7 +23,7 @@ const reducer = (state, action) => {
             return { ...state, theme: state.theme === '' ? 'dark' : '' };
         case 'LOGIN':
 
-            fetch("http://localhost:8080/api/auth/login", {
+            fetch("http://3.135.246.162/api/auth/login", {
                 method: 'POST',
                 body: JSON.stringify(action.payload.user),
                 headers: {
