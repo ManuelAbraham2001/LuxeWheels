@@ -63,22 +63,24 @@ const Navbar = () => {
         <div className="right-block">
           {isAuthenticated ? (
             <>
-              {isAdmin ? (
+
+
+
+                {isAdmin ? (
                 <Link to="/admin" className="admin">
                   <button className="nav-button">Administración</button>
                 </Link>
               ) : null}
-
-
-              <div className="logout">
-
                 <span className="user-greeting">Hola, {ui || ''}</span>
-                <span className="user-initials">{userInitials}</span>
+                
+                <div className="logout">
+                  <span className="user-initials">{userInitials}</span>
+                  <button onClick={handleLogout} className="nav-button">
+                    Cerrar Sesión
+                  </button>
+                </div>
 
-                <button onClick={handleLogout} className="nav-button">
-                  Cerrar Sesión
-                </button>
-              </div>
+
             </>
           ) : (
             <>
@@ -98,28 +100,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-/*
-
-            <div className="user-info">
-              <span className="user-greeting">Hola, {ui || ''}</span>
-              <span className="user-initials">
-                {userInitials}
-                <button onClick={handleLogout} className="nav-button">
-                  Cerrar Sesión
-                </button>
-              </span>
-            </div>
-
-
-//
-
-
-
-            <button onClick={handleLogout} className="nav-button">
-              Cerrar Sesión
-            </button>
-
-            <span className="user-greeting">Hola, {ui || ''}</span>
-            <span className="user-initials">{userInitials}</span>
-
-*/
