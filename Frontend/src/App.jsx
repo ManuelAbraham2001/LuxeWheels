@@ -6,9 +6,10 @@ import Home from './Components/Home';
 import LoginForm from './Components/LoginForm';
 import RegisterForm from "./Components/RegisterForm";
 import Admin from './Components/Admin';
-import ListUsers from './Components/ListUsers';
+import AdminListCategories from './Components/AdminListCategories';
+import AdminListUsers from './Components/ListUsers';
 import AdminListVehicles from './Components/AdminListVehicles';
-import AddVehicleForm from './Components/AddVehicleForm';
+import AdminAddVehicleForm from './Components/AdminAddVehicleForm';
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { useEffect, useState } from 'react';
@@ -30,9 +31,10 @@ const App = () => {
 
                     <Route element={<AuthMiddleware isAuthenticated={state.isAuthenticated} isAdmin={state.isAdmin} />}>
                         <Route path="/admin" element={<Admin />} />
-                        <Route path="/admin/listusers" element={<ListUsers />} />
+                        <Route path="/admin/listusers" element={<AdminListUsers />} />
                         <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
-                        <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+                        <Route path="/admin/addvehicle" element={<AdminAddVehicleForm />} />
+                        <Route path="/admin/listcategories" element={<AdminListCategories />} />
                     </Route>
 
 

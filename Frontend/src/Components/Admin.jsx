@@ -6,7 +6,7 @@ const Admin = () => {
         <>
             <div className="admin-main">
                 <div className="admin-menu">
-                    <a href="/admin/addproduct">
+                    <a href="/admin/addvehicle">
                         <div className="menu-option">
                             <h2>Agregar Vehiculo</h2>
                         </div>
@@ -19,6 +19,11 @@ const Admin = () => {
                     <a href="/admin/listUsers">
                         <div className="menu-option">
                             <h2>Ver Usuarios</h2>
+                        </div>
+                    </a>
+                    <a href="/admin/listcategories">
+                        <div className="menu-option">
+                            <h2>Administrar Categorías</h2>
                         </div>
                     </a>
                 </div>
