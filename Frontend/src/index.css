@@ -19,10 +19,6 @@ code {
     monospace;
 }
 
-.main-container {
-  padding: 20px;
-}
-
 h1 {
   text-align: center;
 }
@@ -53,35 +49,7 @@ textarea {
   padding: 3px;
 }
 
-.card {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-  padding: 0.5rem 0.5rem 0 0.5rem;
-  border: 0.5px solid rgb(136, 136, 136);
-}
 
-.card:hover {
-  border: 0.5px solid rgb(206, 217, 142);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: 25% 25%;
-  place-items: center;
-  justify-content: center;
-}
-
-.card-image {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-  width: 200px;
-  height: auto;
-  flex-wrap: wrap;
-}
 
 table {
   border-collapse: collapse;
@@ -120,14 +88,3 @@ tr:nth-child(even) {
   align-items: center;
 }
 
-@media (max-width: 768px) {
-
-
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: 25%;
-    place-items: center;
-    justify-content: center;
-  }
-}

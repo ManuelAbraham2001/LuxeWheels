@@ -1,7 +1,3 @@
-
-
-
-
 // App.jsx
 import { Route, Routes } from 'react-router-dom';
 import { AuthMiddleware } from './Middlewares/AuthMiddleware';
@@ -63,7 +59,7 @@ const App = () => {
                     
 )};
 
-                    export default App;
+export default App;
 
 
 

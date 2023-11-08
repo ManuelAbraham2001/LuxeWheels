@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './styles/CardHome.css'
 
+
 const Card = ({auto}) => {
 
   return (
-    <div>
+    <>
       {auto && (
         <div key={auto.id} className="card">
           <img src={auto.images[0]} alt={auto.model} />
@@ -18,7 +19,7 @@ const Card = ({auto}) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
