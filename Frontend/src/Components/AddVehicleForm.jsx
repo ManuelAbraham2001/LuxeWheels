@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const AddVehicleForm = () => {
   const [images, setImages] = useState([]);
-
+  const token = localStorage.getItem('jwt')
 
   const [formData, setFormData] = useState({
     modelo: "",
@@ -42,7 +42,6 @@ const AddVehicleForm = () => {
     dataForm.append("vehiculo", JSON.stringify({
       modelo: formData.modelo,
       anio: formData.anio,
-      categoria: formData.categoria,
       patente: formData.patente,
       precio: formData.precio,
       descripcion: formData.descripcion
@@ -54,9 +53,12 @@ const AddVehicleForm = () => {
 
     console.log("enviando");
 
-    fetch("http://localhost:8080/api/vehiculos", {
+    fetch("http://3.135.246.162/api/vehiculos", {
       method: "POST",
       body: dataForm,
+      headers: {
+        "authorization": "Bearer " + token
+      }
     })
       .then((response) => {
         if (response.ok) {
