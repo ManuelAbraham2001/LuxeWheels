@@ -15,6 +15,7 @@ import Navbar from "./Components/Navbar";
 import { useEffect, useState } from 'react';
 import { useRentacarStates } from './Context/Context';
 import AdminAddModelForm from './Components/AdminAddModelForm';
+import Detail from './Components/Detail';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -37,7 +38,7 @@ const App = () => {
                         <Route path="/admin/addvehicle" element={<AdminAddVehicleForm />} />
                         <Route path="/admin/listcategories" element={<AdminListCategories />} />
                     </Route>
-
+                    <Route path="/detail/:id" element={<Detail/>} />
 
                     <Route element={<GuestMiddleware isAuthenticated={state.isAuthenticated} />}>
                         <Route path="/register" element={<RegisterForm />} />

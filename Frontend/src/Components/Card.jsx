@@ -5,7 +5,6 @@ import img from '../../public/images/audi_1.jpg'
 
 
 const Card = ({ auto }) => {
-  console.log(auto);
 
   return (
     <>

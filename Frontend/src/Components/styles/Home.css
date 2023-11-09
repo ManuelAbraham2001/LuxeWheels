@@ -82,12 +82,21 @@ main {
   font-size: 16px;
 }
 
+.btn-buscar:hover{
+  cursor: pointer;
+}
+
+.buscar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
 #buscar {
   height: 25px;
   border-radius: .25rem;
   border: 1px solid #ced4da;
-
-
 }
 
 #reco {

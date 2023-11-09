@@ -16,6 +16,7 @@ const Home = () => {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [randomCard, setRandomCard] = useState([]);
+    const [categorias, setCategorias] = useState([])
 
     useEffect(() => {
         async function loadVehicles() {
@@ -26,8 +27,17 @@ const Home = () => {
                 .then((data) => setVehicles(data))
                 .then(() => setLoading(false))
         }
-
         loadVehicles();
+
+        fetch("http://3.135.246.162/api/categorias", {
+            method: "GET",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => setCategorias(data))
+
     }, []);
 
 
@@ -35,26 +45,20 @@ const Home = () => {
     return (
         <main>
             <div className="buscador">
-
+                <div className="Categorias">
+                    <select name="categoria" id="cate">
+                        <option disabled selected value="">Seleccionar</option>
+                        {categorias.map(c => (
+                            <option key={c.id} value="">{c.categoria}</option>
+                        ))}
+                    </select>
+                </div>
                 <div className="buscar">
-                    <input type="text" placeholder="Escribe aquí..." id="buscar" />
+                    {/* <input type="text" placeholder="Escribe aquí..." id="buscar" /> */}
                     <button className="btn-buscar">
                         <strong>Buscar</strong>
                     </button>
                 </div>
-
-                <div>
-                    <select name="recomendacion" id="reco">
-                        <option value="seleccion">Recomendaciones</option>
-                    </select>
-                </div>
-
-                <div className="Categorias">
-                    <select name="categoria" id="cate">
-                        <option value="seleccion">Categorías</option>
-                    </select>
-                </div>
-
             </div>
 
             <div className="card-grid">
