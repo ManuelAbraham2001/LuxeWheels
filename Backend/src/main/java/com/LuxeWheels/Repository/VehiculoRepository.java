@@ -1,6 +1,8 @@
 package com.LuxeWheels.Repository;
 
 import com.LuxeWheels.Entity.Vehiculo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,4 +15,6 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
     Optional<Vehiculo> buscarVehiculoPorId(Long id);
     @Query("SELECT v FROM Vehiculo v JOIN v.modelo m JOIN m.marca ma WHERE ma.marca = :marca")
     List<Vehiculo> buscarVehiculosPorMarca(String marca);
+    @Query("SELECT v FROM Vehiculo v JOIN v.modelo m JOIN m.categoria ca WHERE ca.categoria = :categoria")
+    Page<Vehiculo> filtrarVehiculosPorCategoria(Pageable pageable, String categoria);
 }

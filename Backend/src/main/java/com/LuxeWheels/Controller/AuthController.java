@@ -7,6 +7,7 @@ import com.LuxeWheels.Exceptions.RolNotFoundException;
 import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 import com.LuxeWheels.Security.JwtUtil;
+import com.LuxeWheels.Service.MailService;
 import com.LuxeWheels.Service.UsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth/")
@@ -30,10 +28,18 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/singup")
     public ResponseEntity<?> registro(@RequestBody Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(usuario));
+        try{
+            service.crear(usuario);
+            mailService.sendMail(usuario, "Confirmacion de la cuenta");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")

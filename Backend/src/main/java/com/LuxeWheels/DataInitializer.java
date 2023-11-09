@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.LuxeWheels;
 
 import com.LuxeWheels.Entity.*;
@@ -32,11 +27,13 @@ public class DataInitializer implements CommandLineRunner {
     private ModeloRepository modeloRepository;
     @Autowired
     private VehiculoRepository vehiculoRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void run(String... args) throws Exception {
+
+        System.out.println("Iniciando DataInitializer...");
+
         Rol admin = new Rol("ROLE_ADMIN");
         Rol user = new Rol("ROLE_USER");
 
@@ -77,5 +74,6 @@ public class DataInitializer implements CommandLineRunner {
 
         vehiculoRepository.save(new Vehiculo(uno, anio, "abe123", 2000d, "auto 1"));
 
+        System.out.println("DataInitializer finalizado.");
     }
 }

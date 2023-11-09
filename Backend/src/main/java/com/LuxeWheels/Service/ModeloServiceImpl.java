@@ -1,5 +1,6 @@
 package com.LuxeWheels.Service;
 
+import com.LuxeWheels.Dto.CrearModeloDTO;
 import com.LuxeWheels.Entity.Anio;
 import com.LuxeWheels.Entity.Categoria;
 import com.LuxeWheels.Entity.Marca;
@@ -26,9 +27,9 @@ public class ModeloServiceImpl implements ModeloService{
 
 
     @Override
-    public Modelo crear(Modelo modelo) {
-        Categoria categoria = categoriaRepository.findByCategoria(modelo.getCategoria().getCategoria());
-        Marca marca = marcaRepository.findByMarca(modelo.getMarca().getMarca());
+    public Modelo crear(CrearModeloDTO modelo) {
+        Categoria categoria = categoriaRepository.findByCategoria(modelo.getCategoria());
+        Marca marca = marcaRepository.findByMarca(modelo.getMarca());
 
         return modeloRepository.save(new Modelo(modelo.getModelo(), marca, categoria));
     }

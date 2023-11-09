@@ -38,6 +38,11 @@ public class VehiculoController {
         return ResponseEntity.ok(vehiculoService.buscarVehiculoPorId(id));
     }
 
+    @GetMapping(params = {"page", "categoria"})
+    public ResponseEntity<?> buscarVehiculosPorCategoria(@RequestParam int page, @RequestParam String categoria){
+        return ResponseEntity.ok(vehiculoService.filtrarVehiculosPorCategoria(page, categoria));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         vehiculoService.eliminar(id);

@@ -1,12 +1,6 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.UsuarioDTO;
-import com.LuxeWheels.Entity.Rol;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
 import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
@@ -17,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {

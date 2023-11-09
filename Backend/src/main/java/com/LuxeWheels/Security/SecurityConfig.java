@@ -70,7 +70,9 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/api/vehiculos/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/vehiculos/**").permitAll()
                                 .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/api/modelo").permitAll()
+                                .requestMatchers("/api/modelo").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/api/categorias").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/marcas").permitAll()
                                 .anyRequest().authenticated())
                 .build();
     }

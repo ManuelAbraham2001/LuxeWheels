@@ -16,15 +16,23 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String categoria;
+    private String descripcion;
+    private String url;
 
     @OneToMany(mappedBy = "categoria")
     @JsonIgnore
-    private List<Modelo> modelos    ;
+    private List<Modelo> modelos;
 
     public Categoria() {
     }
 
     public Categoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Categoria(String categoria, String descripcion, String url) {
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.url = url;
     }
 }

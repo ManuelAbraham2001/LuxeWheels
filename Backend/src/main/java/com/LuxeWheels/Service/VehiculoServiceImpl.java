@@ -8,6 +8,9 @@ import com.LuxeWheels.Repository.CategoriaRepository;
 import com.LuxeWheels.Repository.ModeloRepository;
 import com.LuxeWheels.Repository.VehiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,6 +66,13 @@ public class VehiculoServiceImpl implements VehiculoService{
     @Override
     public List<Vehiculo> buscarVehiculosPorMarca(String marca) {
         return vehiculoRepository.buscarVehiculosPorMarca(marca);
+    }
+
+    @Override
+    public Page<Vehiculo> filtrarVehiculosPorCategoria(int page, String categoria) {
+        int cantidadPorPagina = 10;
+        Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
+        return vehiculoRepository.filtrarVehiculosPorCategoria(pageable, categoria);
     }
 
     @Override

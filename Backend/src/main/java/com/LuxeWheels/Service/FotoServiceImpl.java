@@ -47,7 +47,17 @@ public class FotoServiceImpl implements FotoService{
     }
 
     @Override
-    public Foto cargar(MultipartFile foto) {
-        return null;
+    public Foto cargar(MultipartFile foto) throws IOException {
+        String nombreImagen = "imgs/" + UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
+
+        PutObjectRequest request = new PutObjectRequest("c3-equipo5", nombreImagen, foto.getInputStream(), new ObjectMetadata());
+        ObjectMetadata metadata = new ObjectMetadata();
+        request.setCannedAcl(CannedAccessControlList.PublicRead);
+
+        metadata.setContentType("image/jpeg");
+        request.setMetadata(metadata);
+        s3Client.putObject(request);
+
+        return new Foto("https://c3-equipo5.s3.us-east-2.amazonaws.com/" + nombreImagen);
     }
 }

@@ -1,5 +1,6 @@
 package com.LuxeWheels.Controller;
 
+import com.LuxeWheels.Dto.CrearModeloDTO;
 import com.LuxeWheels.Entity.Modelo;
 import com.LuxeWheels.Service.ModeloServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class ModeloController {
     private ModeloServiceImpl modeloService;
 
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody Modelo modelo){
+    public ResponseEntity<?> crear(@RequestBody CrearModeloDTO modelo){
         return ResponseEntity.ok(modeloService.crear(modelo));
     }
 
