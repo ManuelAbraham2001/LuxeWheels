@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const AddModeloForm = () => {
+const AdminAddModelForm = () => {
 
     const [marcas, setMarcas] = useState([])
     const [categorias, setCategorias] = useState([])
@@ -94,4 +94,4 @@ const AddModeloForm = () => {
     )
 }
 
-export default AddModeloForm
+export default AdminAddModelForm

@@ -14,7 +14,7 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { useEffect, useState } from 'react';
 import { useRentacarStates } from './Context/Context';
-import AddModeloForm from './Components/AddModeloForm';
+import AdminAddModelForm from './Components/AdminAddModelForm';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -33,8 +33,7 @@ const App = () => {
                         <Route path="/admin" element={<Admin />} />
                         <Route path="/admin/listusers" element={<AdminListUsers />} />
                         <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
-                        <Route path="/admin/addproduct" element={<AddVehicleForm />} />
-                        <Route path="/admin/addModelo" element={<AddModeloForm />} />
+                        <Route path="/admin/addmodel" element={<AdminAddModelForm />} />
                         <Route path="/admin/addvehicle" element={<AdminAddVehicleForm />} />
                         <Route path="/admin/listcategories" element={<AdminListCategories />} />
                     </Route>
