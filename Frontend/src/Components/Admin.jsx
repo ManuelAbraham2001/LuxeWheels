@@ -6,7 +6,7 @@ const Admin = () => {
         <>
             <div className="admin-main">
                 <div className="admin-menu">
-                    <a href="/admin/addproduct">
+                    <a href="/admin/addvehicle">
                         <div className="menu-option">
                             <h2>Agregar Vehiculo</h2>
                         </div>

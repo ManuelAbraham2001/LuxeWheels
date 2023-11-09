@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddVehicleForm from './AddVehicleForm';
+import AddVehicleForm from './AdminAddVehicleForm';
 
 const Modal = ({ isOpen, onClose, onAddVehicle }) => {
   const [isFormOpen, setFormOpen] = useState(false);

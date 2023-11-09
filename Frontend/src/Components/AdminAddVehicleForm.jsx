@@ -1,13 +1,15 @@
 
 
 
-import React, { useState, useEffect } from 'react';
-import './styles/AddVehicleForm.css'
+import React, { useState, useEffect} from 'react';
+import './styles/AdminAddVehicleForm.css'
+import { useParams } from 'react-router-dom'
+import { useRentacarStates } from '../Context/Context';
 import { Link } from 'react-router-dom';
 
 
 
-const AddVehicleForm = () => {
+const AdminAddVehicleForm = () => {
   const [images, setImages] = useState([]);
   const token = localStorage.getItem('jwt')
   const [modelos, setModelos] = useState([])
@@ -112,9 +114,6 @@ const AddVehicleForm = () => {
 
     <section className='sectionAddVehicle'>
       <div className='add-vehicle-container'>
-        <Link to="/admin">
-          <button className="submit-button">Ir a Administración</button>
-        </Link>
 
         <h2>Agregar Vehículo</h2>
         <form className='add-vehicle-form'>
@@ -203,4 +202,4 @@ const AddVehicleForm = () => {
   );
 };
 
-export default AddVehicleForm;
+export default AdminAddVehicleForm;
