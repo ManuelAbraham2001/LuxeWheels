@@ -21,6 +21,11 @@ const Admin = () => {
                             <h2>Ver Usuarios</h2>
                         </div>
                     </a>
+                    <a href="/admin/addModelo">
+                        <div className="menu-option">
+                            <h2>Crear Modelo</h2>
+                        </div>
+                    </a>
                 </div>
                 <div className="mobile-device">
                     <span>Sitio no disponible</span>

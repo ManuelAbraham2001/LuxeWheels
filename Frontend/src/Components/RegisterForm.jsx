@@ -10,6 +10,23 @@ const RegisterForm = () => {
   const [telefono, setTelefono] = useState('');
   const [documento, setDocumento] = useState('');
 
+  const [form, setForm] = useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+    fechaNacimiento: "",
+    telefono: "",
+    documento: ""
+  })
+
+  const handleInputs = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  }
+
   const [enviado, setEnviado] = useState(false);
   const [errors, setError] =useState(false);
 
@@ -26,13 +43,28 @@ const RegisterForm = () => {
     setEnviado(false)
     setError(false)
 
-    if(nombre.length > 4 && apellido.length > 4 && validarEmail(email) == true && password.length >= 5) {
+    if(form.nombre.length > 4 && form.apellido.length > 4 && validarEmail(form.email) == true && form.password.length >= 5) {
       setEnviado(true)
       setError(false)
   } else {
       setError(true)
   }
-    console.log(`Registrarse con ${nombre}, ${apellido}, ${email}, ${password}, ${fechaNac}, ${telefono}, ${documento}`);
+
+  setForm({
+    ...form,
+    telefono: parseInt(form.telefono)
+  });
+
+  console.log(form);
+
+  fetch("http://3.135.246.162/api/auth/singup", {
+    method: "POST",
+    body: JSON.stringify(form),
+    headers: {
+      "content-type": "application/json"
+    }
+  })
+
   };
 
   return (
@@ -44,8 +76,8 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="text"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            value={form.nombre}
+            onChange={(e) => handleInputs("nombre", e.target.value)}
           />
           {errors.nombre && <p className="error-message">{errors.nombre}</p>}
 
@@ -53,8 +85,8 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="text"
-            value={apellido}
-            onChange={(e) => setApellido(e.target.value)}
+            value={form.apellido}
+            onChange={(e) => handleInputs("apellido", e.target.value)}
           />
           {errors.apellido && <p className="error-message">{errors.apellido}</p>}
 
@@ -62,8 +94,8 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={(e) => handleInputs("email", e.target.value)}
           />
           {errors.email && <p className="error-message">{errors.email}</p>}
 
@@ -72,8 +104,8 @@ const RegisterForm = () => {
             className="input-field"
             type="password"
             placeholder='la contraseña debe tener mas de 5 caracteres'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={form.password}
+            onChange={(e) => handleInputs("password", e.target.value)}
           />
           {errors.password && <p className="error-message">{errors.password}</p>}
 
@@ -81,8 +113,8 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="date"
-            value={fechaNac}
-            onChange={(e) => setFechaNac(e.target.value)}
+            value={form.fechaNacimiento}
+            onChange={(e) => handleInputs("fechaNacimiento", e.target.value)}
           />
           {errors.fechaNac && <p className="error-message">{errors.fechaNac}</p>}
 
@@ -90,8 +122,8 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="tel"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            value={form.telefono}
+            onChange={(e) => handleInputs("telefono", e.target.value)}
           />
           {errors.telefono && <p className="error-message">{errors.telefono}</p>}
 
@@ -99,15 +131,15 @@ const RegisterForm = () => {
           <input
             className="input-field"
             type="text"
-            value={documento}
-            onChange={(e) => setDocumento(e.target.value)}
+            value={form.documento}
+            onChange={(e) => handleInputs("documento", e.target.value)}
           />
           {errors.documento && <p className="error-message">{errors.documento}</p>}
 
           <button className="submit-button" onClick={handleRegister}>
             Registrarse
           </button>
-          {enviado && <h3>Hola {nombre}! te has registrado correctamente!</h3>}
+          {enviado && <h3>Hola {form.nombre}! te has registrado correctamente!</h3>}
           {errors && <h3 style={{color: 'red'}}>Por favor verifique los datos nuevamente</h3>}
         </div>
       </div>

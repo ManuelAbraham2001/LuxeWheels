@@ -13,11 +13,11 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import { useEffect, useState } from 'react';
 import { useRentacarStates } from './Context/Context';
+import AddModeloForm from './Components/AddModeloForm';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
     const { state, dispatch } = useRentacarStates();
-    console.log(state.isAdmin);
 
     return (
         <>
@@ -33,6 +33,7 @@ const App = () => {
                         <Route path="/admin/listusers" element={<ListUsers />} />
                         <Route path="/admin/listvehicles" element={<AdminListVehicles />} />
                         <Route path="/admin/addproduct" element={<AddVehicleForm />} />
+                        <Route path="/admin/addModelo" element={<AddModeloForm />} />
                     </Route>
 
 

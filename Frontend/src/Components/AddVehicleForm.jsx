@@ -1,10 +1,8 @@
 
 
 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/AddVehicleForm.css'
-import { useParams } from 'react-router-dom'
-import { useRentacarStates } from '../Context/Context';
 import { Link } from 'react-router-dom';
 
 
@@ -12,6 +10,7 @@ import { Link } from 'react-router-dom';
 const AddVehicleForm = () => {
   const [images, setImages] = useState([]);
   const token = localStorage.getItem('jwt')
+  const [modelos, setModelos] = useState([])
 
   const [formData, setFormData] = useState({
     modelo: "",
@@ -23,6 +22,13 @@ const AddVehicleForm = () => {
     descripcion: "",
     fotos: []
   })
+
+  useEffect(() => {
+    fetch("http://3.135.246.162/api/modelo", {
+      method: "GET"
+    }).then(res => res.json())
+      .then(data => setModelos(data))
+  }, [])
 
   const handleInputs = (name, value) => {
     setFormData({
@@ -51,7 +57,7 @@ const AddVehicleForm = () => {
       dataForm.append(`imagen`, imagen);
     });
 
-    console.log("enviando");
+    console.log(formData);
 
     fetch("http://3.135.246.162/api/vehiculos", {
       method: "POST",
@@ -62,7 +68,7 @@ const AddVehicleForm = () => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log(response.json()); 
+          console.log(response.json());
           return response.json();
         } else {
           throw new Error("Error en la solicitud.");
@@ -106,25 +112,27 @@ const AddVehicleForm = () => {
 
     <section className='sectionAddVehicle'>
       <div className='add-vehicle-container'>
-      <Link to="/admin">
+        <Link to="/admin">
           <button className="submit-button">Ir a Administración</button>
-      </Link>
+        </Link>
 
         <h2>Agregar Vehículo</h2>
         <form className='add-vehicle-form'>
           <label className="label-field">Modelo:</label>
-          <input
-            type="text"
+          <select name="" id=""
             value={formData.modelo}
             onChange={(e) => handleInputs("modelo", e.target.value)}
-            className="input-field"
-          />
+          >
+            <option disabled selected value="">Selecciona un modelo</option>
+            {modelos.map((m) => (<option key={m.id}>{m.modelo}</option>))}
+          </select>
           <br />
 
           <label className="label-field">Marca:</label>
           <input
             type="text"
-            value={formData.marca}
+            disabled
+            value={modelos.find(m => m.modelo === formData.modelo)?.marca.marca}
             onChange={(e) => handleInputs("marca", e.target.value)}
             className="input-field"
           />
@@ -139,15 +147,6 @@ const AddVehicleForm = () => {
             <option value="">Selecciona un año</option>
             {generateYearOptions()}
           </select>
-          <br />
-
-          <label className="label-field">Categoría:</label>
-          <input
-            type="text"
-            value={formData.categoria}
-            onChange={(e) => handleInputs("categoria", e.target.value)}
-            className="input-field"
-          />
           <br />
 
           <label className="label-field">Patente:</label>
