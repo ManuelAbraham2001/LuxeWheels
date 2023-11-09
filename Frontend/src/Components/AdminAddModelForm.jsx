@@ -51,9 +51,7 @@ const AdminAddModelForm = () => {
         <div>
             <section className='sectionAddVehicle'>
                 <div className='add-vehicle-container'>
-                    <Link to="/admin">
-                        <button className="submit-button">Ir a Administración</button>
-                    </Link>
+
 
                     <h2>Agregar Vehículo</h2>
                     <form className='add-vehicle-form'>
