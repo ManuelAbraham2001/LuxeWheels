@@ -27,7 +27,8 @@ const AdminAddVehicleForm = () => {
 
   useEffect(() => {
     fetch("http://3.135.246.162/api/modelo", {
-      method: "GET"
+      method: "GET",
+      headers :{authorization: `Bearer' ${token}`}
     }).then(res => res.json())
       .then(data => setModelos(data))
   }, [])
