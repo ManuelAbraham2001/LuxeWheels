@@ -19,7 +19,7 @@ const Gallery = ({ fotos }) => {
                     </div>
                     <div className="img-grid">
                         <div className="grid-item">
-                            <img src={fotos[1]?.url || imagen1} alt="Imagen 1" />
+                            <img src={fotos[1]?.url || noImg} alt="Imagen 1" />
                         </div>
                         <div className="grid-item">
                             <img src={fotos[2]?.url || noImg} alt="Imagen 2" />

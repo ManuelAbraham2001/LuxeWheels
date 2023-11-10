@@ -9,7 +9,7 @@ const AdminAddModelForm = () => {
     const [formData, setFormData] = useState({
         modelo: "",
         marca: "",
-        categoria: "",
+        categorias: [],
         caracteristicas: []
     })
     const token = localStorage.getItem('jwt')
@@ -57,6 +57,17 @@ const AdminAddModelForm = () => {
         });
     };
 
+    const handleCategoriaChange = (e) => {
+        const nuevaCategoria = e.target.value;
+
+        if (formData.categorias.includes(nuevaCategoria)) return
+
+        setFormData({
+            ...formData,
+            categorias: [...formData.categorias, nuevaCategoria]
+        });
+    };
+
     const handleSubmit = () => {
         fetch("http://3.135.246.162/api/modelo", {
             method: "POST",
@@ -96,8 +107,8 @@ const AdminAddModelForm = () => {
                         <br />
                         <label className="label-field">Categoria:</label>
                         <select name="" id=""
-                            value={formData.categoria}
-                            onChange={(e) => handleInputs("categoria", e.target.value)}
+                            value=""
+                            onChange={(e) => handleCategoriaChange(e)}
                         >
                             <option disabled selected value="">Selecciona una categoria</option>
                             {categorias.map((c) => (<option key={c.id}>{c.categoria}</option>))}
