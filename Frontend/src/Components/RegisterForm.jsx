@@ -20,6 +20,8 @@ const RegisterForm = () => {
     documento: ""
   })
 
+  const fechaActual = new Date().toISOString().split('T')[0];
+
   const handleInputs = (name, value) => {
     setForm({
       ...form,
@@ -54,8 +56,6 @@ const RegisterForm = () => {
     ...form,
     telefono: parseInt(form.telefono)
   });
-
-  console.log(form);
 
   fetch("http://3.135.246.162/api/auth/singup", {
     method: "POST",
@@ -115,6 +115,7 @@ const RegisterForm = () => {
             type="date"
             value={form.fechaNacimiento}
             onChange={(e) => handleInputs("fechaNacimiento", e.target.value)}
+            max={fechaActual}
           />
           {errors.fechaNac && <p className="error-message">{errors.fechaNac}</p>}
 
@@ -139,7 +140,12 @@ const RegisterForm = () => {
           <button className="submit-button" onClick={handleRegister}>
             Registrarse
           </button>
-          {enviado && <h3>Hola {form.nombre}! te has registrado correctamente!</h3>}
+          {enviado && <div> 
+            <h3>Hola {form.nombre}! te has registrado correctamente!</h3> 
+            <span>Recibiras un email para confirmar los datos de tu cuenta.</span>
+            <br />
+            <span>No recibiste el correo? <a onClick={() => console.log("asd")} style={{color: "white"}}>Volver a enviar</a></span>
+            </div>}
           {errors && <h3 style={{color: 'red'}}>Por favor verifique los datos nuevamente</h3>}
         </div>
       </div>

@@ -1,4 +1,4 @@
-/*.card {
+.card {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -48,4 +48,4 @@
     width: 200px;
     height: auto;
     flex-wrap: wrap;
-  }*/
+  }

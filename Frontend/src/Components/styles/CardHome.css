@@ -77,8 +77,8 @@
 @media (max-width: 768px) {
 
     .card-grid {
-      display: grid;
-      grid-template-columns: 25%;
+      display: grid !important;
+      grid-template-columns: 25% !important;
       place-items: center;
       justify-content: center;
     }

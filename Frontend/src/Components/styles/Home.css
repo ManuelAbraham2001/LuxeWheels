@@ -63,7 +63,7 @@ main {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: .400rem 2.25rem .375rem .75rem;
+  padding: 10px;
   line-height: 2.5;
   border: 1px solid #ced4da;
   border-radius: .25rem;

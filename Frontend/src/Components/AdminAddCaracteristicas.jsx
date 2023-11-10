@@ -58,7 +58,7 @@ const AdminAddCaracteristicas = () => {
             formData.append("foto", caracteristicaEdit.foto[0])
         }
 
-        fetch("http://localhost:8080/api/caracteristicas", {
+        fetch("http://3.135.246.162/api/caracteristicas", {
             method: "PUT",
             body: formData,
             headers: {
@@ -131,7 +131,7 @@ const AdminAddCaracteristicas = () => {
                                         <input type="file" accept='.svg' onChange={e => {isEditing ? setCaracteristicaEdit({...caracteristicaEdit, foto: e.target.files}) : setImagen(e.target.files)}} className="file-input-button" />
                                         <br />
 
-                                        <button onClick={handleEdit} type="button" className="submit-button">
+                                        <button onClick={isEditing ? handleEdit : handleSubmit} type="button" className="submit-button">
                                             {isEditing ? "Editar" : "Agregar"}
                                         </button>
                                         <button style={{ marginTop: "2px" }} className="submit-button" onClick={() => { setPopUp(false), setisEditing(false) }}>Cerrar</button>
