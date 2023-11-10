@@ -68,10 +68,17 @@ main {
   border-radius: .25rem;
   justify-content: center;
   box-sizing: border-box;
+  gap: 10px;
 }
 
 .buscador input {
   outline: none;
+}
+
+.categorias{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
 }
 
 .btn-buscar {
@@ -91,6 +98,27 @@ main {
   justify-content: center;
   align-items: center;
   gap: 2px;
+}
+
+.filter-results{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-results button{
+  width: 10%;
+  background-color: rgb(212, 65, 65);
+  color: white;
+  font-weight: bold;
+  border: 2px solid rgb(190, 0, 0);
+  border-radius: 5px;
+}
+
+.fechas{
+  display: flex;
+  color: white;
+  gap: 10px;
 }
 
 #buscar {

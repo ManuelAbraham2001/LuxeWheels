@@ -5,16 +5,17 @@ const AdminListVehicles = () => {
 
     const [vehicles, setVehicles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [page, currentPage] = useState(1)
 
     const token = localStorage.getItem('jwt');
 
     useEffect(() => {
-        fetch("http://3.135.246.162/api/vehiculos", {
+        fetch(`http://3.135.246.162/api/vehiculos?page=${page}`, {
             method: "GET",
           })
           .then(res => res.json())
           .then(data => {
-              setVehicles(data);
+              setVehicles(data.content);
               setIsLoading(false); 
           })
           .catch(error => {

@@ -49,7 +49,9 @@ textarea {
   padding: 3px;
 }
 
-
+button:hover{
+  cursor: pointer;
+}
 
 table {
   border-collapse: collapse;

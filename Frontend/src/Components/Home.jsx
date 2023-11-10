@@ -17,16 +17,15 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [randomCard, setRandomCard] = useState([]);
     const [categorias, setCategorias] = useState([])
+    const [selectedCategoria, setSelectedCategoria] = useState(null);
+    const [isFilter, setIsFilter] = useState(false)
+    const [page, currentPage] = useState(1)
+    const [totalElements, setTotalElements] = useState(0)
+    const [filterElements, setFilterElements] = useState(0)
+
+    console.log(totalElements);
 
     useEffect(() => {
-        async function loadVehicles() {
-            await fetch('http://3.135.246.162/api/vehiculos', {
-                method: 'GET',
-            })
-                .then((res) => res.json())
-                .then((data) => setVehicles(data))
-                .then(() => setLoading(false))
-        }
         loadVehicles();
 
         fetch("http://3.135.246.162/api/categorias", {
@@ -40,47 +39,65 @@ const Home = () => {
 
     }, []);
 
+    async function loadVehicles() {
+        await fetch(`http://3.135.246.162/api/vehiculos?page=${page}`, {
+            method: 'GET',
+        })
+            .then((res) => res.json())
+            .then((data) => {setVehicles(data.content), setTotalElements(data.totalElements), setFilterElements(data.numberOfElements)})
+            .then(() => setLoading(false))
+    }
 
+    const filterRequest = (categoria) => {
+
+        setLoading(true)
+        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&categoria=${categoria}`, {
+            method: 'GET',
+        })
+            .then((res) => res.json())
+            .then((data) => {setVehicles(data.content), setFilterElements(data.numberOfElements)})
+            .then(() => { setLoading(false), setIsFilter(true)})
+    };
 
     return (
         <main>
             <div className="buscador">
-                <div className="Categorias">
-                    <select name="categoria" id="cate">
-                        <option disabled selected value="">Seleccionar</option>
-                        {categorias.map(c => (
-                            <option key={c.id} value="">{c.categoria}</option>
-                        ))}
-                    </select>
+                <div className="fechas">
+                    <div className="search-date">
+                        <label>Desde </label>
+                        <input type="date" />
+                    </div>
+                    <div className="search-date">
+                        <label>Hasta </label>
+                        <input type="date" />
+                    </div>
                 </div>
                 <div className="buscar">
-                    {/* <input type="text" placeholder="Escribe aquí..." id="buscar" /> */}
-                    <button className="btn-buscar">
+                    <button onClick={() => { loadVehicles(), setIsFilter(true) }} className="btn-buscar">
                         <strong>Buscar</strong>
                     </button>
                 </div>
             </div>
-
+            {isFilter ? <div className='filter-results'>
+                <span>Mostrando resultados: {filterElements} de {totalElements}</span>
+                <div className="categorias">
+                    <select name="categoria" id="cate" onChange={e => setSelectedCategoria(e.target.value)} value={selectedCategoria}>
+                        <option disabled selected value="">Seleccionar</option>
+                        {categorias.map((c) => (
+                            <option key={c.id} value={c.categoria}>
+                                {c.categoria}
+                            </option>
+                        ))}
+                    </select>
+                    <button onClick={() => { filterRequest(selectedCategoria), setLoading(true) }}>Aplicar filtros</button>
+                </div>
+                <button onClick={() => { loadVehicles(), setLoading(true) }}>Eliminar filtros</button>
+            </div> : null}
             <div className="card-grid">
                 {loading ? <>Cargando</> : vehicles.map((a) => <Card auto={a} key={a.id} />)}
             </div>
-
         </main>
     );
 }
 
 export default Home
-
-
-
-
-
-
-
-
-
-
-
-
-
-

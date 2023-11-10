@@ -9,3 +9,31 @@
     align-items: center;
     margin: 0 auto;
 }
+
+.detail-descripcion, .caracteristicas-main{
+    text-align: center;
+    background-color: #fff;
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.detail-descripcion p{
+    margin: 0 auto;
+    max-width: 50%;
+}
+
+.caracteristicas-list-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.caracteristicas-list{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}

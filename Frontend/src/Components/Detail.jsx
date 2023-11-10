@@ -1,29 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Gallery from "./Gallery";
 import svg from './../../public/images/arrow-left-solid.svg'
 import './styles/DetailCard.css'
 import Caracteristicas from "./Caracteristicas";
+import { useParams } from "react-router-dom";
 
 
 
 const Detail = () => {
 
-  return (
-    <div className="main-container">
-      <div className="detail-vehicle">
-      <h2>modelo</h2>
-      <div className="arrow-back">
-        <a href="/">
-        <img src={svg}/>
-        </a>
-      </div>
-      </div>
+  const { id } = useParams();
+  const [auto, setAuto] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
-      <Gallery/>
-      <p>descripcion:</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ipsa odio exercitationem? Possimus cupiditate, quae perspiciatis sapiente est deserunt nam quasi incidunt animi explicabo reiciendis tenetur ab, similique et eius. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet doloremque sit natus. Fugiat inventore dicta cum mollitia possimus ipsam non delectus qui est, officiis minus ducimus, totam laudantium? In, quas! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed dolore cum molestiae accusamus non unde, architecto, esse vero labore recusandae voluptates ad quam maiores aliquam tempore necessitatibus perspiciatis nesciunt assumenda? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat debitis aliquid odit optio deserunt! Veniam molestias recusandae quis minima, optio voluptatem eveniet mollitia minus quod, fugit, officia natus adipisci! Exercitationem?</p>
-      <Caracteristicas></Caracteristicas>
-    </div>
+  useEffect(() => {
+    fetch("http://3.135.246.162/api/vehiculos/" + id, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json"
+      }
+    }).then(res => res.json())
+      .then(data => setAuto(data))
+      .then(() => setIsLoading(false))
+  }, [])
+
+  return (
+    <>
+      {isLoading ? <div>Cargando...</div> :
+        <div className="main-container">
+          <div className="detail-vehicle">
+            <h1>{auto.modelo.marca.marca} {auto.modelo.modelo} {auto.anio.anio}</h1>
+            <div className="arrow-back">
+              <a href="/">
+                <img src={svg} />
+              </a>
+            </div>
+          </div>
+          <Gallery fotos={auto.modelo.fotos} />
+          <div className="detail-descripcion">
+            <h2>DESCRIPCION</h2>
+            <p>{auto.descripcion}</p>
+          </div>
+          <Caracteristicas caracteristicas={auto.modelo.caracteristicas}></Caracteristicas>
+        </div>}
+    </>
   );
 };
 
