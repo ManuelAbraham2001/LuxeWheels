@@ -1,9 +1,11 @@
 package com.LuxeWheels.Dto;
 
+import com.LuxeWheels.Entity.Caracteristica;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +16,8 @@ public class CrearVehiculoDTO implements Serializable {
     private String patente;
     private double precio;
     private String descripcion;
+
+    private List<Caracteristica> caracteristicas;
 
     public CrearVehiculoDTO() {
     }

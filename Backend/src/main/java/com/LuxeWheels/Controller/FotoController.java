@@ -18,10 +18,10 @@ public class FotoController {
     @Autowired
     private FotoServiceImpl fotoService;
 
-    @PostMapping
-    public ResponseEntity<?> cargar(@RequestBody MultipartFile foto) throws IOException {
-        Foto subida = fotoService.cargar(foto);
-        return ResponseEntity.ok(subida.getUrl());
-    }
+//    @PostMapping
+//    public ResponseEntity<?> cargar(@RequestBody MultipartFile foto) throws IOException {
+//        Foto subida = fotoService.cargar(foto);
+//        return ResponseEntity.ok(subida.getUrl());
+//    }
 
 }

@@ -22,7 +22,7 @@ public class CategoriaServiceImpl implements CategoriaService{
 
     @Override
     public Categoria crear(CrearCategoriaDTO categoriaDTO, MultipartFile foto) throws IOException {
-        Foto fotoSubida = fotoService.cargar(foto);
+        Foto fotoSubida = fotoService.cargar(foto, "image/jpeg");
         Categoria categoria = new Categoria(categoriaDTO.getCategoria(), categoriaDTO.getDescripcion(), fotoSubida.getUrl());
         return categoriaRepository.save(categoria);
     }

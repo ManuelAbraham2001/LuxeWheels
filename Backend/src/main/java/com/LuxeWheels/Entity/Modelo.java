@@ -33,6 +33,14 @@ public class Modelo {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "modelo_caracteristica",
+            joinColumns = @JoinColumn(name = "modelo_id"),
+            inverseJoinColumns = @JoinColumn(name = "caracteristica_id")
+    )
+    private List<Caracteristica> caracteristicas;
+
     public Modelo() {
     }
 
@@ -56,5 +64,12 @@ public class Modelo {
         this.marca = marca;
         this.vehiculos = vehiculos;
         this.fotos = fotos;
+    }
+
+    public Modelo(String modelo, Marca marca, Categoria categoria, List<Caracteristica> caracteristicas) {
+        this.modelo = modelo;
+        this.marca = marca;
+        this.categoria = categoria;
+        this.caracteristicas = caracteristicas;
     }
 }
