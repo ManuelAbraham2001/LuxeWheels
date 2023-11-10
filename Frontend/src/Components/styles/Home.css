@@ -4,6 +4,7 @@
   grid-template-columns: 25% 25%;
   place-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 /*
@@ -89,6 +90,10 @@ main {
   font-size: 16px;
 }
 
+.home-container{
+  display: flex;
+}
+
 .btn-buscar:hover{
   cursor: pointer;
 }
@@ -107,7 +112,6 @@ main {
 }
 
 .filter-results button{
-  width: 10%;
   background-color: rgb(212, 65, 65);
   color: white;
   font-weight: bold;

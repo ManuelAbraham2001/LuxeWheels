@@ -17,7 +17,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [randomCard, setRandomCard] = useState([]);
     const [categorias, setCategorias] = useState([])
-    const [selectedCategoria, setSelectedCategoria] = useState(null);
+    const [selectedCategorias, setSelectedCategorias] = useState([]);
     const [isFilter, setIsFilter] = useState(false)
     const [page, currentPage] = useState(1)
     const [totalElements, setTotalElements] = useState(0)
@@ -44,20 +44,30 @@ const Home = () => {
             method: 'GET',
         })
             .then((res) => res.json())
-            .then((data) => {setVehicles(data.content), setTotalElements(data.totalElements), setFilterElements(data.numberOfElements)})
+            .then((data) => { setVehicles(data.content), setTotalElements(data.totalElements), setFilterElements(data.numberOfElements) })
             .then(() => setLoading(false))
     }
 
-    const filterRequest = (categoria) => {
-
-        setLoading(true)
-        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&categoria=${categoria}`, {
+    const filterRequest = () => {
+        setLoading(true);
+        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&categorias=${encodeURIComponent(selectedCategorias.join(','))}`, {
             method: 'GET',
         })
             .then((res) => res.json())
-            .then((data) => {setVehicles(data.content), setFilterElements(data.numberOfElements)})
-            .then(() => { setLoading(false), setIsFilter(true)})
+            .then((data) => { setVehicles(data.content), setFilterElements(data.numberOfElements) })
+            .then(() => { setLoading(false), setIsFilter(true)});
     };
+
+    const handleAddCategorias = (categoria) => {
+        setSelectedCategorias((prevSelectedCategorias) => {
+            if (prevSelectedCategorias.includes(categoria)) {
+                return prevSelectedCategorias.filter((c) => c !== categoria);
+            } else {
+                return [...prevSelectedCategorias, categoria];
+            }
+        });
+    };
+
 
     return (
         <main>
@@ -78,23 +88,33 @@ const Home = () => {
                     </button>
                 </div>
             </div>
-            {isFilter ? <div className='filter-results'>
-                <span>Mostrando resultados: {filterElements} de {totalElements}</span>
-                <div className="categorias">
-                    <select name="categoria" id="cate" onChange={e => setSelectedCategoria(e.target.value)} value={selectedCategoria}>
-                        <option disabled selected value="">Seleccionar</option>
-                        {categorias.map((c) => (
-                            <option key={c.id} value={c.categoria}>
-                                {c.categoria}
-                            </option>
-                        ))}
-                    </select>
-                    <button onClick={() => { filterRequest(selectedCategoria), setLoading(true) }}>Aplicar filtros</button>
+            <div className='home-container'>
+                {isFilter && (
+                    <div className='filter-container'>
+                        <div className='filter-results'>
+                            <span>Mostrando resultados: {filterElements} de {totalElements}</span>
+                            <div className="categorias">
+                                <h3>Categorias</h3>
+                                {categorias.map((c) => (
+                                    <div>
+                                        <span>{c.categoria}</span>
+                                        <input
+                                            onChange={() => handleAddCategorias(c.categoria)}
+                                            value={c.categoria}
+                                            key={c.id}
+                                            checked={selectedCategorias.includes(c.categoria)}
+                                            type='checkbox'></input>
+                                    </div>
+                                ))}
+                                <button onClick={() => { filterRequest(selectedCategorias), setLoading(true) }}>Aplicar filtros</button>
+                            </div>
+                            <button onClick={() => { loadVehicles(), setLoading(true),  setSelectedCategorias([]) }}>Eliminar filtros</button>
+                        </div>
+                    </div>
+                )}
+                <div className="card-grid">
+                    {loading ? <>Cargando</> : vehicles.map((a) => <Card auto={a} key={a.id} />)}
                 </div>
-                <button onClick={() => { loadVehicles(), setLoading(true) }}>Eliminar filtros</button>
-            </div> : null}
-            <div className="card-grid">
-                {loading ? <>Cargando</> : vehicles.map((a) => <Card auto={a} key={a.id} />)}
             </div>
         </main>
     );
