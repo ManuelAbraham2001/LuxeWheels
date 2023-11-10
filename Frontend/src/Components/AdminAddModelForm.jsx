@@ -42,14 +42,20 @@ const AdminAddModelForm = () => {
             ...formData,
             [name]: value
         })
-
-        console.log(formData);
     }
 
-    const handleCaracteristicaChange = (e) => {
-        const nuevaCaracteristica = e.target.value;
+    const handleCaracteristicaChange = (caracteristica) => {
+        console.log(caracteristica);
+        const nuevaCaracteristica = caracteristica
 
-        if (formData.caracteristicas.includes(e.target.value)) return
+        if (formData.caracteristicas.includes(caracteristica)){
+            const nuevoArray = formData.caracteristicas.filter(c => c!== caracteristica)
+            setFormData({
+                ...formData,
+                caracteristicas: nuevoArray
+            });
+            return
+        }
 
         setFormData({
             ...formData,
@@ -57,10 +63,17 @@ const AdminAddModelForm = () => {
         });
     };
 
-    const handleCategoriaChange = (e) => {
-        const nuevaCategoria = e.target.value;
+    const handleCategoriaChange = (value) => {
+        const nuevaCategoria = value;
 
-        if (formData.categorias.includes(nuevaCategoria)) return
+        if (formData.categorias.includes(nuevaCategoria)){
+            const nuevoArray = formData.categorias.filter(c => c!== value)
+            setFormData({
+                ...formData,
+                categorias: nuevoArray
+            });
+            return
+        }
 
         setFormData({
             ...formData,
@@ -86,7 +99,7 @@ const AdminAddModelForm = () => {
         <div>
             <section className='sectionAddVehicle'>
                 <div className='add-vehicle-container'>
-                    <h2>Agregar Vehículo</h2>
+                    <h2>Agregar Modelo</h2>
                     <form className='add-vehicle-form'>
                         <label className="label-field">Modelo:</label>
                         <input
@@ -108,21 +121,34 @@ const AdminAddModelForm = () => {
                         <label className="label-field">Categoria:</label>
                         <select name="" id=""
                             value=""
-                            onChange={(e) => handleCategoriaChange(e)}
+                            onChange={(e) => handleCategoriaChange(e.target.value)}
                         >
                             <option disabled selected value="">Selecciona una categoria</option>
                             {categorias.map((c) => (<option key={c.id}>{c.categoria}</option>))}
                         </select>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "2px" }}>
+                            {formData.categorias.map(c => (
+                                <div className="item-container">
+                                    <span>{c}</span>
+                                    <button onClick={(e) => { e.preventDefault(), handleCategoriaChange(c) }}>X</button>
+                                </div>
+                            ))}
+                        </div>
                         <br />
                         <label className="label-field">Caracteristicas:</label>
                         <select name="" id=""
-                            onChange={handleCaracteristicaChange}
+                            onChange={e => handleCaracteristicaChange(e.target.value)}
                         >
                             <option disabled selected value="">Selecciona una Caracteristica</option>
                             {caracteristicas.map((c) => (<option key={c.id}>{c.caracteristica}</option>))}
                         </select>
-                        <div style={{display: "flex", flexWrap: "wrap", gap: "2px"}}>
-                            {formData.caracteristicas.map(c => (<span>{c} </span>))}
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "2px" }}>
+                            {formData.caracteristicas.map(c => (
+                                <div className="item-container">
+                                    <span>{c}</span>
+                                    <button onClick={(e) => { e.preventDefault(), handleCaracteristicaChange(c) }}>X</button>
+                                </div>
+                            ))}
                         </div>
                         <br />
                         <button type="button" onClick={handleSubmit} className="submit-button">

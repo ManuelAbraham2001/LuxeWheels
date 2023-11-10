@@ -125,6 +125,11 @@ main {
   gap: 10px;
 }
 
+.pagination div:hover{
+  cursor: pointer;
+}
+
+
 #buscar {
   height: 25px;
   border-radius: .25rem;

@@ -9,6 +9,10 @@ const ListUsers = () => {
     const token = localStorage.getItem('jwt');
 
     useEffect(() => {
+        getUsers()
+    }, [])
+
+    const getUsers = () => {
         fetch("http://3.135.246.162/api/usuarios/allusers", {
             method: "GET",
             headers: {
@@ -25,7 +29,7 @@ const ListUsers = () => {
                 console.error(error);
                 setIsLoading(false);
             });
-    }, [])
+    }
 
     const callApiAddRemoveRole = (user, id, roleToAdd) => {
         const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
@@ -35,7 +39,7 @@ const ListUsers = () => {
             headers: {
                 "authorization": "Bearer " + token
             }
-        });
+        }).then(() => getUsers())
         
     }
     
