@@ -11,14 +11,14 @@ const AdminAddCaracteristicas = () => {
     popUp ? document.body.style.overflow = "hidden" : document.body.style.overflow = "auto"
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/caracteristicas", {
+        fetch("http://3.135.246.162/api/caracteristicas", {
             method: "GET",
         }).then(res => res.json())
             .then(data => setCaracteristicas(data))
     }, [])
 
     const handleDelete = id => {
-        fetch("http://localhost:8080/api/caracteristicas/" + id, {
+        fetch("http://3.135.246.162/api/caracteristicas/" + id, {
             method: "DELETE",
             headers: {
                 authorization: "Bearer " + token
@@ -33,7 +33,7 @@ const AdminAddCaracteristicas = () => {
         formData.append("caracteristica", caracteristica)
         formData.append("foto", imagen[0])
 
-        fetch("http://localhost:8080/api/caracteristicas", {
+        fetch("http://3.135.246.162/api/caracteristicas", {
             method: "POST",
             body: formData,
             headers:{

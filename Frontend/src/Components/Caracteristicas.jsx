@@ -5,7 +5,7 @@ const Caracteristicas = () => {
     const [caracteristicas, setCaracteristicas] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/caracteristicas", {
+        fetch("http://3.135.246.162/api/caracteristicas", {
             method: "GET",
         }).then(res => res.json())
         .then(data => setCaracteristicas(data))

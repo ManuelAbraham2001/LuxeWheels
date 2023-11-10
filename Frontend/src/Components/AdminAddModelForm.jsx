@@ -27,7 +27,7 @@ const AdminAddModelForm = () => {
         }).then(res => res.json())
             .then(data => setCategorias(data))
 
-        fetch("http://localhost:8080/api/caracteristicas", {
+        fetch("http://3.135.246.162/api/caracteristicas", {
             method: "GET",
             headers: {
                 "content-type": "application/json"
