@@ -60,8 +60,6 @@ const AdminAddVehicleForm = () => {
       dataForm.append(`imagen`, imagen);
     });
 
-    console.log(formData);
-
     fetch("http://3.135.246.162/api/vehiculos", {
       method: "POST",
       body: dataForm,

@@ -26,6 +26,11 @@ const Admin = () => {
                             <h2>Crear Modelo</h2>
                         </div>
                     </a>
+                    <a href="/admin/addCaracteristicas">
+                        <div className="menu-option">
+                            <h2>Administrar caracteristicas</h2>
+                        </div>
+                    </a>
                 </div>
                 <div className="mobile-device">
                     <span>Sitio no disponible</span>

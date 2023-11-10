@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { useRentacarStates } from './Context/Context';
 import AdminAddModelForm from './Components/AdminAddModelForm';
 import Detail from './Components/Detail';
+import AdminAddCaracteristicas from './Components/AdminAddCaracteristicas';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -37,6 +38,7 @@ const App = () => {
                         <Route path="/admin/addmodel" element={<AdminAddModelForm />} />
                         <Route path="/admin/addvehicle" element={<AdminAddVehicleForm />} />
                         <Route path="/admin/listcategories" element={<AdminListCategories />} />
+                        <Route path="/admin/addCaracteristicas" element={<AdminAddCaracteristicas />} />
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
 
