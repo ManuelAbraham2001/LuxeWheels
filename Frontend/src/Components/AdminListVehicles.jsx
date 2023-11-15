@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './styles/ListVehicles.css'
+import Paginacion from './Paginacion';
 
 const AdminListVehicles = () => {
 
     const [vehicles, setVehicles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [page, currentPage] = useState(1)
+    const [totalElements, setTotalElements] = useState(0)
 
     const token = localStorage.getItem('jwt');
 
@@ -17,12 +19,13 @@ const AdminListVehicles = () => {
           .then(data => {
               setVehicles(data.content);
               setIsLoading(false); 
+              setTotalElements(data.totalElements)
           })
           .catch(error => {
               console.error(error);
               setIsLoading(false); 
           });
-    }, [])
+    }, [page])
 
     const handleEliminar = id => {
 
@@ -74,6 +77,7 @@ const AdminListVehicles = () => {
                         ))
                     )}
                 </div>
+                <Paginacion totalItems={totalElements} itemsPerPage={10} currentPage={currentPage} page={page}></Paginacion>
             </div>
         </>
     )

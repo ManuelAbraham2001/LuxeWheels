@@ -29,8 +29,6 @@ const Home = () => {
 
 
     useEffect(() => {
-        loadVehicles();
-
         fetch("http://3.135.246.162/api/categorias", {
             method: "GET",
             headers: {
@@ -41,6 +39,10 @@ const Home = () => {
             .then(data => setCategorias(data))
 
     }, []);
+
+    useEffect(() => {
+        loadVehicles();
+    }, [page])
 
     async function loadVehicles() {
         await fetch(`http://3.135.246.162/api/vehiculos?page=${page}`, {
@@ -70,11 +72,6 @@ const Home = () => {
             }
         });
     };
-
-    const onPageChange = () => {
-        console.log('asd');
-    }
-
 
     return (
         <main>
@@ -135,7 +132,7 @@ const Home = () => {
 
             </div>
             <div style={{width: "100%"}}>
-                <Paginacion totalItems={totalElements} itemsPerPage={10} onPageChange={onPageChange}></Paginacion>
+                <Paginacion totalItems={totalElements} itemsPerPage={10} currentPage={currentPage} page={page}></Paginacion>
             </div>
         </main>
     );
