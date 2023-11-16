@@ -12,6 +12,10 @@ const AdminListVehicles = () => {
     const token = localStorage.getItem('jwt');
 
     useEffect(() => {
+        getVehicles()
+    }, [page])
+
+    const getVehicles = () => {
         fetch(`http://3.135.246.162/api/vehiculos?page=${page}`, {
             method: "GET",
           })
@@ -25,7 +29,7 @@ const AdminListVehicles = () => {
               console.error(error);
               setIsLoading(false); 
           });
-    }, [page])
+    }
 
     const handleEliminar = id => {
 
@@ -37,7 +41,7 @@ const AdminListVehicles = () => {
                 headers: {
                     "authorization": "Bearer " + token
                 }
-            })
+            }).then(() => getVehicles())
         }else{
             return;
         }
