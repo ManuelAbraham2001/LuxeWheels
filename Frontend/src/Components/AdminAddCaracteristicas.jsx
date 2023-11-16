@@ -18,11 +18,15 @@ const AdminAddCaracteristicas = () => {
     popUp ? document.body.style.overflow = "hidden" : document.body.style.overflow = "auto"
 
     useEffect(() => {
+        getCaracteristias()
+    }, [])
+
+    const getCaracteristias = () => {
         fetch("http://3.135.246.162/api/caracteristicas", {
             method: "GET",
         }).then(res => res.json())
             .then(data => setCaracteristicas(data))
-    }, [])
+    }
 
     const handleDelete = id => {
         fetch("http://3.135.246.162/api/caracteristicas/" + id, {
@@ -30,7 +34,7 @@ const AdminAddCaracteristicas = () => {
             headers: {
                 authorization: "Bearer " + token
             }
-        })
+        }).then(() => getCaracteristias())
     }
 
     const handleSubmit = () => {
@@ -54,7 +58,7 @@ const AdminAddCaracteristicas = () => {
 
         formData.append("nuevaCaracteristica", caracteristicaEdit.nuevaCaracteristica)
         formData.append("caracteristica", caracteristicaEdit.caracteristica)
-        if(caracteristicaEdit.foto != null || caracteristicaEdit.foto.length > 0){
+        if (caracteristicaEdit.foto != null || caracteristicaEdit.foto.length > 0) {
             formData.append("foto", caracteristicaEdit.foto[0])
         }
 
@@ -124,11 +128,11 @@ const AdminAddCaracteristicas = () => {
                                             type="text"
                                             onChange={(e) => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, nuevaCaracteristica: e.target.value }) : setCaracteristica(e.target.value) }}
                                             className="input-field"
-                                            // value={isEditing ? caracteristicaEdit.caracteristica : ""}
+                                        // value={isEditing ? caracteristicaEdit.caracteristica : ""}
                                         />
                                         <br />
                                         <label className="label-field">Imagen:</label>
-                                        <input type="file" accept='.svg' onChange={e => {isEditing ? setCaracteristicaEdit({...caracteristicaEdit, foto: e.target.files}) : setImagen(e.target.files)}} className="file-input-button" />
+                                        <input type="file" accept='.svg' onChange={e => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, foto: e.target.files }) : setImagen(e.target.files) }} className="file-input-button" />
                                         <br />
 
                                         <button onClick={isEditing ? handleEdit : handleSubmit} type="button" className="submit-button">
