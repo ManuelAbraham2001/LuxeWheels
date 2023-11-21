@@ -1,56 +1,49 @@
-
 .card {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    padding: 0.5rem 0.5rem 0 0.5rem;
-    border: 0.5px solid rgb(136, 136, 136);
+  display: flex;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-.card {
-
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-  
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-  }
-  
-  .card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-
-
-
-.card-content button{
-    width: 100%;
-    background-color: #FFBE3F;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 12px;
+.card img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
 }
-.card-content button:hover{
-    cursor: pointer;
+
+.card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content button {
+  width: 100%;
+  background-color: #FFBE3F;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.card-content button:hover {
+  cursor: pointer;
 }
 
 
 .card:hover {
-    border: 0.5px solid rgb(206, 217, 142);
+  border: 0.5px solid rgb(206, 217, 142);
 }
 
 
@@ -63,28 +56,23 @@
 }
 
 */
-  
+
 .card-image {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 1rem;
-    width: 200px;
-    height: auto;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 200px;
+  height: auto;
+  flex-wrap: wrap;
 }
 
 
 @media (max-width: 768px) {
 
-    .card-grid {
-      display: grid !important;
-      grid-template-columns: 25% !important;
-      place-items: center;
-      justify-content: center;
-    }
+  .card-grid {
+    display: grid !important;
+    grid-template-columns: 25% !important;
+    place-items: center;
+    justify-content: center;
   }
-
-  
-
-
-
+}

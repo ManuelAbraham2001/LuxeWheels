@@ -1,8 +1,7 @@
 
 .card-grid {
   display: grid;
-  grid-template-columns: 25% 25%;
-  place-items: center;
+  grid-template-columns: 40% 40%;
   justify-content: center;
   width: 100%;
 }
