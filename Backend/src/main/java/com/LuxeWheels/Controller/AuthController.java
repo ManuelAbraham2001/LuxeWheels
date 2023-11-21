@@ -10,6 +10,7 @@ import com.LuxeWheels.Security.JwtUtil;
 import com.LuxeWheels.Service.MailService;
 import com.LuxeWheels.Service.UsuarioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,12 @@ public class AuthController {
         String token = jwtUtil.generarToken(authentication);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.ok().body(jwtResponse);
+    }
+
+    @PostMapping("/resend")
+    public ResponseEntity<?> resendEmail(@RequestBody Usuario usuario) throws MessagingException {
+        mailService.sendMail(usuario, "Confirmar cuenta");
+        return ResponseEntity.ok().build();
     }
 
 }

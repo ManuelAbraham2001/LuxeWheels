@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class CrearModeloDTO {
     private String modelo;
-    private String categoria;
+    private List<String> categorias;
     private String marca;
     private List<String> caracteristicas;
     public CrearModeloDTO() {

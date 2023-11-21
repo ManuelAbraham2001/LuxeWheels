@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AWSConfig {
-    private String accessKey = "accesskey"; // NUNCA PUSHEAR ESTAS CLAVES // CAMBIAR LOS VALORES SOLO PARA DESARROLLO
+    private String accessKey = "accessKey"; // NUNCA PUSHEAR ESTAS CLAVES // CAMBIAR LOS VALORES SOLO PARA DESARROLLO
 
-    private String secretKey = "secretkey"; // NUNCA PUSHEAR ESTAS CLAVES // CAMBIAR LOS VALORES SOLO PARA DESARROLLO
+    private String secretKey = "secretKey"; // NUNCA PUSHEAR ESTAS CLAVES // CAMBIAR LOS VALORES SOLO PARA DESARROLLO
 
     private String region = "us-east-2";
 

@@ -25,6 +25,12 @@ public class CaracteristicaController {
         return ResponseEntity.ok(caracteristicaService.listar());
     }
 
+    @PutMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<?> editar(@RequestParam("nuevaCaracteristica") String neuvaCaracteristica, @RequestParam("caracteristica") String caracteristica, @RequestParam(value = "foto", required = false) MultipartFile foto) throws IOException {
+        caracteristicaService.editar(neuvaCaracteristica, caracteristica, foto);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id){
         caracteristicaService.eliminar(id);

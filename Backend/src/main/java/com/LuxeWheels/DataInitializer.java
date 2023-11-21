@@ -4,7 +4,9 @@ import com.LuxeWheels.Entity.*;
 import com.LuxeWheels.Repository.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -65,14 +67,25 @@ public class DataInitializer implements CommandLineRunner {
             marcaRepository.save(new Marca(marca));
         }
 
-        Categoria compacto = categoriaRepository.findByCategoria("Compactos");
-        Marca fiat = marcaRepository.findByMarca("fiat");
-        Modelo modelo = new Modelo("Uno", fiat, compacto);
-        modeloRepository.save(modelo);
-        Modelo uno = modeloRepository.findByModelo("Uno");
-        Anio anio = anioRepository.findByAnio(2015);
-
-        vehiculoRepository.save(new Vehiculo(uno, anio, "abe123", 2000d, "auto 1"));
+//        Categoria compacto = categoriaRepository.findByCategoria("Compactos");
+//        Categoria electrico = categoriaRepository.findByCategoria("Electricos");
+//        Marca tesla = marcaRepository.findByMarca("tesla");
+//        Marca fiat = marcaRepository.findByMarca("fiat");
+//        List<Categoria> categoriasTesla = new ArrayList<>();
+//        List<Categoria> categoriasFiat = new ArrayList<>();
+//        categoriasTesla.add(compacto);
+//        categoriasTesla.add(electrico);
+//        categoriasFiat.add(compacto);
+//        Modelo modelo = new Modelo("Model S", tesla, categoriasTesla);
+//        Modelo modelo1 = new Modelo("Uno", fiat, categoriasFiat);
+//        modeloRepository.save(modelo);
+//        modeloRepository.save(modelo1);
+//        Modelo uno = modeloRepository.findByModelo("Uno");
+//        Modelo modelS = modeloRepository.findByModelo("Model S");
+//        Anio anio = anioRepository.findByAnio(2015);
+//
+//        vehiculoRepository.save(new Vehiculo(uno, anio, "abe123", 2000d, "auto 1"));
+//        vehiculoRepository.save(new Vehiculo(modelS, anio, "abx123", 3000d, "auto 2"));
 
         System.out.println("DataInitializer finalizado.");
     }

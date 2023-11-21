@@ -10,4 +10,5 @@ import java.util.List;
 public interface CategoriaService {
     Categoria crear(CrearCategoriaDTO categoriaDTO, MultipartFile foto) throws IOException;
     List<Categoria> listar();
+    void eliminar(Long id);
 }

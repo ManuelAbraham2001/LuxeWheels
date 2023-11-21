@@ -19,7 +19,11 @@ public class Categoria {
     private String descripcion;
     private String url;
 
-    @OneToMany(mappedBy = "categoria")
+    @ManyToMany
+    @JoinTable(
+            name = "categoria_modelo",
+            joinColumns = @JoinColumn(name = "categoria_id"),
+            inverseJoinColumns = @JoinColumn(name = "modelo_id"))
     @JsonIgnore
     private List<Modelo> modelos;
 

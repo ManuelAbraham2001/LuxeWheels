@@ -30,16 +30,21 @@ public class ModeloServiceImpl implements ModeloService{
 
     @Override
     public Modelo crear(CrearModeloDTO modelo) {
-        Categoria categoria = categoriaRepository.findByCategoria(modelo.getCategoria());
         Marca marca = marcaRepository.findByMarca(modelo.getMarca());
-
+        List<Categoria> categorias = new ArrayList<>();
         List<Caracteristica> caracteristicas = new ArrayList<>();
+
+        for (String c : modelo.getCategorias()) {
+            Categoria categoria = categoriaRepository.findByCategoria(c);
+            categorias.add(categoria);
+        }
+
         for (String c : modelo.getCaracteristicas()) {
             Caracteristica caracteristica = caracteristicaRepository.findByCaracteristica(c);
             caracteristicas.add(caracteristica);
         }
 
-        return modeloRepository.save(new Modelo(modelo.getModelo(), marca, categoria, caracteristicas));
+        return modeloRepository.save(new Modelo(modelo.getModelo(), marca, categorias, caracteristicas));
     }
 
     @Override

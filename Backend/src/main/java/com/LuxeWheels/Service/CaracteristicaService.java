@@ -9,5 +9,6 @@ import java.util.List;
 public interface CaracteristicaService {
     Caracteristica crear(String caracteristica, MultipartFile foto) throws IOException;
     List<Caracteristica> listar();
+    void editar(String neuvaCaracteristica, String caracteristica, MultipartFile foto) throws IOException;
     void eliminar(Long id);
 }

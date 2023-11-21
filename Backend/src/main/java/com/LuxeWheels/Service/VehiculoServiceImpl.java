@@ -69,10 +69,24 @@ public class VehiculoServiceImpl implements VehiculoService{
     }
 
     @Override
-    public Page<Vehiculo> filtrarVehiculosPorCategoria(int page, String categoria) {
+    public Page<Vehiculo> paginarVehiculos(int pagina) {
+        int cantidadPorPagina = 10;
+        Pageable pageable = PageRequest.of(pagina - 1, cantidadPorPagina);
+        return vehiculoRepository.paginarVehiculos(pageable);
+    }
+
+    @Override
+    public Page<Vehiculo> filtrarVehiculosPorCategoria(int page, List<String> categorias, Long numCategorias) {
         int cantidadPorPagina = 10;
         Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
-        return vehiculoRepository.filtrarVehiculosPorCategoria(pageable, categoria);
+        return vehiculoRepository.filtrarVehiculosPorCategoria(pageable, categorias, numCategorias);
+    }
+
+    @Override
+    public Page<Vehiculo> buscarVehiculosPorInput(int page, String busqueda) {
+        int cantidadPorPagina = 10;
+        Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
+        return vehiculoRepository.buscarPorInput(pageable, busqueda);
     }
 
     @Override

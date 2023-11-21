@@ -31,4 +31,9 @@ public class CategoriaServiceImpl implements CategoriaService{
     public List<Categoria> listar() {
         return categoriaRepository.findAll();
     }
+
+    @Override
+    public void eliminar(Long id) {
+        categoriaRepository.deleteById(id);
+    }
 }

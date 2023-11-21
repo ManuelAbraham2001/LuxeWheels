@@ -32,6 +32,23 @@ public class CaracteristicaServiceImpl implements CaracteristicaService{
     }
 
     @Override
+    public void editar(String neuvaCaracteristica, String caracteristica, MultipartFile foto) throws IOException {
+
+        Caracteristica caracteristicaDB = caracteristicaRepository.findByCaracteristica(caracteristica);
+
+        caracteristicaDB.setCaracteristica(neuvaCaracteristica);
+
+        if(foto != null){
+            Foto fotoCargada = fotoService.cargar(foto, "image/svg+xml");
+            caracteristicaDB.setUrl(fotoCargada.getUrl());
+            caracteristicaRepository.save(caracteristicaDB);
+        }else{
+            caracteristicaRepository.save(caracteristicaDB);
+        }
+
+    }
+
+    @Override
     public void eliminar(Long id) {
         caracteristicaRepository.deleteById(id);
     }

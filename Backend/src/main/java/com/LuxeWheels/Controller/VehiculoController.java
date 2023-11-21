@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/vehiculos")
 @CrossOrigin("*")
@@ -17,8 +19,8 @@ public class VehiculoController {
     private VehiculoService vehiculoService;
 
     @GetMapping
-    public ResponseEntity<?> listar(){
-        return ResponseEntity.ok(vehiculoService.listarTodo());
+    public ResponseEntity<?> listarvehiculosPaginados(@RequestParam("page") int page){
+        return ResponseEntity.ok(vehiculoService.paginarVehiculos(page));
     }
 
     @PostMapping(consumes = {"multipart/form-data"})
@@ -38,9 +40,14 @@ public class VehiculoController {
         return ResponseEntity.ok(vehiculoService.buscarVehiculoPorId(id));
     }
 
-    @GetMapping(params = {"page", "categoria"})
-    public ResponseEntity<?> buscarVehiculosPorCategoria(@RequestParam int page, @RequestParam String categoria){
-        return ResponseEntity.ok(vehiculoService.filtrarVehiculosPorCategoria(page, categoria));
+    @GetMapping(params = {"page", "categorias"})
+    public ResponseEntity<?> buscarVehiculosPorCategoria(@RequestParam int page, @RequestParam List<String> categorias){
+        return ResponseEntity.ok(vehiculoService.filtrarVehiculosPorCategoria(page, categorias, (long) categorias.size()));
+    }
+
+    @GetMapping(params = {"page", "busqueda"})
+    public ResponseEntity<?> buscarVehiculosPorInput(@RequestParam int page, @RequestParam String busqueda){
+        return ResponseEntity.ok(vehiculoService.buscarVehiculosPorInput(page, busqueda));
     }
 
     @DeleteMapping("/{id}")

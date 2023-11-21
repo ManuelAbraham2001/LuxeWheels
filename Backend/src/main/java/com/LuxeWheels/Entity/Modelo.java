@@ -29,9 +29,12 @@ public class Modelo {
     @OneToMany(mappedBy = "modelo")
     private List<Foto> fotos;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @ManyToMany
+    @JoinTable(
+            name = "modelo_categoria",
+            joinColumns = @JoinColumn(name = "modelo_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Categoria> categorias;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -53,23 +56,23 @@ public class Modelo {
         this.marca = marca;
     }
 
-    public Modelo(String modelo, Marca marca, Categoria categoria) {
+    public Modelo(String modelo, Marca marca, List<Categoria> categorias) {
         this.modelo = modelo;
         this.marca = marca;
-        this.categoria = categoria;
+        this.categorias = categorias;
     }
 
-    public Modelo(String modelo, Marca marca, List<Vehiculo> vehiculos, List<Foto> fotos) {
-        this.modelo = modelo;
-        this.marca = marca;
-        this.vehiculos = vehiculos;
-        this.fotos = fotos;
-    }
+//    public Modelo(String modelo, Marca marca, List<Vehiculo> vehiculos, List<Foto> fotos) {
+//        this.modelo = modelo;
+//        this.marca = marca;
+//        this.vehiculos = vehiculos;
+//        this.fotos = fotos;
+//    }
 
-    public Modelo(String modelo, Marca marca, Categoria categoria, List<Caracteristica> caracteristicas) {
+    public Modelo(String modelo, Marca marca, List<Categoria> categorias, List<Caracteristica> caracteristicas) {
         this.modelo = modelo;
         this.marca = marca;
-        this.categoria = categoria;
+        this.categorias = categorias;
         this.caracteristicas = caracteristicas;
     }
 }
