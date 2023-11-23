@@ -3,17 +3,18 @@
 }
 
 .detail-vehicle{
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .detail-descripcion, .caracteristicas-main{
     text-align: center;
     background-color: #fff;
-    width: 90%;
+    width: 100%;
     margin: 20px auto;
     border-radius: 20px;
     padding: 20px;
@@ -37,3 +38,60 @@
     gap: 5px;
     align-items: center;
 }
+
+.detail-conainer{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 20px;
+}
+
+.react-datepicker {
+    font-size: 1.5em;
+  }
+  .react-datepicker__header {
+    padding-top: 0.8em;
+  }
+  .react-datepicker__month {
+    margin: 0.4em 1em;
+  }
+  .react-datepicker__day-name, .react-datepicker__day {
+    width: 1.9em;
+    line-height: 1.9em;
+    margin: 0.166em;
+  }
+  .react-datepicker__current-month {
+    font-size: 1em;
+  }
+  .react-datepicker__navigation {
+    top: 1em;
+    line-height: 1.7em;
+    border: 0.45em solid transparent;
+  }
+
+  .error-calendar{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .error-calendar span{
+    font-size: 24px;
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  .error-calendar button{
+    font-size: 20px;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
+    color: #FFBE3F;
+    font-weight: bold;
+  }
+

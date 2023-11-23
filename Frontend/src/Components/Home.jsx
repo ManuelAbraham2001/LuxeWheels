@@ -30,10 +30,6 @@ const Home = () => {
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [maxDate, setMaxDate] = useState(null)
-    const [excludeDates, setExcludeDates] = useState([
-        { start: new Date('2023-12-05'), end: new Date('2023-12-15') },
-        { start: new Date('2023-12-20'), end: new Date('2023-12-25') },
-    ])
     const [isMobile, setIsMobile] = useState(false)
     const feedbackOptions = [
         { id: 1, name: 'Ford' },
@@ -51,7 +47,6 @@ const Home = () => {
         { id: 13, name: 'Chevrolet Onix' },
     ];
     const [feedback, setFeedback] = useState('');
-    const [selectedOption, setSelectedOption] = useState(null);
 
     // const [states, setStates] = useState({
     //     vehicles: [],
@@ -110,10 +105,6 @@ const Home = () => {
 
 
     const handleDate = date => {
-        const nuevaFecha = new Date(date)
-        const excludeDatesFilter = excludeDates.map(fecha => fecha.start)
-        const fechasFuturas = excludeDatesFilter.filter(fecha => fecha.getTime() > nuevaFecha.getTime());
-        setMaxDate(fechasFuturas[0])
         setDateRange(date)
     }
 
@@ -185,7 +176,6 @@ const Home = () => {
                             minDate={new Date()}
                             maxDate={maxDate}
                             monthsShown={isMobile ? 1 : 2}
-                            excludeDateIntervals={excludeDates}
                             isClearable
                             customInput={<div className='buscador-form-input'><input value={inputValue} type="text" placeholder='Desde - Hasta' /></div>}
                         />
