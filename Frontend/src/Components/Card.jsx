@@ -11,7 +11,7 @@ const Card = ({ auto }) => {
     <>
       {auto && (
         <div key={auto.id} className="card">
-          <img src={auto.modelo.fotos[0]?.url || img} alt={(auto.modelo.marca.marca || "") + " " + (auto.modelo.modelo || "") + " " + (auto.anio.anio || "")} />
+          <img src={auto.fotos[0]?.url || img} alt={(auto.modelo.marca.marca || "") + " " + (auto.modelo.modelo || "") + " " + (auto.anio.anio || "")} />
           <div className="card-content">
             <div style={{textAlign: "left"}}>
               <h3>

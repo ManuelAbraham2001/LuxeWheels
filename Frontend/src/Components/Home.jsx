@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Card from './Card'
 
 import "./styles/Home.css"
 import Paginacion from './Paginacion';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function getRandomObjects(jsonData, count) {
     const shuffledData = [...jsonData];
@@ -23,10 +26,56 @@ const Home = () => {
     const [page, currentPage] = useState(1)
     const [totalElements, setTotalElements] = useState(0)
     const [filterElements, setFilterElements] = useState(0)
-    const [fechaInicio, setFechaInicio] = useState(null)
-    const [fechaFin, setFechaFin] = useState(null)
-    const fechaActual = new Date().toISOString().split('T')[0];
+    const [busqueda, setBusqueda] = useState('')
+    const [dateRange, setDateRange] = useState([null, null]);
+    const [startDate, endDate] = dateRange;
+    const [maxDate, setMaxDate] = useState(null)
+    const [excludeDates, setExcludeDates] = useState([
+        { start: new Date('2023-12-05'), end: new Date('2023-12-15') },
+        { start: new Date('2023-12-20'), end: new Date('2023-12-25') },
+    ])
+    const [isMobile, setIsMobile] = useState(false)
+    const feedbackOptions = [
+        { id: 1, name: 'Ford' },
+        { id: 2, name: 'Volkswagen' },
+        { id: 3, name: 'Fiat' },
+        { id: 4, name: 'Peugeot' },
+        { id: 5, name: 'Chevrolet' },
+        { id: 6, name: 'Toyota' },
+        { id: 7, name: 'Tesla' },
+        { id: 8, name: 'Amarok' },
+        { id: 9, name: 'Tiguan' },
+        { id: 10, name: 'Volkswagen Tiguan' },
+        { id: 11, name: 'Volkswagen Amarok' },
+        { id: 12, name: 'Peugeot 208' },
+        { id: 13, name: 'Chevrolet Onix' },
+    ];
+    const [feedback, setFeedback] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
 
+    // const [states, setStates] = useState({
+    //     vehicles: [],
+    //     loading: true,
+    //     categorias: [],
+    //     selectedCategorias: [],
+    //     isFilter: false,
+    //     page: 1,
+    //     totalElements: 0,
+    //     filterElements: 0,
+    //     busqueda: "",
+    //     dateRange: [null, null],
+    //     startDate: dateRange[0],
+    //     endDate: dateRange[1],
+    //     maxDate: null,
+    //     excludeDates: [],
+    //     isMobile: false
+    // })
+
+    // refactorizar todos los states y pasarlos a un solo objeto
+
+    const handleSelect = (selected) => {
+        setBusqueda(selected.name);
+    };
 
     useEffect(() => {
         fetch("http://3.135.246.162/api/categorias", {
@@ -38,11 +87,35 @@ const Home = () => {
             .then(res => res.json())
             .then(data => setCategorias(data))
 
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     useEffect(() => {
         loadVehicles();
     }, [page])
+
+
+    const handleDate = date => {
+        const nuevaFecha = new Date(date)
+        const excludeDatesFilter = excludeDates.map(fecha => fecha.start)
+        const fechasFuturas = excludeDatesFilter.filter(fecha => fecha.getTime() > nuevaFecha.getTime());
+        setMaxDate(fechasFuturas[0])
+        setDateRange(date)
+    }
 
     async function loadVehicles() {
         await fetch(`http://3.135.246.162/api/vehiculos?page=${page}`, {
@@ -53,9 +126,19 @@ const Home = () => {
             .then(() => setLoading(false))
     }
 
+    const searchVehicles = () => {
+        setLoading(true);
+        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&busqueda=${busqueda}`, {
+            method: 'GET',
+        })
+            .then((res) => res.json())
+            .then((data) => { setVehicles(data.content), setTotalElements(data.totalElements), setFilterElements(data.numberOfElements) })
+            .then(() => setLoading(false))
+    }
+
     const filterRequest = () => {
         setLoading(true);
-        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&categorias=${encodeURIComponent(selectedCategorias.join(','))}`, {
+        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&busqueda=${busqueda}&categorias=${encodeURIComponent(selectedCategorias.join(','))}`, {
             method: 'GET',
         })
             .then((res) => res.json())
@@ -73,34 +156,47 @@ const Home = () => {
         });
     };
 
+    const inputValue = `${startDate ? startDate.toLocaleDateString() + " -" : ''}${endDate ? ` ${endDate.toLocaleDateString()}` : ''}`;
+
     return (
         <main>
             <div className="buscador">
-                <div className="fechas">
-                    <div className="search-date">
-                        <label>Desde </label>
-                        <input
-                            type="date"
-                            value={fechaInicio}
-                            onChange={e => setFechaInicio(e.target.value)}
-                            min={fechaActual}
+                <div className='buscador-title'>
+                    <h1 >¡Busca tu auto ideal!</h1>
+                    <p>¡Encuentra el vehículo perfecto para tu próxima aventura con nuestro servicio de alquiler de vehículos! Explora una amplia variedad de opciones, desde autos compactos ideales para la ciudad hasta espaciosas SUVs para viajes en familia</p>
+                </div>
+                <div className='buscador-form'>
+                    <div style={{ width: "40%" }} className='buscador-form-input'>
+                        {/* <input value={busqueda} onChange={(e) => handleBusqueda(e.target.value)} type="text" /> */}
+                        <ReactSearchAutocomplete
+                            items={feedbackOptions}
+                            onSelect={handleSelect}
+                            onSearch={(value) => setFeedback(value)}
+                            formatResult={item => <span style={{ display: 'block', textAlign: 'left', cursor: "pointer" }}>{item.name}</span>}
+                            placeholder="Busca por marca o modelo"
                         />
                     </div>
-                    <div className="search-date">
-                        <label>Hasta </label>
-                        <input
-                            type="date"
-                            value={fechaFin}
-                            onChange={e => setFechaFin(e.target.value)}
-                            min={fechaInicio}
+                    <div className='buscador-form-input'>
+                        <DatePicker
+                            selectsRange={true}
+                            startDate={startDate}
+                            endDate={endDate}
+                            onChange={fecha => handleDate(fecha)}
+                            minDate={new Date()}
+                            maxDate={maxDate}
+                            monthsShown={isMobile ? 1 : 2}
+                            excludeDateIntervals={excludeDates}
+                            isClearable
+                            customInput={<div className='buscador-form-input'><input value={inputValue} type="text" placeholder='Desde - Hasta' /></div>}
                         />
                     </div>
+                    <div className="buscar">
+                        <button onClick={() => { searchVehicles(), setIsFilter(true) }} className="btn-buscar">
+                            Buscar
+                        </button>
+                    </div>
                 </div>
-                <div className="buscar">
-                    <button onClick={() => { loadVehicles(), setIsFilter(true) }} className="btn-buscar">
-                        <strong>Buscar</strong>
-                    </button>
-                </div>
+
             </div>
             <div className='home-container'>
                 {isFilter && (
@@ -131,7 +227,7 @@ const Home = () => {
                 </div>
 
             </div>
-            <div style={{width: "100%"}}>
+            <div style={{ width: "100%" }}>
                 <Paginacion totalItems={totalElements} itemsPerPage={10} currentPage={currentPage} page={page}></Paginacion>
             </div>
         </main>

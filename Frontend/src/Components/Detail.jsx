@@ -36,7 +36,7 @@ const Detail = () => {
               </a>
             </div>
           </div>
-          <Gallery fotos={auto.modelo.fotos} />
+          <Gallery fotos={auto.fotos} />
           <div className="detail-descripcion">
             <h2>DESCRIPCION</h2>
             <p>{auto.descripcion}</p>
