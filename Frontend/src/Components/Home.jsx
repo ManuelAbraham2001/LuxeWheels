@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Card from './Card'
-
+import { Link } from "react-router-dom";
 import "./styles/Home.css"
 import Paginacion from './Paginacion';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import Favs from '../Routes/Favs';
 
 function getRandomObjects(jsonData, count) {
     const shuffledData = [...jsonData];
@@ -184,6 +185,13 @@ const Home = () => {
                         <button onClick={() => { searchVehicles(), setIsFilter(true) }} className="btn-buscar">
                             Buscar
                         </button>
+                    </div>
+                    <div className='favs'>
+                        <Link to={"/favs"}>
+                        <button onClick={<Link to ="/favs"></Link> } className='btn-fav'>
+                            Favoritos
+                        </button>
+                        </Link>
                     </div>
                 </div>
 

@@ -3,9 +3,21 @@ import { Link } from "react-router-dom";
 import './styles/CardHome.css'
 import img from '../../public/images/audi_1.jpg'
 import Caracteristicas from "./Caracteristicas";
-
+import { useRentacarStates } from '../Context/Context'
 
 const Card = ({ auto }) => {
+
+  const {state, dispatch} = useRentacarStates()
+  const findVehicle = state.favs.find(fav => fav.id == auto.id)
+
+  const addFav = ()=>{
+    
+    if (findVehicle){
+      dispatch ({type: "DELETE_FAV", payload: findVehicle})
+    } else{
+      dispatch ({type: "ADD_FAV", payload: auto})
+    }
+  }
 
   return (
     <>
@@ -24,8 +36,11 @@ const Card = ({ auto }) => {
                 <button>Ver más</button>
               </Link>
             </div>
+            <button onClick={addFav} className="favBtn">{findVehicle ? '🌟' : '⭐'}</button>
+            
           </div>
         </div>
+        
       )}
     </>
   );

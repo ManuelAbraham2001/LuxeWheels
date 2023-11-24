@@ -35,6 +35,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
+  margin:5px
 }
 
 .card-content button:hover {
@@ -70,32 +71,9 @@
 @media (max-width: 768px) {
 
   .card-grid {
-    grid-template-columns: 75% !important;
-  }
-
-  .card {
-    width: 100%;
-    flex-direction: column;
-    margin: 10px 0;
-  }
-  
-  .card img {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 1400px) {
-
-
-
-  .card {
-    width: 100%;
-    flex-direction: column;
-  }
-  
-  .card img {
-    width: 100%;
-    max-width: 100%;
+    display: grid !important;
+    grid-template-columns: 25% !important;
+    place-items: center;
+    justify-content: center;
   }
 }

@@ -12,10 +12,10 @@ const Favs = () => {
 
   return (
     <>
-      <h1>Dentistas Favs</h1>
+      <h1>Vehiculos Favs</h1>
       <div className="card-grid">
         {state.favs.map(fav =>
-        <Card dentista={fav} key={fav.id}/>)}
+        <Card auto={fav} key={fav.id}/>)}
       </div>
     </>
   );

@@ -148,6 +148,16 @@ main {
   text-transform: uppercase;
 }
 
+.btn-fav {
+  border-radius: 24px;
+  background-color: #FFBE3F;
+  height: 44px;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .home-container{
   display: flex;
 }

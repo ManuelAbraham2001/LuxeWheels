@@ -54,7 +54,7 @@ const Navbar = () => {
           />
         </div>
       </Link>
-
+    
       <div className="burger-menu">
         <img src="/images/icon-hamburger.svg" />
       </div>

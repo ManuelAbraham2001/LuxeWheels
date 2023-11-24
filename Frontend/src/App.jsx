@@ -12,6 +12,7 @@ import AdminListVehicles from './Components/AdminListVehicles';
 import AdminAddVehicleForm from './Components/AdminAddVehicleForm';
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import Favs from './Routes/Favs';
 import { useEffect, useState } from 'react';
 import { useRentacarStates } from './Context/Context';
 import AdminAddModelForm from './Components/AdminAddModelForm';
@@ -41,6 +42,7 @@ const App = () => {
                         <Route path="/admin/addCaracteristicas" element={<AdminAddCaracteristicas />} />
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
+                    <Route path="/favs" element = {<Favs/>}/>
 
                     <Route element={<GuestMiddleware isAuthenticated={state.isAuthenticated} />}>
                         <Route path="/register" element={<RegisterForm />} />
