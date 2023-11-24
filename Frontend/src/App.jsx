@@ -18,6 +18,7 @@ import { useRentacarStates } from './Context/Context';
 import AdminAddModelForm from './Components/AdminAddModelForm';
 import Detail from './Components/Detail';
 import AdminAddCaracteristicas from './Components/AdminAddCaracteristicas';
+import Politicas from './Routes/Politicas';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -43,6 +44,7 @@ const App = () => {
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
                     <Route path="/favs" element = {<Favs/>}/>
+                    <Route path="/politicas" element = {<Politicas/>}/>
 
                     <Route element={<GuestMiddleware isAuthenticated={state.isAuthenticated} />}>
                         <Route path="/register" element={<RegisterForm />} />

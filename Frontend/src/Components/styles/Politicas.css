@@ -1,0 +1,40 @@
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.policy {
+    margin-bottom: 20px;
+}
+
+.politicas-titulo{
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+.policy h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.policy p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Responsive Styling */
+@media (min-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .policy {
+        margin-bottom: 0;
+    }
+}
