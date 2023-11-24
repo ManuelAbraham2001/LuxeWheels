@@ -34,7 +34,7 @@ const Favs = () => {
 }
 
   const getFavs = () => {
-    fetch("http://localhost:8080/api/usuarios/favoritos", {
+    fetch("http://3.135.246.162/api/usuarios/favoritos", {
       method: "GET",
       headers: {
         "authorization": "Bearer " + token,

@@ -6,6 +6,7 @@ import Caracteristicas from "./Caracteristicas";
 import { useParams } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Politicas from "../Routes/Politicas";
 
 
 const Detail = () => {
@@ -21,6 +22,7 @@ const Detail = () => {
 		{ start: new Date('2023-12-20'), end: new Date('2023-12-25') },
 	])
 	const [error, setError] = useState(true)
+	const [isMobile, setIsMobile] = useState(false)
 
 	useEffect(() => {
 		fetch("http://3.135.246.162/api/vehiculos/" + id, {
@@ -31,6 +33,22 @@ const Detail = () => {
 		}).then(res => res.json())
 			.then(data => setAuto(data))
 			.then(() => setIsLoading(false))
+
+		const handleResize = () => {
+			if (window.innerWidth <= 1700) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+		}
+
+		window.addEventListener('resize', handleResize);
+
+		handleResize();
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
 	}, [])
 
 	const handleDate = date => {
@@ -46,7 +64,7 @@ const Detail = () => {
 			{isLoading ? <div>Cargando...</div> :
 				<div className="main-container">
 					<div className="detail-vehicle">
-						<h1>{auto.modelo.marca.marca} {auto.modelo.modelo} {auto.anio.anio}</h1>
+						<h1>{auto.modelo.marca.marca} {auto.modelo.modelo} {auto.anio?.anio}</h1>
 						<div className="arrow-back">
 							<a href="/">
 								<img src={svg} />
@@ -60,26 +78,31 @@ const Detail = () => {
 							<p>{auto.descripcion}</p>
 						</div>
 						<Caracteristicas caracteristicas={auto.modelo.caracteristicas}></Caracteristicas>
-						{error ? <div className="error-calendar">
-							<span>No se puede obtener información sobre las fechas disponibles en este momento. Por favor vuelta a intentarlo.</span>
-							<button onClick={() => setError(false)}>Reintentar</button>
-						</div> :
-							<DatePicker
-								selectsRange={true}
-								startDate={startDate}
-								endDate={endDate}
-								onChange={fecha => handleDate(fecha)}
-								minDate={new Date()}
-								maxDate={maxDate}
-								// monthsShown={isMobile ? 1 : 2}
-								monthsShown={2}
-								excludeDateIntervals={excludeDates}
-								isClearable
-								inline
-								disabledKeyboardNavigation
-							/>
-						}
+						<div className="politicas-calendario">
+
+							<Politicas></Politicas>
+							{error ? <div className="error-calendar">
+								<span>No se puede obtener información sobre las fechas disponibles en este momento. Por favor vuelta a intentarlo.</span>
+								<button onClick={() => setError(false)}>Reintentar</button>
+							</div> :
+								<DatePicker
+									selectsRange={true}
+									startDate={startDate}
+									endDate={endDate}
+									onChange={fecha => handleDate(fecha)}
+									minDate={new Date()}
+									maxDate={maxDate}
+									monthsShown={isMobile ? 1 : 2}
+									excludeDateIntervals={excludeDates}
+									isClearable
+									inline
+									disabledKeyboardNavigation
+								/>
+							}
+
+						</div>
 					</div>
+
 				</div>}
 		</>
 	);

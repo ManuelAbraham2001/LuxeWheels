@@ -5,9 +5,7 @@ import "../Components/styles/Politicas.css"
 const Politicas = () => {
   return (
     <>
-    <div className='politicas-titulo'>
-        Politicas del Servicio
-    </div>
+
         <div class="container">
         <div class="policy">
             <h2>1. Reservas</h2>
