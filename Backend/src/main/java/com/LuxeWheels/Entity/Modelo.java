@@ -26,9 +26,6 @@ public class Modelo {
     @JsonIgnore
     private List<Vehiculo> vehiculos;
 
-    @OneToMany(mappedBy = "modelo")
-    private List<Foto> fotos;
-
     @ManyToMany
     @JoinTable(
             name = "modelo_categoria",

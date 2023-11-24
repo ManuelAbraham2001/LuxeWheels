@@ -2,11 +2,15 @@ package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.UsuarioDTO;
 import com.LuxeWheels.Entity.Usuario;
+import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
 import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 import com.LuxeWheels.Repository.RolRepository;
 import com.LuxeWheels.Repository.UsuarioRepository;
+import com.LuxeWheels.Repository.VehiculoRepository;
+import com.LuxeWheels.Security.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     private RolRepository rolRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private VehiculoRepository vehiculoRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     public Usuario crear(Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException {
 
@@ -71,6 +81,43 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public void eliminarUsuario(Long id) throws UsuarioNotFoundException {
         usuarioRepository.deleteById(buscarUsuarioPorId(id).getId());
+    }
+
+    @Override
+    public void toggleFavorito(Long id, String token) {
+        Claims claims = jwtUtil.getClaims(token);
+        String email = claims.getSubject();
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
+        List<Vehiculo> vehiculos = usuario.getFavoritos();
+        List<Vehiculo> nuevosFavoritos = new ArrayList<>();
+
+        boolean encontrado = false;
+
+        for (Vehiculo v : vehiculos) {
+            if (v.getId().equals(id)) {
+                encontrado = true;
+            } else {
+                nuevosFavoritos.add(v);
+            }
+        }
+
+        if (!encontrado) {
+            Vehiculo vehiculo = vehiculoRepository.findById(id).orElseThrow();
+            nuevosFavoritos.add(vehiculo);
+        }
+
+        usuario.setFavoritos(nuevosFavoritos);
+        usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public List<Vehiculo> listarFavoritos(String token) {
+        Claims claims = jwtUtil.getClaims(token);
+        String email = claims.getSubject();
+
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
+
+        return usuario.getFavoritos();
     }
 
     private Usuario buscarUsuarioPorId(Long id) throws UsuarioNotFoundException {

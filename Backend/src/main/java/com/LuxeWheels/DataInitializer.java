@@ -67,22 +67,19 @@ public class DataInitializer implements CommandLineRunner {
             marcaRepository.save(new Marca(marca));
         }
 
-//        Categoria compacto = categoriaRepository.findByCategoria("Compactos");
-//        Categoria electrico = categoriaRepository.findByCategoria("Electricos");
-//        Marca tesla = marcaRepository.findByMarca("tesla");
-//        Marca fiat = marcaRepository.findByMarca("fiat");
-//        List<Categoria> categoriasTesla = new ArrayList<>();
-//        List<Categoria> categoriasFiat = new ArrayList<>();
-//        categoriasTesla.add(compacto);
-//        categoriasTesla.add(electrico);
-//        categoriasFiat.add(compacto);
-//        Modelo modelo = new Modelo("Model S", tesla, categoriasTesla);
-//        Modelo modelo1 = new Modelo("Uno", fiat, categoriasFiat);
-//        modeloRepository.save(modelo);
-//        modeloRepository.save(modelo1);
-//        Modelo uno = modeloRepository.findByModelo("Uno");
-//        Modelo modelS = modeloRepository.findByModelo("Model S");
-//        Anio anio = anioRepository.findByAnio(2015);
+        Categoria compacto = categoriaRepository.findByCategoria("Compactos");
+        Categoria electrico = categoriaRepository.findByCategoria("Electricos");
+        Marca tesla = marcaRepository.findByMarca("tesla");
+        Marca fiat = marcaRepository.findByMarca("fiat");
+        List<Categoria> categoriasTesla = new ArrayList<>();
+        List<Categoria> categoriasFiat = new ArrayList<>();
+        categoriasTesla.add(compacto);
+        categoriasTesla.add(electrico);
+        categoriasFiat.add(compacto);
+        Modelo modelo = new Modelo("Model S", tesla, categoriasTesla);
+        Modelo modelo1 = new Modelo("Uno", fiat, categoriasFiat);
+        modeloRepository.save(modelo);
+        modeloRepository.save(modelo1);
 //
 //        vehiculoRepository.save(new Vehiculo(uno, anio, "abe123", 2000d, "auto 1"));
 //        vehiculoRepository.save(new Vehiculo(modelS, anio, "abx123", 3000d, "auto 2"));

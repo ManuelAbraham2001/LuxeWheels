@@ -38,4 +38,17 @@ public class UsuarioController {
         return ResponseEntity.ok(service.listarUsuarios());
     }
 
+    @PostMapping("/favoritos/{id}")
+    public ResponseEntity<?> toggleFavoritos(@PathVariable Long id, @RequestHeader(name = "authorization") String token){
+        String tokenCut = token.substring(7);
+        service.toggleFavorito(id, tokenCut);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("favoritos")
+    public ResponseEntity<?> listarFavoritos(@RequestHeader(name = "authorization") String token){
+        String tokenCut = token.substring(7);
+        return ResponseEntity.ok(service.listarFavoritos(tokenCut));
+    }
+
 }

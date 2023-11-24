@@ -14,17 +14,18 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String url;
+
     @ManyToOne
-    @JoinColumn(name = "modelo_id")
+    @JoinColumn(name = "vehiculo_id")
     @JsonIgnore
-    private Modelo modelo;
+    private Vehiculo vehiculo;
 
     public Foto() {
     }
 
-    public Foto(String url, Modelo modelo) {
+    public Foto(String url, Vehiculo vehiculo) {
         this.url = url;
-        this.modelo = modelo;
+        this.vehiculo = vehiculo;
     }
 
     public Foto(Long id, String url) {
