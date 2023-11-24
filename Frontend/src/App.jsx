@@ -40,9 +40,10 @@ const App = () => {
                         <Route path="/admin/addvehicle" element={<AdminAddVehicleForm />} />
                         <Route path="/admin/listcategories" element={<AdminListCategories />} />
                         <Route path="/admin/addCaracteristicas" element={<AdminAddCaracteristicas />} />
+                        <Route path="/favs" element = {<Favs/>}/>
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
-                    <Route path="/favs" element = {<Favs/>}/>
+
 
                     <Route element={<GuestMiddleware isAuthenticated={state.isAuthenticated} />}>
                         <Route path="/register" element={<RegisterForm />} />

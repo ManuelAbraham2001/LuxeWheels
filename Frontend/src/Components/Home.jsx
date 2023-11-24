@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import "./styles/Home.css"
 import Paginacion from './Paginacion';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import Favs from '../Routes/Favs';
+import isFav from '../../public/images/isFav.svg'
+import noFav from '../../public/images/noFav.svg'
+import { useRentacarStates } from '../Context/Context';
 
 function getRandomObjects(jsonData, count) {
     const shuffledData = [...jsonData];
@@ -18,6 +20,10 @@ function getRandomObjects(jsonData, count) {
 }
 
 const Home = () => {
+    const token = localStorage.getItem("jwt")
+    const [error, setError] = useState(false)
+    const [favs, setFavs] = useState([])
+    const [localIdsProductosFavoritos, setLocalIdsProductosFavoritos] = useState([]);
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [randomCard, setRandomCard] = useState([]);
@@ -48,6 +54,21 @@ const Home = () => {
         { id: 13, name: 'Chevrolet Onix' },
     ];
     const [feedback, setFeedback] = useState('');
+    const { state, dispatch } = useRentacarStates()
+
+    const handleFav = id => {
+        if (token) {
+                        const updatedIds = localIdsProductosFavoritos.includes(id)
+                        ? localIdsProductosFavoritos.filter((favId) => favId !== id)
+                        : [...localIdsProductosFavoritos, id];
+        
+                    setLocalIdsProductosFavoritos(updatedIds);
+            dispatch({ type: "TOGGLE_FAV", payload: id })
+        } else {
+            setError(true)
+            return
+        }
+    }
 
     // const [states, setStates] = useState({
     //     vehicles: [],
@@ -100,10 +121,49 @@ const Home = () => {
         };
     }, []);
 
+
+
+
+    const idsProductosPrincipales = vehicles.map(v => v.id);
+    const idsProductosFavoritos = favs.map(v => v.id);
+
+
     useEffect(() => {
         loadVehicles();
+        getFavs()
+        setLocalIdsProductosFavoritos(idsProductosFavoritos)
     }, [page])
 
+    const renderizarIcono = (idProducto) => {
+        const isFavorito = localIdsProductosFavoritos.includes(idProducto);
+        return idsProductosFavoritos.includes(idProducto) ? (
+            <img className='fav'
+                onClick={() => handleFav(idProducto)}
+                style={{ width: "200px !important", cursor: "pointer" }}
+                src={isFavorito ? isFav : noFav}
+                alt={isFavorito ? "Favorito" : "No favorito"}
+            />
+        ) : (
+            <img
+            className='fav'
+                onClick={() => handleFav(idProducto)}
+                src={isFavorito ? isFav : noFav}
+                alt={isFavorito ? "Favorito" : "No favorito"}
+            />
+            )
+    };
+
+    const getFavs = () => {
+        if (token != null) {
+            fetch("http://localhost:8080/api/usuarios/favoritos", {
+                method: "GET",
+                headers: {
+                    authorization: "Bearer " + token
+                }
+            }).then(res => res.json())
+                .then(data => setFavs(data))
+        }
+    }
 
     const handleDate = date => {
         setDateRange(date)
@@ -148,6 +208,24 @@ const Home = () => {
         });
     };
 
+    const handleFavs = () => {
+        console.log("Token en handleFavs:", token);
+        if (token && token.trim() !== "") {
+            window.location.replace("/favs");
+        } else {
+            setError(true);
+            return;
+        }
+    }
+
+    useEffect(() => {
+        if (error) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "auto"
+        }
+    }, [error])
+
     const inputValue = `${startDate ? startDate.toLocaleDateString() + " -" : ''}${endDate ? ` ${endDate.toLocaleDateString()}` : ''}`;
 
     return (
@@ -187,11 +265,9 @@ const Home = () => {
                         </button>
                     </div>
                     <div className='favs'>
-                        <Link to={"/favs"}>
-                        <button onClick={<Link to ="/favs"></Link> } className='btn-fav'>
+                        <button onClick={handleFavs} className='btn-fav'>
                             Favoritos
                         </button>
-                        </Link>
                     </div>
                 </div>
 
@@ -221,13 +297,23 @@ const Home = () => {
                     </div>
                 )}
                 <div className="card-grid">
-                    {loading ? <>Cargando</> : vehicles.map((a) => <Card auto={a} key={a.id} />)}
+                    {loading ? <>Cargando</> : vehicles.map((a) => <Card renderizarIcono={renderizarIcono} auto={a} key={a.id} />)}
                 </div>
 
             </div>
             <div style={{ width: "100%" }}>
                 <Paginacion totalItems={totalElements} itemsPerPage={10} currentPage={currentPage} page={page}></Paginacion>
             </div>
+            {error ?
+                <div className="overlay ">
+                    <div className="favoritoCartel">
+                        <h1>Debes iniciar sesion para marcar un vehiculo como favorito</h1>
+                        <div className="acciones">
+                            <a href="/login">Iniciar sesion</a>
+                            <button onClick={() => setError(false)}>Continuar sin iniciar sesion</button>
+                        </div>
+                    </div>
+                </div> : null}
         </main>
     );
 }

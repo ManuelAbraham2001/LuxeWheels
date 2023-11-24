@@ -18,6 +18,11 @@
   object-fit: cover;
 }
 
+.card-content img{
+  width: 76px;
+}
+
+
 .card-content {
   width: 100%;
   display: flex;
@@ -65,6 +70,36 @@
   width: 200px;
   height: auto;
   flex-wrap: wrap;
+}
+
+.favoritoCartel{
+  background-color: #FFBE3F;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favoritoCartel h1{
+  max-width: 60%;
+}
+
+.acciones{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.acciones button, .acciones a{
+  background-color: #000000;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-weight: bold;
+  width: 100%;
 }
 
 

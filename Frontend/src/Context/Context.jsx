@@ -15,10 +15,14 @@ const reducer = (state, action) => {
             return { ...state, vehicle: action.payload }
         case 'ADD_VEHICLE':
             return { ...state, vehicles: [...state.vehicles, action.payload] };
-        case 'ADD_FAV':
-            return { ...state, favs: [...state.favs, action.payload] }
-        case 'DELETE_FAV':
-            return { ...state, favs: state.favs.filter(fav => fav.id !== action.payload.id) }
+        case 'TOGGLE_FAV':
+            fetch("http://localhost:8080/api/usuarios/favoritos/" + action.payload, {
+                method: "POST",
+                headers: {
+                    "authorization": "Bearer " + localStorage.getItem("jwt")
+                }
+            })
+            
         case 'SWITCH_THEME':
             return { ...state, theme: state.theme === '' ? 'dark' : '' };
         case 'LOGIN':
@@ -38,8 +42,6 @@ const reducer = (state, action) => {
                 }).then(() => {
                     window.location.href = '/';
                 })
-
-
 
             return state;
         case 'LOGOUT':
@@ -94,8 +96,6 @@ const Context = ({ children }) => {
         localStorage.setItem('local_vehicles', JSON.stringify(dataJson))
 
     }, [dispatch]);
-
-
 
 
     useEffect(() => {
