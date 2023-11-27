@@ -98,8 +98,8 @@ const AdminAddCaracteristicas = () => {
                                     <td style={{ display: "flex", width: "100%", justifyContent: "center" }}><img style={{ width: "100px" }} src={c.url} alt="" /></td>
                                     <td>
                                         <div>
-                                            <button onClick={() => handleDelete(c.id)}>Eliminar</button>
-                                            <button onClick={() => {
+                                            <button style={{backgroundColor: 'red'}}  onClick={() => handleDelete(c.id)}>Eliminar</button>
+                                            <button style={{backgroundColor: 'gray'}} onClick={() => {
                                                 setisEditing(true), setPopUp(true), setCaracteristicaEdit({
                                                     id: c.id,
                                                     caracteristica: c.caracteristica,
