@@ -16,7 +16,7 @@ const reducer = (state, action) => {
         case 'ADD_VEHICLE':
             return { ...state, vehicles: [...state.vehicles, action.payload] };
         case 'TOGGLE_FAV':
-            fetch("http://localhost:8080/api/usuarios/favoritos/" + action.payload, {
+            fetch("http://3.135.246.162/api/usuarios/favoritos/" + action.payload, {
                 method: "POST",
                 headers: {
                     "authorization": "Bearer " + localStorage.getItem("jwt")

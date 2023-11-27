@@ -1,12 +1,10 @@
 package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.CrearVehiculoDTO;
+import com.LuxeWheels.Entity.Foto;
 import com.LuxeWheels.Entity.Modelo;
 import com.LuxeWheels.Entity.Vehiculo;
-import com.LuxeWheels.Repository.AnioRepository;
-import com.LuxeWheels.Repository.CategoriaRepository;
-import com.LuxeWheels.Repository.ModeloRepository;
-import com.LuxeWheels.Repository.VehiculoRepository;
+import com.LuxeWheels.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,17 +44,18 @@ public class VehiculoServiceImpl implements VehiculoService{
 
         Modelo modelo = modeloRepository.findByModelo(vehiculoDTO.getModelo());
 
+        Vehiculo vehiculo = new Vehiculo(modelo, anioRepository.findByAnio(vehiculoDTO.getAnio()), vehiculoDTO.getPatente(), vehiculoDTO.getPrecio(), vehiculoDTO.getDescripcion());
+        Vehiculo vehiculoDB = vehiculoRepository.save(vehiculo);
+
         try{
             for (MultipartFile foto : fotos) {
-                fotoService.cargarFotoModelo(foto, modelo);
+                fotoService.cargarFotoModelo(foto, vehiculoDB);
             }
         }catch (RuntimeException e){
             e.printStackTrace();
         }
 
-        Vehiculo vehiculo = new Vehiculo(modelo, anioRepository.findByAnio(vehiculoDTO.getAnio()), vehiculoDTO.getPatente(), vehiculoDTO.getPrecio(), vehiculoDTO.getDescripcion());
-
-        return vehiculoRepository.save(vehiculo);
+        return vehiculoDB;
     }
 
     @Override
@@ -87,6 +87,13 @@ public class VehiculoServiceImpl implements VehiculoService{
         int cantidadPorPagina = 10;
         Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
         return vehiculoRepository.buscarPorInput(pageable, busqueda);
+    }
+
+    @Override
+    public Page<Vehiculo> filtrarVehiculosPorBusquedaYCategoria(int page, String busqueda, List<String> categorias, Long numCategorias) {
+        int cantidadPorPagina = 10;
+        Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
+        return vehiculoRepository.filtrarPorInputYCategorias(pageable, busqueda, categorias, numCategorias);
     }
 
     @Override

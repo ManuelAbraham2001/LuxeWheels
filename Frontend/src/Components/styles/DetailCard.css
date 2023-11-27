@@ -95,3 +95,67 @@
     font-weight: bold;
   }
 
+  .politicas-calendario{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .error-calendar{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .error-calendar span{
+      font-size: 12px;
+      max-width: 80%;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+  
+    .error-calendar button{
+      font-size: 14px;
+    }
+
+    .react-datepicker {
+      font-size: 1em;
+    }
+    .react-datepicker__header {
+      padding-top: 0.8em;
+    }
+    .react-datepicker__month {
+      margin: 0.4em 1em;
+    }
+    .react-datepicker__day-name, .react-datepicker__day {
+      width: 1.9em;
+      line-height: 1.9em;
+      margin: 0.166em;
+    }
+    .react-datepicker__current-month {
+      font-size: 1em;
+    }
+    .react-datepicker__navigation {
+      top: 1em;
+      line-height: 1.7em;
+      border: 0.45em solid transparent;
+    }
+
+  }
+
+  @media (max-width: 1400px) {
+    .politicas-calendario{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+
+
+
+

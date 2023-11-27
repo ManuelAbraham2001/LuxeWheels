@@ -17,7 +17,8 @@ public interface VehiculoService {
     Optional<Vehiculo> buscarVehiculoPorId(Long id);
     List<Vehiculo> buscarVehiculosPorMarca(String marca);
     Page<Vehiculo> paginarVehiculos(int pagina);
-    Page<Vehiculo> filtrarVehiculosPorCategoria(int pagina, List<String> categoria, Long numCategorias);
+    Page<Vehiculo> filtrarVehiculosPorCategoria(int pagina, List<String> categorias, Long numCategorias);
     Page<Vehiculo> buscarVehiculosPorInput(int pagina, String busqueda);
+    Page<Vehiculo> filtrarVehiculosPorBusquedaYCategoria(int pagina, String busqueda, List<String> categorias, Long numCategorias);
     void eliminar(Long id);
 }

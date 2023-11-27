@@ -34,7 +34,7 @@ const ListUsers = () => {
     const callApiAddRemoveRole = (user, id, roleToAdd) => {
         const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
     
-        fetch(`http://localhost:8080/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
+        fetch(`http://3.135.246.162/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
             method: "POST",
             headers: {
                 "authorization": "Bearer " + token

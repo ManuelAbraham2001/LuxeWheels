@@ -2,6 +2,7 @@ package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Entity.Foto;
 import com.LuxeWheels.Entity.Modelo;
+import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Repository.FotoRepository;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -27,7 +28,7 @@ public class FotoServiceImpl implements FotoService{
     private FotoRepository fotoRepository;
 
     @Override
-    public Foto cargarFotoModelo(MultipartFile foto, Modelo modelo) {
+    public void cargarFotoModelo(MultipartFile foto, Vehiculo vehiculo) {
         String nombreImagen = "imgs/" + UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
 
         try{
@@ -39,7 +40,7 @@ public class FotoServiceImpl implements FotoService{
             request.setMetadata(metadata);
             s3Client.putObject(request);
 
-            return fotoRepository.save(new Foto("https://c3-equipo5.s3.us-east-2.amazonaws.com/" + nombreImagen, modelo));
+            fotoRepository.save(new Foto("https://c3-equipo5.s3.us-east-2.amazonaws.com/" + nombreImagen, vehiculo));
         }catch (IOException e){
             throw new RuntimeException("Error al cargar la imagen");
         }

@@ -1,16 +1,12 @@
 package com.LuxeWheels.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +23,19 @@ public class Usuario {
     private LocalDate fechaNacimiento;
     private int telefono;
     private String documento;
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_favorito",
+            joinColumns = {@JoinColumn(
+                    name = "usuario_id"
+            )},
+            inverseJoinColumns = {@JoinColumn(
+                    name = "vehiculo_id"
+            )}
+    )
+    private List<Vehiculo> favoritos = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "usuario_rol",

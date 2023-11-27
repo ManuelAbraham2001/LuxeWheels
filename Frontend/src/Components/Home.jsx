@@ -94,6 +94,10 @@ const Home = () => {
         setBusqueda(selected.name);
     };
 
+    const handleBusqueda = value => {
+        setBusqueda(value)
+    }
+
     useEffect(() => {
         fetch("http://3.135.246.162/api/categorias", {
             method: "GET",
@@ -122,9 +126,6 @@ const Home = () => {
     }, []);
 
 
-
-
-    const idsProductosPrincipales = vehicles.map(v => v.id);
     const idsProductosFavoritos = favs.map(v => v.id);
 
 
@@ -155,7 +156,7 @@ const Home = () => {
 
     const getFavs = () => {
         if (token != null) {
-            fetch("http://localhost:8080/api/usuarios/favoritos", {
+            fetch("http://3.135.246.162/api/usuarios/favoritos", {
                 method: "GET",
                 headers: {
                     authorization: "Bearer " + token
@@ -241,9 +242,12 @@ const Home = () => {
                         <ReactSearchAutocomplete
                             items={feedbackOptions}
                             onSelect={handleSelect}
-                            onSearch={(value) => setFeedback(value)}
+                            onSearch={handleBusqueda}
+                            onChange={(e) => handleBusqueda(e)}
+                            // onSearch={(value) => setFeedback(value)}
                             formatResult={item => <span style={{ display: 'block', textAlign: 'left', cursor: "pointer" }}>{item.name}</span>}
                             placeholder="Busca por marca o modelo"
+                            
                         />
                     </div>
                     <div className='buscador-form-input'>

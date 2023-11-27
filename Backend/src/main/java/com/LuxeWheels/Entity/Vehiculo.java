@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,6 +22,9 @@ public class Vehiculo {
     private String patente;
     private Double precio;
     private String descripcion;
+
+    @OneToMany(mappedBy = "vehiculo")
+    private List<Foto> fotos;
 
     public Vehiculo() {
     }

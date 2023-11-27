@@ -2,6 +2,7 @@ package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.UsuarioDTO;
 import com.LuxeWheels.Entity.Usuario;
+import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
 import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
@@ -21,4 +22,8 @@ public interface UsuarioService {
     void actualizarUsuario(Usuario usuario) throws UsuarioNotFoundException;
 
     void eliminarUsuario(Long id) throws UsuarioNotFoundException;
+
+    void toggleFavorito(Long id, String token);
+
+    List<Vehiculo> listarFavoritos(String token);
 }
