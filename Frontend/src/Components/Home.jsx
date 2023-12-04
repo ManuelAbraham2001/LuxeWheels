@@ -9,6 +9,8 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import isFav from '../../public/images/isFav.svg'
 import noFav from '../../public/images/noFav.svg'
 import { useRentacarStates } from '../Context/Context';
+import LoadingSpinner from './LoadingSpinner';
+import { format } from 'date-fns';
 
 function getRandomObjects(jsonData, count) {
     const shuffledData = [...jsonData];
@@ -58,11 +60,11 @@ const Home = () => {
 
     const handleFav = id => {
         if (token) {
-                        const updatedIds = localIdsProductosFavoritos.includes(id)
-                        ? localIdsProductosFavoritos.filter((favId) => favId !== id)
-                        : [...localIdsProductosFavoritos, id];
-        
-                    setLocalIdsProductosFavoritos(updatedIds);
+            const updatedIds = localIdsProductosFavoritos.includes(id)
+                ? localIdsProductosFavoritos.filter((favId) => favId !== id)
+                : [...localIdsProductosFavoritos, id];
+
+            setLocalIdsProductosFavoritos(updatedIds);
             dispatch({ type: "TOGGLE_FAV", payload: id })
         } else {
             setError(true)
@@ -146,12 +148,12 @@ const Home = () => {
             />
         ) : (
             <img
-            className='fav'
+                className='fav'
                 onClick={() => handleFav(idProducto)}
                 src={isFavorito ? isFav : noFav}
                 alt={isFavorito ? "Favorito" : "No favorito"}
             />
-            )
+        )
     };
 
     const getFavs = () => {
@@ -180,8 +182,20 @@ const Home = () => {
     }
 
     const searchVehicles = () => {
+
+        let url = ''
+
+        if ((busqueda != null && busqueda != '') && startDate == null && endDate == null) {
+            url = `http://localhost:8080/api/vehiculos?page=${page}&busqueda=${busqueda}`
+        } else {
+            const inicio = format(startDate, 'yyyy-MM-dd')
+            const fin = format(endDate, 'yyyy-MM-dd')
+            url = `http://localhost:8080/api/vehiculos/buscar?page=${page}&busqueda=${busqueda}&inicio=${inicio}&fin=${fin}`
+        }
+
         setLoading(true);
-        fetch(`http://3.135.246.162/api/vehiculos?page=${page}&busqueda=${busqueda}`, {
+
+        fetch(url, { // 3.135.246.162
             method: 'GET',
         })
             .then((res) => res.json())
@@ -247,7 +261,7 @@ const Home = () => {
                             // onSearch={(value) => setFeedback(value)}
                             formatResult={item => <span style={{ display: 'block', textAlign: 'left', cursor: "pointer" }}>{item.name}</span>}
                             placeholder="Busca por marca o modelo"
-                            
+
                         />
                     </div>
                     <div className='buscador-form-input'>
@@ -301,7 +315,7 @@ const Home = () => {
                     </div>
                 )}
                 <div className="card-grid">
-                    {loading ? <>Cargando</> : vehicles.map((a) => <Card renderizarIcono={renderizarIcono} auto={a} key={a.id} />)}
+                    {loading ? <LoadingSpinner /> : vehicles.map((a) => <Card renderizarIcono={renderizarIcono} auto={a} key={a.id} />)}
                 </div>
 
             </div>
@@ -309,7 +323,7 @@ const Home = () => {
                 <Paginacion totalItems={totalElements} itemsPerPage={10} currentPage={currentPage} page={page}></Paginacion>
             </div>
             {error ?
-                <div className="overlay ">
+                <div className="overlay">
                     <div className="favoritoCartel">
                         <h1>Debes iniciar sesion para marcar un vehiculo como favorito</h1>
                         <div className="acciones">

@@ -19,6 +19,7 @@ import AdminAddModelForm from './Components/AdminAddModelForm';
 import Detail from './Components/Detail';
 import AdminAddCaracteristicas from './Components/AdminAddCaracteristicas';
 import Politicas from './Routes/Politicas';
+import Reserva from './Components/Reserva';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -42,6 +43,7 @@ const App = () => {
                         <Route path="/admin/listcategories" element={<AdminListCategories />} />
                         <Route path="/admin/addCaracteristicas" element={<AdminAddCaracteristicas />} />
                         <Route path="/favs" element = {<Favs/>}/>
+                        <Route path="/reservar" element = {<Reserva/>}/>
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
 

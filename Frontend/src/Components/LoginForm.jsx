@@ -2,7 +2,7 @@
 import './styles/login.css'; // Importa los estilos CSS o SCSS según tu elección
 import React, { useState, useEffect } from 'react';
 import { useRentacarStates } from '../Context/Context'
-import  { useNavigate } from 'react-router-dom'
+import  { useLocation, useNavigate } from 'react-router-dom'
 
 
 
@@ -11,8 +11,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const { state, dispatch } = useRentacarStates();
   const navigate = useNavigate();
-
-
+  const location = useLocation();
   const [enviado, setEnviado] = useState(false);
   const [errorEmail, setErrorEmail] =useState(false);
   const [errorPassword, setErrorPassword] = useState(false)
@@ -62,7 +61,8 @@ const LoginForm = () => {
 
 
   return (
-    <div className="background-image">
+    <div style={{display: "flex", flexDirection: "column"}} className="background-image">
+      {location.state?.message ?  <h1 style={{color: "white", background: "red", padding: "10px", borderRadius: "10px"}}>{location.state?.message}</h1> : null}
       <div className="add-vehicle-container">
         <div className="add-vehicle-form">
           <h2>Iniciar Sesión</h2>

@@ -1,0 +1,224 @@
+.reserva-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+.reserva-bloque-izquierdo{
+    display: flex;
+    flex-direction: column;
+}
+
+.reserva-calendario h2{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.reserva-detalle{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.reserva-detalle-portada{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.reserva-info{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.reserva-info span{
+    color: #FFBE3F;
+    font-weight: bold;
+}
+
+.reserva-info p{
+    max-width: 90%;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.reserva-info h1{
+    text-align: left;
+    margin: 0 auto;
+}
+
+.reserva-info-fechas{
+    margin-top: 30px;
+}
+
+.reserva-detalle-caracteristicas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px
+}
+
+.caracteristica-item{
+    display: flex;
+    gap: 5px;
+}
+
+.caracteristica-item p{
+    font-size: 12px;
+}
+
+.reserva-info-fechas::before{
+    content: '';
+    display: block;
+    border-bottom: 1px solid #FFBE3F; /* Puedes ajustar el color y el grosor según tus preferencias */
+    margin-bottom: 10px;
+}
+
+.reserva-info-fecha{
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.reserva-datos-usuario{
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.usuario-inputs-container{
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+}
+
+.usuario-input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.usuario-input label{
+    color:#FFBE3F;
+    font-weight: bold;
+}
+
+.usuario-input input{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #FFBE3F
+}
+
+.reserva-popup-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reserva-popup{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+}
+
+.reserva-popup span{
+    font-size: 28px;
+}
+
+.reserva-popup button{
+    background: #FFBE3F;
+    border: none;
+    padding: 5px 20px;
+    font-size: 20px;
+    border: 2px solid #FFBE3F;
+    border-radius: 10px;
+    color: white;
+}
+
+@media (max-width: 1200px) {
+    .reserva-container{
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .reserva-bloque-izquierdo{
+        text-align: center;
+        width: 100%;
+    }
+        
+
+    .reserva-info p{
+        font-size: 14px;
+    }
+    
+    .reserva-info h1{
+        font-size: 20px;
+    }
+    
+    .reserva-detalle-caracteristicas{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .caracteristica-item p{
+        margin: 5px;
+    }
+    
+    .reserva-info-fecha{
+        font-size: 14px;
+    }
+    
+    .reserva-datos-usuario{
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    .usuario-inputs-container{
+        text-align: left;
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .usuario-input{
+        margin-bottom: 10px;
+    }
+    
+    .usuario-input label{
+        font-size: 14px;
+    }
+    
+    .usuario-input input{
+        padding: 5px;
+    }
+        
+    .reserva-popup{
+        padding: 10px;
+        font-size: 12px;
+        width: 80%;
+    }
+    
+    .reserva-popup h1, .reserva-popup span{
+        font-size: 22px;
+    }
+    
+    .reserva-popup button{
+        background: #FFBE3F;
+        border: none;
+        padding: 5px 20px;
+        font-size: 12px;
+        border: 2px solid #FFBE3F;
+        border-radius: 10px;
+        color: white;
+    }
+}

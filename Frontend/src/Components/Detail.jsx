@@ -3,10 +3,9 @@ import Gallery from "./Gallery";
 import svg from './../../public/images/arrow-left-solid.svg'
 import './styles/DetailCard.css'
 import Caracteristicas from "./Caracteristicas";
-import { useParams } from "react-router-dom";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate, useParams } from "react-router-dom";
 import Politicas from "../Routes/Politicas";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 const Detail = () => {
@@ -14,54 +13,44 @@ const Detail = () => {
 	const { id } = useParams();
 	const [auto, setAuto] = useState({})
 	const [isLoading, setIsLoading] = useState(true)
-	const [dateRange, setDateRange] = useState([null, null]);
-	const [startDate, endDate] = dateRange;
-	const [maxDate, setMaxDate] = useState(null)
-	const [excludeDates, setExcludeDates] = useState([
-		{ start: new Date('2023-12-05'), end: new Date('2023-12-15') },
-		{ start: new Date('2023-12-20'), end: new Date('2023-12-25') },
-	])
-	const [error, setError] = useState(true)
-	const [isMobile, setIsMobile] = useState(false)
+	const token = localStorage.getItem('jwt')
+	const navigate = useNavigate();
+
+
 
 	useEffect(() => {
-		fetch("http://3.135.246.162/api/vehiculos/" + id, {
-			method: "GET",
+
+		fetch(`http://3.135.246.162/api/vehiculos/${id}`, {
+			method: 'GET',
 			headers: {
-				"content-type": "application/json"
-			}
-		}).then(res => res.json())
-			.then(data => setAuto(data))
-			.then(() => setIsLoading(false))
+				'content-type': 'application/json',
+			},
+		})
+		.then(res => res.json())
+		.then(data => { setAuto(data), setIsLoading(false)})
 
-		const handleResize = () => {
-			if (window.innerWidth <= 1700) {
-				setIsMobile(true);
-			} else {
-				setIsMobile(false);
-			}
-		}
-
-		window.addEventListener('resize', handleResize);
-
-		handleResize();
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
 	}, [])
 
-	const handleDate = date => {
-		const nuevaFecha = new Date(date)
-		const excludeDatesFilter = excludeDates.map(fecha => fecha.start)
-		const fechasFuturas = excludeDatesFilter.filter(fecha => fecha.getTime() > nuevaFecha.getTime());
-		setMaxDate(fechasFuturas[0])
-		setDateRange(date)
+
+	const handleRedirect = () => {
+
+		if (!token) {
+			navigate('/login', {
+				state: { message: 'Debes iniciar sesión o registrarte para poder comprar' },
+			})
+		} else {
+			navigate('/reservar', {
+				state: { auto: auto, token: token}
+			})
+		}
+
 	}
 
 	return (
 		<>
-			{isLoading ? <div>Cargando...</div> :
+			{isLoading ?
+				<LoadingSpinner />
+				:
 				<div className="main-container">
 					<div className="detail-vehicle">
 						<h1>{auto.modelo.marca.marca} {auto.modelo.modelo} {auto.anio?.anio}</h1>
@@ -79,30 +68,10 @@ const Detail = () => {
 						</div>
 						<Caracteristicas caracteristicas={auto.modelo.caracteristicas}></Caracteristicas>
 						<div className="politicas-calendario">
-
 							<Politicas></Politicas>
-							{error ? <div className="error-calendar">
-								<span>No se puede obtener información sobre las fechas disponibles en este momento. Por favor vuelta a intentarlo.</span>
-								<button onClick={() => setError(false)}>Reintentar</button>
-							</div> :
-								<DatePicker
-									selectsRange={true}
-									startDate={startDate}
-									endDate={endDate}
-									onChange={fecha => handleDate(fecha)}
-									minDate={new Date()}
-									maxDate={maxDate}
-									monthsShown={isMobile ? 1 : 2}
-									excludeDateIntervals={excludeDates}
-									isClearable
-									inline
-									disabledKeyboardNavigation
-								/>
-							}
-
+							<button onClick={handleRedirect} className="reservar-button">Iniciar reserva</button>
 						</div>
 					</div>
-
 				</div>}
 		</>
 	);

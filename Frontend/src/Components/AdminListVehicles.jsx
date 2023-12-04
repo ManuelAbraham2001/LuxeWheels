@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './styles/ListVehicles.css'
 import Paginacion from './Paginacion';
+import LoadingSpinner from './LoadingSpinner';
 
 const AdminListVehicles = () => {
 
@@ -64,7 +65,7 @@ const AdminListVehicles = () => {
                 </div>
                 <div className="vechicle-card">
                     {isLoading ? ( 
-                        <div>Cargando...</div>
+                        <LoadingSpinner/>
                     ) : (
                         vehicles.map(v => (
                             <div className='vehicle-properties' key={v.id}>
