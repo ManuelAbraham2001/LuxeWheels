@@ -43,7 +43,7 @@ const Reserva = () => {
         }
         setUserInfo(info)
 
-        fetch(`http://localhost:8080/api/reservas/${auto.id}`, {
+        fetch(`http://3.135.246.162/api/reservas/${auto.id}`, {
             method: 'GET',
             headers: {
                 'content-type': "application/json"
@@ -99,7 +99,7 @@ const Reserva = () => {
             fin: fin
         }
 
-        fetch(`http://localhost:8080/api/reservas/${location.state.auto.id}`, {
+        fetch(`http://3.135.246.162/api/reservas/${location.state.auto.id}`, {
             method: "POST",
             body: JSON.stringify(fechas),
             headers: {

@@ -186,11 +186,11 @@ const Home = () => {
         let url = ''
 
         if ((busqueda != null && busqueda != '') && startDate == null && endDate == null) {
-            url = `http://localhost:8080/api/vehiculos?page=${page}&busqueda=${busqueda}`
+            url = `http://3.135.246.162/api/vehiculos?page=${page}&busqueda=${busqueda}`
         } else {
             const inicio = format(startDate, 'yyyy-MM-dd')
             const fin = format(endDate, 'yyyy-MM-dd')
-            url = `http://localhost:8080/api/vehiculos/buscar?page=${page}&busqueda=${busqueda}&inicio=${inicio}&fin=${fin}`
+            url = `http://3.135.246.162/api/vehiculos/buscar?page=${page}&busqueda=${busqueda}&inicio=${inicio}&fin=${fin}`
         }
 
         setLoading(true);

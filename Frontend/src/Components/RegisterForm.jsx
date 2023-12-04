@@ -106,7 +106,7 @@ const RegisterForm = () => {
       telefono: parseInt(form.telefono)
     });
 
-    fetch("http://localhost:8080/api/auth/singup", {
+    fetch("http://3.135.246.162/api/auth/singup", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
