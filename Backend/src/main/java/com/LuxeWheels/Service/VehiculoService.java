@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,5 +21,6 @@ public interface VehiculoService {
     Page<Vehiculo> filtrarVehiculosPorCategoria(int pagina, List<String> categorias, Long numCategorias);
     Page<Vehiculo> buscarVehiculosPorInput(int pagina, String busqueda);
     Page<Vehiculo> filtrarVehiculosPorBusquedaYCategoria(int pagina, String busqueda, List<String> categorias, Long numCategorias);
+    Page<Vehiculo> buscarPorFecha(int pagina, String busqueda, LocalDate inicio, LocalDate fin);
     void eliminar(Long id);
 }

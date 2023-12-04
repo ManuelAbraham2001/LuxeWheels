@@ -1,5 +1,6 @@
 package com.LuxeWheels.Controller;
 
+import com.LuxeWheels.Dto.CrearReservaDTO;
 import com.LuxeWheels.Dto.CrearVehiculoDTO;
 import com.LuxeWheels.Service.VehiculoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -52,6 +54,11 @@ public class VehiculoController {
     @GetMapping(params = {"page", "busqueda", "categorias"})
     public ResponseEntity<?> filtrarPorBusquedaYCategorias(@RequestParam int page, @RequestParam String busqueda, @RequestParam List<String> categorias){
         return ResponseEntity.ok(vehiculoService.filtrarVehiculosPorBusquedaYCategoria(page, busqueda, categorias, (long) categorias.size()));
+    }
+
+    @GetMapping(value = "/buscar", params = {"page", "busqueda", "inicio", "fin"})
+    public ResponseEntity<?> buscarPorFecha(@RequestParam int page, @RequestParam String busqueda, @RequestParam LocalDate inicio, @RequestParam LocalDate fin){
+        return ResponseEntity.ok(vehiculoService.buscarPorFecha(page, busqueda, inicio, fin));
     }
 
     @DeleteMapping("/{id}")

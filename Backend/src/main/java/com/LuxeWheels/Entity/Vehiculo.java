@@ -1,5 +1,6 @@
 package com.LuxeWheels.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,10 @@ public class Vehiculo {
 
     @OneToMany(mappedBy = "vehiculo")
     private List<Foto> fotos;
+
+    @OneToMany(mappedBy = "vehiculo")
+    @JsonIgnore
+    private List<Reserva> reservas;
 
     public Vehiculo() {
     }

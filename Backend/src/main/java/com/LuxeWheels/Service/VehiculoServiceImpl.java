@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -94,6 +95,13 @@ public class VehiculoServiceImpl implements VehiculoService{
         int cantidadPorPagina = 10;
         Pageable pageable = PageRequest.of(page - 1, cantidadPorPagina);
         return vehiculoRepository.filtrarPorInputYCategorias(pageable, busqueda, categorias, numCategorias);
+    }
+
+    @Override
+    public Page<Vehiculo> buscarPorFecha(int pagina, String busqueda, LocalDate inicio, LocalDate fin) {
+        int cantidadPorPagina = 10;
+        Pageable pageable = PageRequest.of(pagina - 1, cantidadPorPagina);
+        return vehiculoRepository.buscarPorFecha(pageable,busqueda, inicio, fin);
     }
 
     @Override

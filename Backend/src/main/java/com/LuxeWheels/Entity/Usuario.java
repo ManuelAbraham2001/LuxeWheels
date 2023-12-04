@@ -1,5 +1,6 @@
 package com.LuxeWheels.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,10 @@ public class Usuario {
     private LocalDate fechaNacimiento;
     private int telefono;
     private String documento;
+
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Reserva> reservas;
 
     @ManyToMany
     @JoinTable(
