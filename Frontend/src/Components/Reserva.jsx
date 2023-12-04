@@ -18,14 +18,13 @@ const Reserva = () => {
     const [isMobile, setIsMobile] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [popUp, setPopup] = useState(false)
+    const [auto, setAuto] = useState({});
     const [userInfo, setUserInfo] = useState({
         nombre: "",
         apellido: "",
         email: ""
     })
 
-    const auto = location.state.auto;
-    console.log(auto);
 
     useEffect(() => {
 
@@ -34,6 +33,7 @@ const Reserva = () => {
             return
         }
 
+        setAuto(location.state.auto)
         const decoded = jwtDecode(location.state.token);
         const name = decoded.nombre.split(" ");
         const info = {
@@ -43,7 +43,7 @@ const Reserva = () => {
         }
         setUserInfo(info)
 
-        fetch(`http://3.135.246.162/api/reservas/${auto.id}`, {
+        fetch(`http://3.135.246.162/api/reservas/${location.state.auto.id}`, {
             method: 'GET',
             headers: {
                 'content-type': "application/json"

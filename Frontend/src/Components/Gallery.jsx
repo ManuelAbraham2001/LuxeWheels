@@ -1,9 +1,5 @@
 import React from 'react'
 import noImg from '../../public/images/no-imagen.jpg'
-import imagen1 from '../../public/images/audi_a6_quattro_2016.jpg'
-import imagen2 from '../../public/images/audi_q7_2015.jpg'
-import imagen3 from '../../public/images/audi_q5_2017.jpg'
-import imagen4 from '../../public/images/audi_q7_2017.jpg'
 import './styles/Gallery.css'
 
 

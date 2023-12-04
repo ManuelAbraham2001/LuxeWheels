@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import './styles/CardHome.css'
 import img from '../../public/images/audi_1.jpg'
-import Caracteristicas from "./Caracteristicas";
 import { useRentacarStates } from '../Context/Context'
-import isFav from '../../public/images/isFav.svg'
-
 const Card = ({ auto, renderizarIcono }) => {
 
     const { state, dispatch } = useRentacarStates()
