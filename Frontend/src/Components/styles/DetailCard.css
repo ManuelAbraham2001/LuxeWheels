@@ -1,8 +1,8 @@
-.arrow-back img{
+.arrow-back img {
     width: 20px;
 }
 
-.detail-vehicle{
+.detail-vehicle {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,20 @@
     padding: 20px;
 }
 
-.detail-descripcion, .caracteristicas-main{
+.detail-vehicle-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-vehicle-title span{
+    font-style: italic;
+    font-weight: bold;
+    color: gray;
+}
+
+.detail-descripcion,
+.caracteristicas-main {
     text-align: center;
     background-color: #fff;
     width: 100%;
@@ -20,26 +33,26 @@
     padding: 20px;
 }
 
-.detail-descripcion p{
+.detail-descripcion p {
     margin: 0 auto;
     max-width: 50%;
 }
 
-.caracteristicas-list-container{
+.caracteristicas-list-container {
     display: flex;
     width: 100%;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.caracteristicas-list{
+.caracteristicas-list {
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
 }
 
-.detail-conainer{
+.detail-conainer {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -48,44 +61,51 @@
 
 .react-datepicker {
     font-size: 1.5em;
-  }
-  .react-datepicker__header {
+}
+
+.react-datepicker__header {
     padding-top: 0.8em;
-  }
-  .react-datepicker__month {
+}
+
+.react-datepicker__month {
     margin: 0.4em 1em;
-  }
-  .react-datepicker__day-name, .react-datepicker__day {
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
     width: 1.9em;
     line-height: 1.9em;
     margin: 0.166em;
-  }
-  .react-datepicker__current-month {
+}
+
+.react-datepicker__current-month {
     font-size: 1em;
-  }
-  .react-datepicker__navigation {
+}
+
+.react-datepicker__navigation {
     top: 1em;
     line-height: 1.7em;
     border: 0.45em solid transparent;
-  }
+}
 
-  .error-calendar{
+.error-calendar {
     display: flex;
     flex-direction: column;
     width: 40%;
     background-color: #fff;
     padding: 20px;
     border-radius: 20px;
-  }
-  .error-calendar span{
+}
+
+.error-calendar span {
     font-size: 24px;
     max-width: 80%;
     text-align: center;
     margin: 0 auto;
     margin-bottom: 20px;
-  }
+}
 
-  .error-calendar button{
+.error-calendar button {
     font-size: 20px;
     text-align: center;
     margin: 0 auto;
@@ -93,17 +113,17 @@
     background-color: transparent;
     color: #FFBE3F;
     font-weight: bold;
-  }
+}
 
-  .politicas-calendario{
+.politicas-calendario {
     display: flex;
     align-items: start;
     justify-content: space-between;
     flex-direction: column;
     width: 100%;
-  }
+}
 
-  .reservar-button{
+.reservar-button {
     background-color: #FFBE3F;
     outline: none;
     border: none;
@@ -113,63 +133,102 @@
     border-radius: 10px;
     color: white;
     font-weight: bold;
-    margin-top: 10px;
-  }
+    margin: 10px 0;
+}
 
-  @media (max-width: 768px) {
-    .error-calendar{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+.resenias {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resenia-content {
+    margin: 0 20px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.resenia-content h2 {
+    margin: 5px 0;
+}
+
+.resenia-content span{
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgb(128, 128, 128);
+}
+
+.resenias-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .error-calendar {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
-    .error-calendar span{
-      font-size: 12px;
-      max-width: 80%;
-      text-align: center;
-      margin: 0 auto;
-      margin-bottom: 20px;
+
+    .error-calendar span {
+        font-size: 12px;
+        max-width: 80%;
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 20px;
     }
-  
-    .error-calendar button{
-      font-size: 14px;
+
+    .error-calendar button {
+        font-size: 14px;
     }
 
     .react-datepicker {
-      font-size: 1em;
+        font-size: 1em;
     }
+
     .react-datepicker__header {
-      padding-top: 0.8em;
+        padding-top: 0.8em;
     }
+
     .react-datepicker__month {
-      margin: 0.4em 1em;
+        margin: 0.4em 1em;
     }
-    .react-datepicker__day-name, .react-datepicker__day {
-      width: 1.9em;
-      line-height: 1.9em;
-      margin: 0.166em;
+
+    .react-datepicker__day-name,
+    .react-datepicker__day {
+        width: 1.9em;
+        line-height: 1.9em;
+        margin: 0.166em;
     }
+
     .react-datepicker__current-month {
-      font-size: 1em;
+        font-size: 1em;
     }
+
     .react-datepicker__navigation {
-      top: 1em;
-      line-height: 1.7em;
-      border: 0.45em solid transparent;
+        top: 1em;
+        line-height: 1.7em;
+        border: 0.45em solid transparent;
     }
 
-  }
+}
 
-  @media (max-width: 1400px) {
-    .politicas-calendario{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: column;
-      gap: 20px;
+@media (max-width: 1400px) {
+    .politicas-calendario {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 20px;
     }
-  }
-
-
-
-
-
+}

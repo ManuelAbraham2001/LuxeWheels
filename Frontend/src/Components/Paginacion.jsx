@@ -21,7 +21,6 @@ const Paginacion = ({ totalItems, itemsPerPage, currentPage, page }) => {
 
         }else if(accion === "anterior"){
             currentPage(page - 1)
-
         }
     }
 

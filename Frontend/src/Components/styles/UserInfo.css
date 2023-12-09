@@ -1,0 +1,66 @@
+.user-info-main{
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-info-container{
+    width: 50%;
+}
+
+.user-info{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user-info-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-content-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-reservas{
+    width: 40%;
+}
+
+.reservas-content{
+    background-color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.reservas-container{
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.reservas-content-item{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.guardar-resenia{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.guardar-resenia button{
+    background-color: #FFBE3F;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}

@@ -26,12 +26,16 @@ const Admin = () => {
                             <h2>Crear Modelo</h2>
                         </div>
                     </a>
+                    <a href="/admin/listmodels">
+                        <div className="menu-option">
+                            <h2>Ver modelos</h2>
+                        </div>
+                    </a>
                     <a href="/admin/listcategories">
                         <div className="menu-option">
                             <h2>Categorias</h2>
                         </div>
                     </a>
-
                     <a href="/admin/addCaracteristicas">
                         <div className="menu-option">
                             <h2>Administrar caracteristicas</h2>

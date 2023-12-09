@@ -14,7 +14,7 @@ const Reserva = () => {
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
     const [maxDate, setMaxDate] = useState(null)
-    const [error, setError] = useState(true)
+    const [error, setError] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [popUp, setPopup] = useState(false)
@@ -113,8 +113,11 @@ const Reserva = () => {
                 setExcludeDates([...excludeDates, { start: new Date(fechas.inicio), end: new Date(fechas.fin + 'T23:59:59') }])
                 setIsLoading(false)
                 setPopup(true)
+            }else if(res.status === 409){
+                setDateRange([])
+                setError(true)
+                setIsLoading(false)
             }
-
         })
 
     }
@@ -128,6 +131,14 @@ const Reserva = () => {
                         <span style={{ color: "#FFBE3F" }}>Muchas gracias!</span>
                         <h1>Tu reserva se realizo exitosamente!</h1>
                         <button onClick={() => setPopup(false)}>Seguir navegando</button>
+                    </div>
+                </div> : null}
+
+                {error ? <div className="overlay">
+                    <div className="reserva-popup">
+                        <span style={{ color: "#ff0000", fontWeight: 'bold' }}>Error</span>
+                        <h1 style={{fontSize: "24px"}}>Lo sentimos, al parecer las fechas seleccionadas no se encuentran disponibles. Por favor seleccione otro rango de fechas.</h1>
+                        <button onClick={() => setError(false)}>Volver a seleccionar fechas</button>
                     </div>
                 </div> : null}
 
@@ -176,7 +187,7 @@ const Reserva = () => {
                         </div>
                     </div>
                     <div className="reserva-detalle">
-                        <img className='reserva-detalle-portada' src={auto.fotos[0].url} alt="" />
+                        <img className='reserva-detalle-portada' src={auto.fotos[0]?.url} alt="" />
                         <div className="reserva-info">
                             <span>Auto</span>
                             <h1>{auto.modelo.marca.marca + " " + auto.modelo.modelo + " " + auto.anio.anio}</h1>

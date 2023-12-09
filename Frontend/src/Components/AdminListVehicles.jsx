@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './styles/ListVehicles.css'
 import Paginacion from './Paginacion';
 import LoadingSpinner from './LoadingSpinner';
+import AdminAddVehicleForm from './AdminAddVehicleForm'
 
 const AdminListVehicles = () => {
 
@@ -9,6 +10,8 @@ const AdminListVehicles = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [page, currentPage] = useState(1)
     const [totalElements, setTotalElements] = useState(0)
+    const [vehicle, setVehicle] = useState({})
+    const [isEdit, setIsEdit] = useState(false)
 
     const token = localStorage.getItem('jwt');
 
@@ -48,10 +51,20 @@ const AdminListVehicles = () => {
         }
     }
 
+    const handleEditar  = vehicle => {
+        setVehicle(vehicle)
+        setIsEdit(true)
+    }
+
     
     return (
         <>
             <div className="list">
+                {isEdit ? 
+                    <div className="overlay">
+                        <AdminAddVehicleForm vehicle={vehicle} isEdit={isEdit} id={vehicle.id}/>
+                    </div> : null
+                }
                 <div className='vehicle-list'>
                     <div>
                         <span>ID</span>
@@ -76,7 +89,8 @@ const AdminListVehicles = () => {
                                     <span>{v.modelo.marca.marca + " " + v.modelo.modelo + " " + v.anio.anio}</span>
                                 </div>
                                 <div>
-                                    <button onClick={() => handleEliminar(v.id)}>Eliminar</button>
+                                    <button style={{margin: "0 10px"}} onClick={() => handleEliminar(v.id)}>Eliminar</button>
+                                    <button style={{margin: "0 10px"}} onClick={() => handleEditar(v)}>Edtiar</button>
                                 </div>
                             </div>
                         ))

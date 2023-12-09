@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const AdminAddModelForm = () => {
+const AdminAddModelForm = ({ modelo, isEdit, id}) => {
 
     const [marcas, setMarcas] = useState([])
     const [categorias, setCategorias] = useState([])
     const [caracteristicas, setCaracteristicas] = useState([])
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = isEdit ? useState({
+        modelo: modelo.modelo,
+        marca: modelo.marca.marca,
+        categorias: modelo.categorias.map(c => (c.categoria)),
+        caracteristicas: modelo.caracteristicas.map(c => (c.caracteristica))
+    }) : useState({
         modelo: "",
         marca: "",
         categorias: [],
@@ -48,8 +53,8 @@ const AdminAddModelForm = () => {
         console.log(caracteristica);
         const nuevaCaracteristica = caracteristica
 
-        if (formData.caracteristicas.includes(caracteristica)){
-            const nuevoArray = formData.caracteristicas.filter(c => c!== caracteristica)
+        if (formData.caracteristicas.includes(caracteristica)) {
+            const nuevoArray = formData.caracteristicas.filter(c => c !== caracteristica)
             setFormData({
                 ...formData,
                 caracteristicas: nuevoArray
@@ -66,8 +71,8 @@ const AdminAddModelForm = () => {
     const handleCategoriaChange = (value) => {
         const nuevaCategoria = value;
 
-        if (formData.categorias.includes(nuevaCategoria)){
-            const nuevoArray = formData.categorias.filter(c => c!== value)
+        if (formData.categorias.includes(nuevaCategoria)) {
+            const nuevoArray = formData.categorias.filter(c => c !== value)
             setFormData({
                 ...formData,
                 categorias: nuevoArray
@@ -82,6 +87,15 @@ const AdminAddModelForm = () => {
     };
 
     const handleSubmit = () => {
+        isEdit ? fetch(`http://3.135.246.162/api/modelo/${id}`, {
+            method: "PUT", 
+            body: JSON.stringify(formData),
+            headers: {
+                "authorization": "Bearer " + token,
+                "content-type": "application/json"
+            }
+        })
+        :
         fetch("http://3.135.246.162/api/modelo", {
             method: "POST",
             body: JSON.stringify(formData),
@@ -99,7 +113,7 @@ const AdminAddModelForm = () => {
         <div>
             <section className='sectionAddVehicle'>
                 <div className='add-vehicle-container'>
-                    <h2>Agregar Modelo</h2>
+                    <h2>{isEdit ? "Editar modelo" : "Agregar modelo"}</h2>
                     <form className='add-vehicle-form'>
                         <label className="label-field">Modelo:</label>
                         <input
@@ -152,7 +166,7 @@ const AdminAddModelForm = () => {
                         </div>
                         <br />
                         <button type="button" onClick={handleSubmit} className="submit-button">
-                            Agregar Modelo
+                            {isEdit ? "Editar modelo" : "Agregar modelo"}
                         </button>
                     </form>
                 </div>

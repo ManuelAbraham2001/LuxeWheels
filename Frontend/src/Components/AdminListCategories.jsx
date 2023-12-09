@@ -3,26 +3,18 @@ import './styles/Categories.css'
 
 const AdminListCategories = () => {
 
-    /*const [categories, setCategories] = useState([]);*/
+    const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [alerta, setAlerta] = useState({
+        estado: false,
+        id: null,
+        categoria: ''
+    })
 
     const token = localStorage.getItem('jwt');
 
-
-    const categories = [
-        { id: 1, nombre: "Compactos", descripcion: "Automóviles compactos ideales para la ciudad.", imagen: "imagen_compactos.jpg" },
-        { id: 2, nombre: "Sedanes", descripcion: "Elegantes sedanes para un viaje cómodo.", imagen: "imagen_sedanes.jpg" },
-        { id: 3, nombre: "Deportivos", descripcion: "Deportivos rápidos y potentes.", imagen: "imagen_deportivos.jpg" },
-        { id: 4, nombre: "Coupes", descripcion: "Coupés elegantes y con estilo.", imagen: "imagen_coupes.jpg" },
-        { id: 5, nombre: "Camionetas", descripcion: "Camionetas robustas para aventuras todo terreno.", imagen: "imagen_camionetas.jpg" },
-        { id: 6, nombre: "Electricos", descripcion: "Automóviles eléctricos para una conducción sostenible.", imagen: "imagen_electricos.jpg" },
-        { id: 7, nombre: "Híbridos", descripcion: "Automóviles híbridos que combinan eficiencia y rendimiento.", imagen: "imagen_hibridos.jpg" }
-      ];
-
-
-    /*
     useEffect(() => {
-        fetch("http://3.135.246.162/api/productos/categorias", {
+        fetch("http://3.135.246.162/api/categorias", {
             method: "GET",
             headers: {
                 "content-type": "application/json",
@@ -40,67 +32,75 @@ const AdminListCategories = () => {
             });
     }, [])
 
-*/
 
-    /*
-    const callApiAddRemoveRole = (user, id, roleToAdd) => {
-        const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
-    
-        fetch(`http://3.135.246.162/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
-            method: "POST",
-            headers: {
-                "authorization": "Bearer " + token
-            }
-        });
-        
+    const handleAlerta = (id, categoria) => {
+        setAlerta({
+            estado: true,
+            id: id,
+            categoria: categoria
+        } )        
     }
-    
-    const toggleAdmin = (user) => {
-        callApiAddRemoveRole(user, user.id, "ROLE_ADMIN");
-    };
 
-
-*/
-
-  const handleAddCategorie = () => {};
-
-
-
+    const handleEliminar = id => {
+        // console.log(id);
+        fetch(`http://3.135.246.162/api/categorias/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: "Bearer " + token
+            }
+        }).then(res => console.log(res.status))
+    }
 
     return (
         <>
             <main className="table">
-                <section className="table__header">
-                    <h1>Categorías</h1>
-                    <button onClick={handleAddCategorie}>Agregar Categoría</button>
-                </section>
-                <section className="table__body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Imagen</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {categories.map(c => (
-                                <tr key={c.id}>
-                                    <td>{c.id}</td>
-                                    <td>{c.nombre}</td>
-                                    <td>{c.descripcion}</td>
-                                    <td>{c.imagen}</td>
-                                    <td>
-                                        <div>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </section>
+                {alerta.estado ?
+                    <div className='overlay'>
+                        <div className="eliminar-alerta">
+                            <h1>ATENCION</h1>
+                            <p style={{fontSize: "20px"}}>Estas por eliminar la categoria <span style={{color: "red", fontWeight: "bold"}}>{alerta.categoria}</span></p>
+                            <p style={{fontSize: "20px"}}>Esto eliminara <span style={{color: "red", fontWeight: "bold"}}>TODOS</span> los vehiculos que tengan esta categoria</p>
+                            <div className="eliminar-alerta-acciones">
+                                <button onClick={() => setAlerta({...alerta, estado: false})} className='eliminar-alerta-acciones-cancelar'>Cancelar</button>
+                                <button value={alerta.id} onClick={e => handleEliminar(e.target.value)} className='eliminar-alerta-acciones-confirmar'>Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                    :
+                    <div style={{ overflowX: "auto" }}>
+                        <section className="table__header">
+                            <h1>Categorías</h1>
+                            <button>Agregar Categoría</button>
+                        </section>
+                        <section className="table__body">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Imagen</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {categories.map(c => (
+                                        <tr key={c.id}>
+                                            <td>{c.id}</td>
+                                            <td>{c.categoria}</td>
+                                            <td>{c.descripcion}</td>
+                                            <td><img src={c.url} width={200}/></td>
+                                            <td>
+                                                <div style={{ display: "flex", justifyContent: "center" }}>
+                                                    <button onClick={() => handleAlerta(c.id, c.categoria)} style={{ background: "red" }}>Eliminar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>}
             </main>
         </>
     )

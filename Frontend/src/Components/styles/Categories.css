@@ -55,12 +55,9 @@ main.table {
     width: 95%;
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
-
     margin: .8rem auto;
     border-radius: .6rem;
-
     overflow: auto;
-    overflow: overlay;
 }
 
 .table__body::-webkit-scrollbar{
@@ -153,6 +150,42 @@ tbody tr.hide td img {
     width: 0;
     height: 0;
     transition: .2s ease-in-out .5s;
+}
+
+.eliminar-alerta h1{
+    color: red;
+    font-weight: bold;
+}
+
+.eliminar-alerta{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.eliminar-alerta-acciones button{
+    width: 100%;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
+.eliminar-alerta-acciones-cancelar{
+    background-color: red;
+}
+
+.eliminar-alerta-acciones-confirmar{
+    background-color: rgb(0, 184, 0);
+}
+
+.eliminar-alerta-acciones{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
 }
 
 

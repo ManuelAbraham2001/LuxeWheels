@@ -14,12 +14,14 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    width: 400px;
   }
   
   .add-vehicle-form {
     display: flex;
     flex-direction: column;
     text-align: center; 
+    width: 100%;
   }
   
 

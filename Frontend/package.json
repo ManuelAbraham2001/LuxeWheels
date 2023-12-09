@@ -19,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.4.5",
     "react-router-dom": "^6.17.0",
-    "react-search-autocomplete": "^8.5.2"
+    "react-search-autocomplete": "^8.5.2",
+    "react-simple-star-rating": "^5.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

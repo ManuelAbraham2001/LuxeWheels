@@ -26,11 +26,11 @@
   }
   
   /* Estilo para etiquetas y campos */
-  .label-field {
+  /* .label-field {
     font-weight: bold;
     margin-bottom: 10px;
-    text-align: center; /* Títulos centrados */
-  }
+    text-align: center;
+  } */
   
   /* Estilo para campos de texto y textarea */
   .input-field {
