@@ -19,9 +19,21 @@ public class ModeloController {
         return ResponseEntity.ok(modeloService.crear(modelo));
     }
 
-    @GetMapping
-    public ResponseEntity<?> listarTodos(){
-        return ResponseEntity.ok(modeloService.listarTodos());
+    @GetMapping(params = {"page"})
+    public ResponseEntity<?> listarTodos(@RequestParam int page){
+        return ResponseEntity.ok(modeloService.listarTodos(page));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> agregarCategoria(@PathVariable Long id, @RequestBody CrearModeloDTO crearModeloDTO){
+        modeloService.editar(crearModeloDTO, id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value = "/{id}", params = {"categoria"})
+    public ResponseEntity<?> agregarCategoria(@PathVariable Long id, @RequestParam String categoria){
+        modeloService.agregarCategoria(categoria, id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

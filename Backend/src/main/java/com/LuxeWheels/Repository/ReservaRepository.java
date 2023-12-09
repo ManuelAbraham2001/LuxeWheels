@@ -1,6 +1,7 @@
 package com.LuxeWheels.Repository;
 
 import com.LuxeWheels.Entity.Reserva;
+import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Entity.Vehiculo;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,7 @@ import java.util.List;
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     List<Reserva> findByVehiculo(Vehiculo vehiculo);
+    List<Reserva> findByUsuario(Usuario usuario);
 
     @Modifying
     @Transactional

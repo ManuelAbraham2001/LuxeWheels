@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -48,6 +49,13 @@ public class FotoServiceImpl implements FotoService{
     }
 
     @Override
+    public void eliminarFotosVehiculo(List<Foto> fotos) {
+        for (Foto f : fotos) {
+            fotoRepository.deleteById(f.getId());
+        }
+    }
+
+    @Override
     public Foto cargar(MultipartFile foto, String tipo) throws IOException {
         String nombreImagen = "imgs/" + UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
 
@@ -61,4 +69,6 @@ public class FotoServiceImpl implements FotoService{
 
         return new Foto("https://c3-equipo5.s3.us-east-2.amazonaws.com/" + nombreImagen);
     }
+
+
 }

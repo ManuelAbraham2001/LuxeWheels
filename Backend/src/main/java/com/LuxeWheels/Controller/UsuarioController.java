@@ -30,7 +30,6 @@ public class UsuarioController {
         Claims claims = jwtUtil.getClaims(token.substring(7));
         String email = claims.getSubject();
         return ResponseEntity.ok(service.listarUsuarioPorEmail(email));
-
     }
 
     @GetMapping("/allusers")
@@ -45,10 +44,16 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("favoritos")
+    @GetMapping("/favoritos")
     public ResponseEntity<?> listarFavoritos(@RequestHeader(name = "authorization") String token){
         String tokenCut = token.substring(7);
         return ResponseEntity.ok(service.listarFavoritos(tokenCut));
+    }
+
+    @GetMapping("/reservas")
+    public ResponseEntity<?> listarReservas(@RequestHeader(name = "authorization") String token) throws UsuarioNotFoundException {
+        String tokenCut = token.substring(7);
+        return ResponseEntity.ok(service.listarReservasUsuario(tokenCut));
     }
 
 }

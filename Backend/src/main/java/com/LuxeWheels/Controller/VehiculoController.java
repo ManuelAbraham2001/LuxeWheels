@@ -2,6 +2,8 @@ package com.LuxeWheels.Controller;
 
 import com.LuxeWheels.Dto.CrearReservaDTO;
 import com.LuxeWheels.Dto.CrearVehiculoDTO;
+import com.LuxeWheels.Dto.EditarVehiculoDTO;
+import com.LuxeWheels.Exceptions.PatenteAlreadyExistException;
 import com.LuxeWheels.Service.VehiculoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +33,14 @@ public class VehiculoController {
         ObjectMapper objectMapper = new ObjectMapper();
         CrearVehiculoDTO crearVehiculoDTO = objectMapper.readValue(json, CrearVehiculoDTO.class);
         return ResponseEntity.ok(vehiculoService.crear(crearVehiculoDTO, fotos));
+    }
+
+    @PutMapping(value = "/{id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> editar(@RequestParam("vehiculo") String json, @RequestParam(value = "imagen", required = false) List<MultipartFile> fotos, @PathVariable Long id) throws IOException, PatenteAlreadyExistException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        EditarVehiculoDTO editarVehiculoDTO = objectMapper.readValue(json, EditarVehiculoDTO.class);
+        vehiculoService.editar(editarVehiculoDTO, id, fotos);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping(params = "marca")
@@ -66,4 +77,10 @@ public class VehiculoController {
         vehiculoService.eliminar(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "/resenias/{id}", params = {"page"})
+    public ResponseEntity<?> listarResenias(@PathVariable Long id, @RequestParam int page){
+        return ResponseEntity.ok(vehiculoService.listarResenias(id, page));
+    }
+
 }

@@ -1,11 +1,15 @@
 package com.LuxeWheels.Service;
 
+import com.LuxeWheels.Dto.ReservaUsuarioDTO;
 import com.LuxeWheels.Dto.UsuarioDTO;
+import com.LuxeWheels.Dto.UsuarioReservaResponseDTO;
+import com.LuxeWheels.Entity.Reserva;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
 import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
+import com.LuxeWheels.Repository.ReservaRepository;
 import com.LuxeWheels.Repository.RolRepository;
 import com.LuxeWheels.Repository.UsuarioRepository;
 import com.LuxeWheels.Repository.VehiculoRepository;
@@ -28,6 +32,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
+
+    @Autowired
+    private ReservaRepository reservaRepository;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -118,6 +125,27 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
 
         return usuario.getFavoritos();
+    }
+
+    @Override
+    public UsuarioReservaResponseDTO listarReservasUsuario(String token) throws UsuarioNotFoundException {
+
+        Claims claims = jwtUtil.getClaims(token);
+        String email = claims.getSubject();
+        List<ReservaUsuarioDTO> reservaUsuarioDTOS = new ArrayList<>();
+
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getTelefono(), usuario.getDocumento(), usuario.getRoles());
+
+        List<Reserva> reservasUsuario = reservaRepository.findByUsuario(usuario);
+
+        for (Reserva r : reservasUsuario) {
+            String vehiuclo = r.getVehiculo().getModelo().getMarca().getMarca() + " " + r.getVehiculo().getModelo().getModelo() + " " + r.getVehiculo().getAnio().getAnio();
+            ReservaUsuarioDTO reservaUsuarioDTO = new ReservaUsuarioDTO(r.getId(), r.getInicio(), r.getCierre(), r.isEstado(), r.getFechaDeReserva(), vehiuclo, r.getResenia());
+            reservaUsuarioDTOS.add(reservaUsuarioDTO);
+        }
+
+        return new UsuarioReservaResponseDTO(usuarioDTO, reservaUsuarioDTOS);
     }
 
     private Usuario buscarUsuarioPorId(Long id) throws UsuarioNotFoundException {

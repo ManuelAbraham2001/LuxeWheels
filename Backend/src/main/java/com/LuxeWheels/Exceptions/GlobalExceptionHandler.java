@@ -30,4 +30,14 @@ public class GlobalExceptionHandler {
     private ResponseEntity<?> usuarioAlreadyAdmin(UsuarioAlreadyAdmin e, WebRequest request) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler({ConflictDatesException.class})
+    private ResponseEntity<?> conflictDates(ConflictDatesException e, WebRequest request) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler({PatenteAlreadyExistException.class})
+    private ResponseEntity<?> conflictDates(PatenteAlreadyExistException e, WebRequest request) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
 }

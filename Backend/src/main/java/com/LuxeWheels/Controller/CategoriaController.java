@@ -34,7 +34,6 @@ public class CategoriaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> elimiar(@PathVariable Long id){
-
         return ResponseEntity.ok().build();
     }
 

@@ -1,9 +1,10 @@
 package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.CrearVehiculoDTO;
-import com.LuxeWheels.Entity.Foto;
-import com.LuxeWheels.Entity.Modelo;
-import com.LuxeWheels.Entity.Vehiculo;
+import com.LuxeWheels.Dto.EditarVehiculoDTO;
+import com.LuxeWheels.Dto.ReseniasVehiculoDTO;
+import com.LuxeWheels.Entity.*;
+import com.LuxeWheels.Exceptions.PatenteAlreadyExistException;
 import com.LuxeWheels.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,10 @@ public class VehiculoServiceImpl implements VehiculoService{
     private ModeloRepository modeloRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private ReseniaRepository reseniaRepository;
+
+    @Autowired
+    private FotoRepository fotoRepository;
 
     @Autowired
     private FotoServiceImpl fotoService;
@@ -102,6 +107,63 @@ public class VehiculoServiceImpl implements VehiculoService{
         int cantidadPorPagina = 10;
         Pageable pageable = PageRequest.of(pagina - 1, cantidadPorPagina);
         return vehiculoRepository.buscarPorFecha(pageable,busqueda, inicio, fin);
+    }
+
+    @Override
+    public List<ReseniasVehiculoDTO> listarResenias(Long id, int pagina) {
+
+        int cantidadPorPagina = 5;
+        Pageable pageable = PageRequest.of(pagina - 1, cantidadPorPagina);
+
+        List<ReseniasVehiculoDTO> reseniasDTO = new ArrayList<>();
+        Page<Resenia> resenias = reseniaRepository.listar(id, pageable);
+
+        if(resenias.getTotalElements() > 0){
+            for (Resenia r : resenias) {
+                String usuario = r.getReserva().getUsuario().getNombre() + " " + r.getReserva().getUsuario().getApellido();
+                ReseniasVehiculoDTO rndto = new ReseniasVehiculoDTO(usuario, r.getFecha(), r.getCalificacion(), r.getResenia());
+                reseniasDTO.add(rndto);
+            }
+        }
+
+        return reseniasDTO;
+    }
+
+    @Override
+    public void editar(EditarVehiculoDTO vehiculoDTO, Long id, List<MultipartFile> fotos) throws IOException, PatenteAlreadyExistException {
+        Vehiculo vehiculo = vehiculoRepository.findById(id).orElseThrow();
+        fotoService.eliminarFotosVehiculo(vehiculoDTO.getFotosBorradas());
+        if (fotos != null){
+            for (MultipartFile f : fotos) {
+                Foto foto = fotoService.cargar(f, "image/jpeg");
+                foto.setVehiculo(vehiculo);
+                fotoRepository.save(foto);
+            }
+        }
+        if(!vehiculo.getModelo().getModelo().equals(vehiculoDTO.getModelo())){
+            Modelo modelo = modeloRepository.findByModelo(vehiculoDTO.getModelo());
+            vehiculo.setModelo(modelo);
+        }
+        if(vehiculo.getAnio().getAnio() != vehiculoDTO.getAnio()){
+            Anio anio = anioRepository.findByAnio(vehiculoDTO.getAnio());
+            vehiculo.setAnio(anio);
+        }
+        if(!vehiculo.getPatente().equals(vehiculoDTO.getPatente())){
+            if(!vehiculoRepository.existsByPatente(vehiculoDTO.getPatente())){
+                vehiculo.setPatente(vehiculo.getPatente());
+            }else{
+                throw new PatenteAlreadyExistException("Ya existe un vehiculo con esa patente");
+            }
+        }
+        if(vehiculo.getPrecio() != vehiculoDTO.getPrecio()){
+            vehiculo.setPrecio(vehiculoDTO.getPrecio());
+        }
+        if(!vehiculo.getDescripcion().equals(vehiculoDTO.getDescripcion())){
+            vehiculo.setDescripcion(vehiculo.getDescripcion());
+        }
+
+        vehiculoRepository.save(vehiculo);
+
     }
 
     @Override

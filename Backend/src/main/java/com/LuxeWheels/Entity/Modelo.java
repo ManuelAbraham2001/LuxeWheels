@@ -22,7 +22,7 @@ public class Modelo {
 
     private Marca marca;
 
-    @OneToMany(mappedBy = "modelo")
+    @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Vehiculo> vehiculos;
 

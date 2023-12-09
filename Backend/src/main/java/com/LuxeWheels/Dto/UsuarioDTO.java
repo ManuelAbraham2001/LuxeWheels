@@ -1,6 +1,7 @@
 package com.LuxeWheels.Dto;
 
 import com.LuxeWheels.Entity.Rol;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class UsuarioDTO {
     private String nombre;
     private String apellido;
     private String email;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaNacimiento;
     private int telefono;
     private String documento;

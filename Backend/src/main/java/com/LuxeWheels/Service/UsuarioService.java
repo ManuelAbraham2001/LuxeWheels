@@ -1,6 +1,8 @@
 package com.LuxeWheels.Service;
 
 import com.LuxeWheels.Dto.UsuarioDTO;
+import com.LuxeWheels.Dto.UsuarioReservaResponseDTO;
+import com.LuxeWheels.Entity.Reserva;
 import com.LuxeWheels.Entity.Usuario;
 import com.LuxeWheels.Entity.Vehiculo;
 import com.LuxeWheels.Exceptions.RolNotFoundException;
@@ -8,7 +10,6 @@ import com.LuxeWheels.Exceptions.UsuarioAlreadyExistException;
 import com.LuxeWheels.Exceptions.UsuarioNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UsuarioService {
     Usuario crear(Usuario usuario) throws RolNotFoundException, UsuarioAlreadyExistException;
@@ -26,4 +27,6 @@ public interface UsuarioService {
     void toggleFavorito(Long id, String token);
 
     List<Vehiculo> listarFavoritos(String token);
+
+    UsuarioReservaResponseDTO listarReservasUsuario(String token) throws UsuarioNotFoundException;
 }

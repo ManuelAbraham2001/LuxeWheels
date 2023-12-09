@@ -1,6 +1,7 @@
 package com.LuxeWheels.Controller;
 
 import com.LuxeWheels.Dto.CrearReservaDTO;
+import com.LuxeWheels.Exceptions.ConflictDatesException;
 import com.LuxeWheels.Repository.ReservaRepository;
 import com.LuxeWheels.Security.JwtUtil;
 import com.LuxeWheels.Service.ReservaServiceImpl;
@@ -23,7 +24,7 @@ public class ReservaController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> crearReserva(@PathVariable Long id, @RequestBody CrearReservaDTO reservaDTO, @RequestHeader("authorization") String token) throws MessagingException {
+    public ResponseEntity<?> crearReserva(@PathVariable Long id, @RequestBody CrearReservaDTO reservaDTO, @RequestHeader("authorization") String token) throws MessagingException, ConflictDatesException {
         if(token.startsWith("Bearer ")){
             String tokenSubString = token.substring(7);
             if(jwtUtil.esValido(tokenSubString)){

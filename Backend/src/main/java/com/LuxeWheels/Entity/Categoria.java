@@ -19,7 +19,7 @@ public class Categoria {
     private String descripcion;
     private String url;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "categoria_modelo",
             joinColumns = @JoinColumn(name = "categoria_id"),

@@ -1,5 +1,6 @@
 package com.LuxeWheels.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class Vehiculo {
 
     @OneToMany(mappedBy = "vehiculo")
     private List<Foto> fotos;
+
+    @OneToOne(mappedBy = "vehiculo")
+    private PromedioCalificacionVehiculo promedioCalificacionVehiculo;
 
     @OneToMany(mappedBy = "vehiculo")
     @JsonIgnore
