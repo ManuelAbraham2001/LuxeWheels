@@ -19,9 +19,14 @@ public class ModeloController {
         return ResponseEntity.ok(modeloService.crear(modelo));
     }
 
+    @GetMapping
+    public ResponseEntity<?> listarTodos(){
+        return ResponseEntity.ok(modeloService.listarTodos());
+    }
+
     @GetMapping(params = {"page"})
-    public ResponseEntity<?> listarTodos(@RequestParam int page){
-        return ResponseEntity.ok(modeloService.listarTodos(page));
+    public ResponseEntity<?> listarPaginados(@RequestParam int page){
+        return ResponseEntity.ok(modeloService.listarPaginados(page));
     }
 
     @PutMapping(value = "/{id}")

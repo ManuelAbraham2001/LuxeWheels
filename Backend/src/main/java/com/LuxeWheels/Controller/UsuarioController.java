@@ -50,10 +50,10 @@ public class UsuarioController {
         return ResponseEntity.ok(service.listarFavoritos(tokenCut));
     }
 
-    @GetMapping("/reservas")
-    public ResponseEntity<?> listarReservas(@RequestHeader(name = "authorization") String token) throws UsuarioNotFoundException {
+    @GetMapping(value = "/reservas", params = {"page"})
+    public ResponseEntity<?> listarReservas(@RequestHeader(name = "authorization") String token, @RequestParam int page) throws UsuarioNotFoundException {
         String tokenCut = token.substring(7);
-        return ResponseEntity.ok(service.listarReservasUsuario(tokenCut));
+        return ResponseEntity.ok(service.listarReservasUsuario(tokenCut, page));
     }
 
 }

@@ -54,6 +54,11 @@ public class ModeloServiceImpl implements ModeloService{
     }
 
     @Override
+    public List<Modelo> listarTodos() {
+        return modeloRepository.findAll();
+    }
+
+    @Override
     public void editar(CrearModeloDTO modeloDTO, Long id) {
 
         Modelo modelo = modeloRepository.findById(id).orElseThrow();
@@ -75,7 +80,7 @@ public class ModeloServiceImpl implements ModeloService{
     }
 
     @Override
-    public Page<Modelo> listarTodos(int pagina) {
+    public Page<Modelo> listarPaginados(int pagina) {
         int cantidadPorPagina = 10;
         Pageable page = PageRequest.of(pagina - 1, cantidadPorPagina);
         return modeloRepository.paginarModelos(page);

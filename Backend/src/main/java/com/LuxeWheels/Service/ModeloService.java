@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface ModeloService {
     Modelo crear(CrearModeloDTO modelo);
+    List<Modelo> listarTodos();
     void editar(CrearModeloDTO modeloDTO, Long id);
-    Page<Modelo> listarTodos(int pagina);
+    Page<Modelo> listarPaginados(int pagina);
     void agregarCategoria(String categoria, Long id);
     void eliminar(Long id);
 }

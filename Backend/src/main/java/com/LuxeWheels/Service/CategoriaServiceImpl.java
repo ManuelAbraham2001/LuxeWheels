@@ -4,6 +4,7 @@ import com.LuxeWheels.Dto.CrearCategoriaDTO;
 import com.LuxeWheels.Entity.Categoria;
 import com.LuxeWheels.Entity.Foto;
 import com.LuxeWheels.Repository.CategoriaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +32,8 @@ public class CategoriaServiceImpl implements CategoriaService{
     public List<Categoria> listar() {
         return categoriaRepository.findAll();
     }
-
     @Override
+    @Transactional
     public void eliminar(Long id) {
         categoriaRepository.deleteById(id);
     }

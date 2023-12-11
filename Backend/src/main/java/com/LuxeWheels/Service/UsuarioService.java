@@ -28,5 +28,5 @@ public interface UsuarioService {
 
     List<Vehiculo> listarFavoritos(String token);
 
-    UsuarioReservaResponseDTO listarReservasUsuario(String token) throws UsuarioNotFoundException;
+    UsuarioReservaResponseDTO listarReservasUsuario(String token, int page) throws UsuarioNotFoundException;
 }

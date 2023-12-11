@@ -22,7 +22,7 @@ public class Modelo {
 
     private Marca marca;
 
-    @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "modelo", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Vehiculo> vehiculos;
 

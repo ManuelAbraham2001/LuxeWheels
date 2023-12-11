@@ -25,7 +25,7 @@ public class Vehiculo {
     private Double precio;
     private String descripcion;
 
-    @OneToMany(mappedBy = "vehiculo")
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.REMOVE)
     private List<Foto> fotos;
 
     @OneToOne(mappedBy = "vehiculo")

@@ -16,6 +16,10 @@ import com.LuxeWheels.Repository.VehiculoRepository;
 import com.LuxeWheels.Security.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -128,25 +132,30 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioReservaResponseDTO listarReservasUsuario(String token) throws UsuarioNotFoundException {
-
+    public UsuarioReservaResponseDTO listarReservasUsuario(String token, int pagina) throws UsuarioNotFoundException {
         Claims claims = jwtUtil.getClaims(token);
         String email = claims.getSubject();
-        List<ReservaUsuarioDTO> reservaUsuarioDTOS = new ArrayList<>();
+        int cantPorPage = 5;
+        Pageable page = PageRequest.of(pagina - 1, cantPorPage);
 
         Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow();
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(), usuario.getTelefono(), usuario.getDocumento(), usuario.getRoles());
 
-        List<Reserva> reservasUsuario = reservaRepository.findByUsuario(usuario);
+        Page<Reserva> reservasUsuario = reservaRepository.findByUsuario(usuario, page);
+
+        List<ReservaUsuarioDTO> reservaUsuarioDTOS = new ArrayList<>();
 
         for (Reserva r : reservasUsuario) {
-            String vehiuclo = r.getVehiculo().getModelo().getMarca().getMarca() + " " + r.getVehiculo().getModelo().getModelo() + " " + r.getVehiculo().getAnio().getAnio();
-            ReservaUsuarioDTO reservaUsuarioDTO = new ReservaUsuarioDTO(r.getId(), r.getInicio(), r.getCierre(), r.isEstado(), r.getFechaDeReserva(), vehiuclo, r.getResenia());
+            String vehiculo = r.getVehiculo().getModelo().getMarca().getMarca() + " " + r.getVehiculo().getModelo().getModelo() + " " + r.getVehiculo().getAnio().getAnio();
+            ReservaUsuarioDTO reservaUsuarioDTO = new ReservaUsuarioDTO(r.getId(), r.getVehiculo().getId(), r.getInicio(), r.getCierre(), r.isEstado(), r.getFechaDeReserva(), vehiculo, r.getResenia());
             reservaUsuarioDTOS.add(reservaUsuarioDTO);
         }
 
-        return new UsuarioReservaResponseDTO(usuarioDTO, reservaUsuarioDTOS);
+        Page<ReservaUsuarioDTO> pageReservaUsuarioDTO = new PageImpl<>(reservaUsuarioDTOS, page, reservasUsuario.getTotalElements());
+
+        return new UsuarioReservaResponseDTO(usuarioDTO, pageReservaUsuarioDTO);
     }
+
 
     private Usuario buscarUsuarioPorId(Long id) throws UsuarioNotFoundException {
         return usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException("El usuario no existe"));

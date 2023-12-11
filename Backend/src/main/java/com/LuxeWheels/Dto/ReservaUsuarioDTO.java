@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 public class ReservaUsuarioDTO {
     private Long id;
+    private Long idVehiculo;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate inicio;
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -24,8 +25,9 @@ public class ReservaUsuarioDTO {
     public ReservaUsuarioDTO() {
     }
 
-    public ReservaUsuarioDTO(Long id, LocalDate inicio, LocalDate cierre, boolean estado, LocalDate fechaDeReserva, String vehiculo, Resenia resenia) {
+    public ReservaUsuarioDTO(Long id, Long idVehiculo, LocalDate inicio, LocalDate cierre, boolean estado, LocalDate fechaDeReserva, String vehiculo, Resenia resenia) {
         this.id = id;
+        this.idVehiculo = idVehiculo;
         this.inicio = inicio;
         this.cierre = cierre;
         this.estado = estado;

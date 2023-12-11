@@ -149,7 +149,7 @@ public class VehiculoServiceImpl implements VehiculoService{
             vehiculo.setAnio(anio);
         }
         if(!vehiculo.getPatente().equals(vehiculoDTO.getPatente())){
-            if(!vehiculoRepository.existsByPatente(vehiculoDTO.getPatente())){
+            if(!vehiculoRepository.existsVehiculoByPatente(vehiculoDTO.getPatente())){
                 vehiculo.setPatente(vehiculo.getPatente());
             }else{
                 throw new PatenteAlreadyExistException("Ya existe un vehiculo con esa patente");
