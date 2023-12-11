@@ -99,7 +99,7 @@ const Detail = () => {
 								<div className="resenias-container">
 									{resenias.map(r => (
 										<div className="resenia-content">
-											<div style={{ display: "flex", alignItems: "center", gap: "20px", justifyContent: "space-between" }}>
+											<div className="resenia-content-rating"  style={{ display: "flex", alignItems: "center", gap: "20px", justifyContent: "space-between" }}>
 												<h2>{r.usuario}</h2>
 												<Rating
 													size={30}

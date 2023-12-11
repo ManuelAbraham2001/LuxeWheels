@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import LoadingSpinner from './LoadingSpinner'
+import Swal from 'sweetalert2'
 
 const AdminAddCaracteristicas = () => {
 
@@ -8,6 +10,8 @@ const AdminAddCaracteristicas = () => {
     const [caracteristica, setCaracteristica] = useState(null)
     const [imagen, setImagen] = useState(null)
     const [isEditing, setisEditing] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [fotoEdit, setFotoEdit] = useState('')
     const [caracteristicaEdit, setCaracteristicaEdit] = useState({
         id: "",
         caracteristica: "",
@@ -21,11 +25,15 @@ const AdminAddCaracteristicas = () => {
         getCaracteristias()
     }, [])
 
+    useEffect(() => {
+        console.log(imagen);
+    }, [imagen])
+
     const getCaracteristias = () => {
         fetch("http://3.135.246.162/api/caracteristicas", {
             method: "GET",
         }).then(res => res.json())
-            .then(data => setCaracteristicas(data))
+            .then(data => { setCaracteristicas(data), setIsLoading(false) })
     }
 
     const handleDelete = id => {
@@ -34,10 +42,29 @@ const AdminAddCaracteristicas = () => {
             headers: {
                 authorization: "Bearer " + token
             }
-        }).then(() => getCaracteristias())
+        }).then(res => {
+
+            const caracterisciasCopy = caracteristicas.filter(c => c.id != id)
+            setCaracteristicas(caracterisciasCopy)
+
+            setIsLoading(false)
+            if (res.status === 200) {
+                Swal.fire({
+                    title: "Caracteristica eliminada con exito!",
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al eliminar la caracteristica.",
+                    icon: "Error"
+                });
+            }
+        })
     }
 
     const handleSubmit = () => {
+
+        setIsLoading(true)
 
         const formData = new FormData();
 
@@ -50,10 +77,27 @@ const AdminAddCaracteristicas = () => {
             headers: {
                 authorization: "Bearer " + token
             }
+        }).then(res => {
+            setIsLoading(false)
+            if (res.status === 200) {
+                Swal.fire({
+                    title: "Caracteristica creada con exito!",
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al crear la caracteristica.",
+                    icon: "Error"
+                });
+            }
+            setPopUp(false)
         })
     }
 
     const handleEdit = () => {
+
+        setIsLoading(true)
+
         const formData = new FormData();
 
         formData.append("nuevaCaracteristica", caracteristicaEdit.nuevaCaracteristica)
@@ -68,85 +112,107 @@ const AdminAddCaracteristicas = () => {
             headers: {
                 authorization: "Bearer " + token
             }
+        }).then(res => {
+            setIsLoading(false)
+            if (res.status === 200) {
+                Swal.fire({
+                    title: "Caracteristica actualizada con exito!",
+                    icon: "success"
+                });
+                getCaracteristias()
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al actualizar la caracteristica.",
+                    icon: "Error"
+                });
+            }
+            setPopUp(false)
         })
     }
 
 
     return (
-        <>
-            <main className="table">
-                <section className="table__header">
-                    <div style={{ width: "95%", display: "flex", justifyContent: "end", margin: "0 auto" }}>
-                        <button onClick={() => { setPopUp(true) }}>Agregar caracteristica</button>
-                    </div>
-                </section>
-                <section className="table__body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Caracteristica</th>
-                                <th>Foto</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {caracteristicas.map(c => (
-                                <tr key={c.id}>
-                                    <td>{c.id}</td>
-                                    <td>{c.caracteristica}</td>
-                                    <td style={{ display: "flex", width: "100%", justifyContent: "center" }}><img style={{ width: "100px" }} src={c.url} alt="" /></td>
-                                    <td>
-                                        <div>
-                                            <button style={{backgroundColor: 'red'}}  onClick={() => handleDelete(c.id)}>Eliminar</button>
-                                            <button style={{backgroundColor: 'gray'}} onClick={() => {
-                                                setisEditing(true), setPopUp(true), setCaracteristicaEdit({
-                                                    id: c.id,
-                                                    caracteristica: c.caracteristica,
-                                                    nuevaCaracteristica: "",
-                                                    foto: []
-                                                })
-                                            }}>Editar</button>
-                                        </div>
-                                    </td>
+        isLoading ? <LoadingSpinner /> :
+            <>
+                <main className="table">
+                    <section className="table__header">
+                        <div style={{ width: "95%", display: "flex", justifyContent: "end", margin: "0 auto" }}>
+                            <button onClick={() => { setPopUp(true) }}>Agregar caracteristica</button>
+                        </div>
+                    </section>
+                    <section className="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Caracteristica</th>
+                                    <th>Foto</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-            {popUp && (
-                <div className="overlay">
-                    <div className="modal">
-                        <div>
-                            <section className='sectionAddVehicle'>
-                                <div className='add-vehicle-container'>
-                                    <h2>{isEditing ? "Editar" : "Agregar"} Caracteristica</h2>
-                                    <form className='add-vehicle-form'>
-                                        <label className="label-field">Caracteristica:</label>
-                                        <input
-                                            type="text"
-                                            onChange={(e) => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, nuevaCaracteristica: e.target.value }) : setCaracteristica(e.target.value) }}
-                                            className="input-field"
-                                        // value={isEditing ? caracteristicaEdit.caracteristica : ""}
-                                        />
-                                        <br />
-                                        <label className="label-field">Imagen:</label>
-                                        <input type="file" accept='.svg' onChange={e => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, foto: e.target.files }) : setImagen(e.target.files) }} className="file-input-button" />
-                                        <br />
+                            </thead>
+                            <tbody>
+                                {caracteristicas.map(c => (
+                                    <tr key={c.id}>
+                                        <td>{c.id}</td>
+                                        <td>{c.caracteristica}</td>
+                                        <td style={{ display: "flex", width: "100%", justifyContent: "center" }}><img style={{ width: "100px" }} src={c.url} alt="" /></td>
+                                        <td>
+                                            <div>
+                                                <button style={{ backgroundColor: 'red' }} onClick={() => handleDelete(c.id)}>Eliminar</button>
+                                                <button style={{ backgroundColor: 'gray' }} onClick={() => {
+                                                    setisEditing(true), setPopUp(true), setCaracteristicaEdit({
+                                                        id: c.id,
+                                                        caracteristica: c.caracteristica,
+                                                        nuevaCaracteristica: "",
+                                                        foto: null
+                                                    }, setFotoEdit(c.url))
+                                                }}>Editar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+                {popUp && (
+                    <div className="overlay">
+                        <div className="modal">
+                            <div>
+                                <section className='sectionAddVehicle'>
+                                    <div id='caracteristica-form' className='add-vehicle-container'>
+                                        <h2>{isEditing ? "Editar" : "Agregar"} Caracteristica</h2>
+                                        <form className='add-vehicle-form'>
+                                            <label className="label-field">Caracteristica:</label>
+                                            <input
+                                                type="text"
+                                                onChange={(e) => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, nuevaCaracteristica: e.target.value }) : setCaracteristica(e.target.value) }}
+                                                className="input-field"
+                                            />
+                                            <br />
+                                            <label for="file-upload" className="custom-file-upload">Seleccionar fotos</label>
+                                            <input id="file-upload" accept='.svg' type="file" onChange={e => { isEditing ? setCaracteristicaEdit({ ...caracteristicaEdit, foto: e.target.files }) : setImagen(e.target.files) }} className="file-input-button custom-file-upload" />
+                                            {!isEditing && imagen != null ?
+                                                <div style={{ marginTop: "20px" }}>
+                                                    <img width="100px" src={URL.createObjectURL(imagen[0])} alt="caracteristica-foto" />
+                                                </div> : isEditing && <div style={{ marginTop: "20px" }}>
+                                                    {caracteristicaEdit.foto != null ? <img width="100px" src={URL.createObjectURL(caracteristicaEdit.foto[0])} alt="caracteristica-foto" /> : <img width="100px" src={fotoEdit} alt="caracteristica-foto" />}
+                                                </div>}
+                                            <br />
 
-                                        <button onClick={isEditing ? handleEdit : handleSubmit} type="button" className="submit-button">
-                                            {isEditing ? "Editar" : "Agregar"}
-                                        </button>
-                                        <button style={{ marginTop: "2px" }} className="submit-button" onClick={() => { setPopUp(false), setisEditing(false) }}>Cerrar</button>
-                                    </form>
-                                </div>
-                            </section>
+                                            <button onClick={isEditing ? handleEdit : handleSubmit} type="button" className="submit-button">
+                                                {isEditing ? "Editar" : "Agregar"}
+                                            </button>
+                                            <button style={{ marginTop: "2px" }} className="submit-button" onClick={() => { setPopUp(false), setisEditing(false), setImagen(null) }}>Cerrar</button>
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </>
+                )}
+            </>
+
     )
 }
 

@@ -41,7 +41,7 @@ const Card = ({ auto, renderizarIcono }) => {
                     <div className="card-content" style={{ width: "100%" }}>
                         <div style={{display: "flex", flexDirection: "column", alignItems: "start"}}>
                             <div className="card-content-info" style={{ textAlign: "left", display: "flex", justifyContent: "space-between", width: "100%" }}>
-                                <h3>
+                                <h3 style={{margin: 0}}>
                                     {(auto.modelo.marca.marca || "") + " " + (auto.modelo.modelo || "") + " " + (auto.anio?.anio || "")}
                                 </h3>
                                 {favIcon}

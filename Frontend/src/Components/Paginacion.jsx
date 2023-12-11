@@ -4,11 +4,30 @@ const Paginacion = ({ totalItems, itemsPerPage, currentPage, page }) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const [disabledNext, setDisabledNext] = useState(false)
     const [disabledPrev, setDisabledPrev] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 1200) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [])
 
     useEffect(() => {
         setDisabledNext(page === totalPages);
         setDisabledPrev(page === 1);
-      }, [page, totalPages]);
+    }, [page, totalPages]);
 
     const handlePageChange = (newPage) => {
         currentPage(newPage);
@@ -16,30 +35,45 @@ const Paginacion = ({ totalItems, itemsPerPage, currentPage, page }) => {
 
 
     const handleNextOrPreviusPage = (accion) => {
-        if(accion === "siguiente"){
+        if (accion === "siguiente") {
             currentPage(page + 1)
 
-        }else if(accion === "anterior"){
+        } else if (accion === "anterior") {
             currentPage(page - 1)
         }
     }
 
     const renderPageNumbers = () => {
         const pageNumbers = [];
-        for (let i = 1; i <= totalPages; i++) {
+        if (isMobile) {
+            console.log(currentPage);
             pageNumbers.push(
                 <div>
                     <div style={{ background: "white", padding: "3px 10px", borderRadius: "5px" }}
-                        key={i}
-                        className={i === currentPage ? 'active' : ''}
+                        className='active'
                         onClick={() => handlePageChange(i)}
                     >
-                        {i}
+                        {page}
                     </div>
                 </div>
             );
+            return pageNumbers;
+        } else {
+            for (let i = 1; i <= totalPages; i++) {
+                pageNumbers.push(
+                    <div>
+                        <div style={{ background: "white", padding: "3px 10px", borderRadius: "5px" }}
+                            key={i}
+                            className={i === currentPage ? 'active' : ''}
+                            onClick={() => handlePageChange(i)}
+                        >
+                            {i}
+                        </div>
+                    </div>
+                );
+            }
+            return pageNumbers;
         }
-        return pageNumbers;
     };
 
     return (

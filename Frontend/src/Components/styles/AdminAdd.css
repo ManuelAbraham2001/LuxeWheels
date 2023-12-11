@@ -8,16 +8,16 @@
     margin-bottom: 20px; /* Deja espacio para el footer */
   }
   
-  .add-vehicle-container {
-    background: #FFBE3F; /* Fondo amarillo */
+  /* .add-vehicle-container {
+    background: #FFBE3F;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Bordes redondeados */
+    border-radius: 10px; 
     padding: 20px;
     width: 400px;
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-  }
+  } */
   
   .add-vehicle-form {
     display: flex;

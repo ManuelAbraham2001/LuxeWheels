@@ -3,10 +3,6 @@
     justify-content: space-around;
 }
 
-.user-info-container{
-    width: 50%;
-}
-
 .user-info{
     background-color: white;
     padding: 10px;
@@ -40,7 +36,6 @@
 }
 
 .reservas-container{
-    padding: 20px;
     border-radius: 10px;
 }
 
@@ -63,4 +58,148 @@
     border: none;
     padding: 10px;
     border-radius: 5px;
+}
+
+.user-info-favs{
+    width: 50%;
+}
+
+@media (min-width: 320px) and (max-width: 767px){
+    .user-info-main{
+        flex-direction: column;
+    }
+
+    .user-info-container{
+        width: 100%;
+        padding: 10px;
+    }
+
+    .user-info-favs{
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .user-info{
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+    
+    .user-info-content{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .user-info-content-item{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .user-reservas{
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .reservas-content{
+        background-color: white;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+    }
+    
+    .reservas-container{
+        border-radius: 10px;
+    }
+    
+    .reservas-content-item#calificacion{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: start;
+    }
+    
+    .guardar-resenia{
+        display: flex;
+        width: 100%;
+        justify-content: end;
+    }
+    
+    .guardar-resenia button{
+        background-color: #FFBE3F;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1280px){
+    .user-info-main{
+        flex-direction: column;
+    }
+
+    .user-info-container{
+        width: 100%;
+        padding: 10px;
+    }
+
+    .user-info-favs{
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .user-info{
+        font-size: 14px;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: start;
+    }
+    
+    .user-info-content{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .user-info-content-item{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .user-reservas{
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .reservas-content{
+        background-color: white;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+    }
+    
+    .reservas-container{
+        border-radius: 10px;
+    }
+    
+    .reservas-content-item#calificacion{
+        flex-direction: row;
+    }
+    
 }

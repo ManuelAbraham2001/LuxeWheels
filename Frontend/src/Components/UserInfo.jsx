@@ -3,6 +3,8 @@ import './styles/UserInfo.css'
 import { Rating } from 'react-simple-star-rating'
 import { format } from 'date-fns'
 import LoadingSpinner from './LoadingSpinner';
+import Favs from '../Routes/Favs'
+import Paginacion from './Paginacion';
 
 const UserInfo = () => {
     const reformatDate = dateString => {
@@ -17,15 +19,12 @@ const UserInfo = () => {
     const [userInfo, setUserInfo] = useState({})
     const [isLoading, setIsLoading] = useState(true)
     const [rating, setRating] = useState(0)
+    const [totalItems, setTotalItems] = useState(0)
+    const [page, currentPage] = useState(1)
 
     const handleRating = (rate) => {
-        console.log(rate);
         setRating(rate)
     }
-
-    useEffect(() => {
-        console.log(rating);
-    }, [rating])
 
     const handleResenia = (id, rate) => {
         const payload = {
@@ -49,7 +48,8 @@ const UserInfo = () => {
     }
 
     useEffect(() => {
-        fetch("http://3.135.246.162/api/usuarios/reservas", {
+        setIsLoading(true)
+        fetch(`http://3.135.246.162/api/usuarios/reservas?page=${page}`, {
             method: "GET",
             headers: {
                 authorization: "Bearer " + token,
@@ -57,22 +57,23 @@ const UserInfo = () => {
             }
         }).then(res => res.json())
             .then(data => {
-                const reservasOrdenadas = data.reservas.sort((a, b) => {
+                const reservasOrdenadas = data.reservas.content.sort((a, b) => {
                     const fechaA = new Date(a.inicio.split('/').reverse().join('/'));
                     const fechaB = new Date(b.inicio.split('/').reverse().join('/'));
                     return fechaA - fechaB;
                 });
-
+                setTotalItems(data.reservas.totalElements)
                 setReservas(reservasOrdenadas)
                 setUserInfo(data.usuario);
                 setIsLoading(false)
             })
-    }, [])
+    }, [page])
 
     return (
         isLoading ? <LoadingSpinner /> :
             <div>
                 <div className='user-info-main'>
+                    <div className='user-info-favs'>
                     <div className="user-info-container">
                         <h1>Informacion personal</h1>
                         <div className='user-info'>
@@ -108,6 +109,8 @@ const UserInfo = () => {
                             </div>
                         </div>
                     </div>
+                    <Favs isUserPage={true}></Favs>
+                    </div>
                     <div className="user-reservas">
                         <h1>Reservas</h1>
                         <div className="reservas-container">
@@ -115,17 +118,17 @@ const UserInfo = () => {
                                 <div key={r.id} className="reservas-content">
                                     <div className='reservas-content-item'>
                                         <h3>Vehiculo:</h3>
-                                        <span>{r.vehiculo}</span>
+                                        <span> <a target='_blank' href={`/detail/${r.idVehiculo}`}> {r.vehiculo} </a></span>
                                     </div>
                                     <div className='reservas-content-item'>
                                         <h3>Fecha de reserva:</h3>
                                         <span>{r.fechaDeReserva}</span>
                                     </div>
-                                    <div className='reservas-content-item'>
+                                    <div id='fecha-uso' className='reservas-content-item'>
                                         <h3>Fecha de uso</h3>
                                         <span>Desde: {r.inicio} Hasta: {r.cierre}</span>
                                     </div>
-                                    <div className='reservas-content-item'>
+                                    <div id='calificacion' className='reservas-content-item'>
                                         <h3>Calificacion</h3>
                                         <span>
                                             {r.resenia?.calificacion == null && new Date(reformatDate(r.cierre)) <= date ? (
@@ -177,6 +180,7 @@ const UserInfo = () => {
                                     </div>
                                 </div>
                             ))}
+                            <Paginacion totalItems={totalItems} itemsPerPage={5} page={page} currentPage={currentPage}></Paginacion>
                         </div>
                     </div>
                 </div>

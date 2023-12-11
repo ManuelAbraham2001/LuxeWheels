@@ -3,7 +3,7 @@ import { Oval } from 'react-loader-spinner'
 
 const LoadingSpinner = () => {
   return (
-    <div className="spinner-container overlaySpinner">
+    <div style={{zIndex: 100}} className="spinner-container overlaySpinner">
     <Oval
         height={80}
         width={80}

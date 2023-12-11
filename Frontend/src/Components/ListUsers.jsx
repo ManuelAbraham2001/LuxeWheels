@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import LoadingSpinner from './LoadingSpinner'
 import './styles/listUsers.css'
+import Swal from 'sweetalert2';
 
 const ListUsers = () => {
 
@@ -11,6 +13,10 @@ const ListUsers = () => {
     useEffect(() => {
         getUsers()
     }, [])
+
+    const buttonAdmin = u => {
+        return u.roles.some((rol) => rol.rol === "ROLE_ADMIN") ? "Eliminar admin" : "Agregar admin"
+    }
 
     const getUsers = () => {
         fetch("http://3.135.246.162/api/usuarios/allusers", {
@@ -32,6 +38,9 @@ const ListUsers = () => {
     }
 
     const callApiAddRemoveRole = (user, id, roleToAdd) => {
+
+        setIsLoading(true)
+
         const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
     
         fetch(`http://3.135.246.162/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
@@ -39,17 +48,58 @@ const ListUsers = () => {
             headers: {
                 "authorization": "Bearer " + token
             }
-        }).then(() => getUsers())
-        
+        }).then(res => {
+
+            if(res.status != 200 && !isAdding){
+                Swal.fire({
+                    title: "Ocurrio un error al eliminar el administrador.",
+                    icon: "Error"
+                });
+            }else if(res.status != 200 && isAdding){
+                Swal.fire({
+                    title: "Ocurrio un error al agregar el administrador.",
+                    icon: "Error"
+                });
+            }
+
+            if (res.status === 200 && !isAdding) {
+                setUsers(prevUsers => {
+                    return prevUsers.map(u => {
+                        if (u.id === id) {
+                            u.roles = [{ id: 2, rol: 'ROLE_USER' }];
+                        }
+                        return u;
+                    });
+                });
+                Swal.fire({
+                    title: "Administrador eliminado con exito!",
+                    icon: "success"
+                });
+            } else if (res.status === 200 && isAdding) {
+                setUsers(prevUsers => {
+                    return prevUsers.map(u => {
+                        if (u.id === id) {
+                            u.roles = [{ id: 1, rol: 'ROLE_ADMIN' }, { id: 2, rol: 'ROLE_USER' }];
+                        }
+                        return u;
+                    });
+                });
+                Swal.fire({
+                    title: "Administrador agregado con exito!",
+                    icon: "success"
+                });
+            }
+            setIsLoading(false)
+        })
+    
     }
     
     const toggleAdmin = (user) => {
         callApiAddRemoveRole(user, user.id, "ROLE_ADMIN");
     };
-    
-
 
     return (
+        isLoading ? <LoadingSpinner/> :
         <>
             <main className="table">
                 <section className="table__header">
@@ -76,7 +126,7 @@ const ListUsers = () => {
                                     <td>
                                         <div>
                                             <button onClick={() => toggleAdmin(u)} className={u.roles.some((rol) => rol.rol === "ROLE_ADMIN") ? "noAdmin" : "admin"}>
-                                                {u.roles.some((rol) => rol.rol === "ROLE_ADMIN") ? "Eliminar admin" : "Agregar admin"}
+                                                {buttonAdmin(u)}
                                             </button>
                                         </div>
                                     </td>

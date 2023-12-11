@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import noImg from '../../public/images/no-imagen.jpg'
 import './styles/Gallery.css'
+import SliderImagesGallery from './SliderImagesGallery';
 
 
 
 const Gallery = ({ fotos }) => {
     console.log(fotos);
+
+    const [gallery, toggleGallery] = useState(false);
+
     return (
         <>
+            {gallery ?
+                <div className='overlay'>
+                    <SliderImagesGallery fotos={fotos} toggleGallery={toggleGallery} />
+                </div>
+                : null}
             <div className="gallery-main">
                 <div className="gallery-container">
                     <div className="main-img">
@@ -29,7 +38,7 @@ const Gallery = ({ fotos }) => {
                     </div>
                 </div>
                 <div className="ver-mas">
-                    <a href='#'>Ver más</a>
+                    <button onClick={() => toggleGallery(!gallery)}>Ver más</button>
                 </div>
             </div>
 

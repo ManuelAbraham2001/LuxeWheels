@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import LoadingSpinner from './LoadingSpinner'
+import Swal from 'sweetalert2'
 
-const AdminAddModelForm = ({ modelo, isEdit, id}) => {
+const AdminAddModelForm = ({ modelo, isEdit, setEditForm, id}) => {
 
     const [marcas, setMarcas] = useState([])
     const [categorias, setCategorias] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const [caracteristicas, setCaracteristicas] = useState([])
     const [formData, setFormData] = isEdit ? useState({
         modelo: modelo.modelo,
@@ -40,6 +43,7 @@ const AdminAddModelForm = ({ modelo, isEdit, id}) => {
         }).then(res => res.json())
             .then(data => setCaracteristicas(data))
 
+        setIsLoading(false)
     }, [])
 
     const handleInputs = (name, value) => {
@@ -87,12 +91,27 @@ const AdminAddModelForm = ({ modelo, isEdit, id}) => {
     };
 
     const handleSubmit = () => {
+
+        setIsLoading(true)
+
         isEdit ? fetch(`http://3.135.246.162/api/modelo/${id}`, {
             method: "PUT", 
             body: JSON.stringify(formData),
             headers: {
                 "authorization": "Bearer " + token,
                 "content-type": "application/json"
+            }
+        }).then(res => {
+            if(res.status == 200){
+                Swal.fire({
+                    title: "Modelo actualizado con exito!",
+                    icon: "success"
+                }).then(() => window.location.reload())
+            }else{
+                Swal.fire({
+                    title: "Ocurrio un error al actualizar el modelo.",
+                    icon: "error"
+                }).then(() => window.location.reload())
             }
         })
         :
@@ -103,16 +122,29 @@ const AdminAddModelForm = ({ modelo, isEdit, id}) => {
                 "content-type": "application/json",
                 "authorization": "Bearer " + token
             }
+        }).then(res => {
+            if(res.status == 200){
+                Swal.fire({
+                    title: "Modelo creado con exito!",
+                    icon: "success"
+                });
+            }else{
+                Swal.fire({
+                    title: "Ocurrio un error al crear el modelo.",
+                    icon: "error"
+                });
+            }
+            setFormData({})
+            setIsLoading(false)
         })
-            .then(res => res.json())
-            .then(data => console.log(data))
     }
 
 
     return (
+        isLoading ? <LoadingSpinner/> :
         <div>
             <section className='sectionAddVehicle'>
-                <div className='add-vehicle-container'>
+                <div id={isEdit ? 'modelo-edit' : null} className='add-vehicle-container'>
                     <h2>{isEdit ? "Editar modelo" : "Agregar modelo"}</h2>
                     <form className='add-vehicle-form'>
                         <label className="label-field">Modelo:</label>
@@ -141,7 +173,7 @@ const AdminAddModelForm = ({ modelo, isEdit, id}) => {
                             {categorias.map((c) => (<option key={c.id}>{c.categoria}</option>))}
                         </select>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "2px" }}>
-                            {formData.categorias.map(c => (
+                            {formData?.categorias && formData.categorias.map(c => (
                                 <div className="item-container">
                                     <span>{c}</span>
                                     <button onClick={(e) => { e.preventDefault(), handleCategoriaChange(c) }}>X</button>
@@ -157,7 +189,7 @@ const AdminAddModelForm = ({ modelo, isEdit, id}) => {
                             {caracteristicas.map((c) => (<option key={c.id}>{c.caracteristica}</option>))}
                         </select>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "2px" }}>
-                            {formData.caracteristicas.map(c => (
+                            {formData?.caracteristicas.map(c => (
                                 <div className="item-container">
                                     <span>{c}</span>
                                     <button onClick={(e) => { e.preventDefault(), handleCaracteristicaChange(c) }}>X</button>

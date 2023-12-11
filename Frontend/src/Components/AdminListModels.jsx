@@ -4,12 +4,13 @@ import { useEffect } from 'react'
 import Paginacion from './Paginacion'
 import LoadingSpinner from './LoadingSpinner'
 import AdmiAddModelForm from './AdminAddModelForm'
+import Swal from 'sweetalert2'
 
 const AdminListModels = () => {
 
     const [modelo, setModelo] = useState({})
     const token = localStorage.getItem("jwt")
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [totalElements, setTotalElements] = useState(0)
     const [editForm, setEditForm] = useState(false)
@@ -68,19 +69,61 @@ const AdminListModels = () => {
     }
 
     const handleSubmitCategoria = () => {
+        setIsLoading(true)
         fetch(`http://3.135.246.162/api/modelo/${payloadCategoria.id}?categoria=${payloadCategoria.categoria}`,{
             method: "PUT",
             headers: {
                 "authorization": "Bearer " + token
             }
+        }).then(res => {
+            if(res.status == 200){
+                Swal.fire({
+                    title: "Categoria agregada con exito!",
+                    icon: "success"
+                });
+            }else{
+                Swal.fire({
+                    title: "Ocurrio un error al agregar la categoria.",
+                    icon: "Error"
+                });
+            }
+            setEditCategoria(false)
+            setIsLoading(false)
         })
     }
 
+    const handleEliminar = id => {
+        setIsLoading(true)
+        fetch(`http://3.135.246.162/api/modelo/${id}`,{
+            method: "DELETE",
+            headers: {
+                "authorization": "Bearer " + token
+            }
+        }).then(res => {
+            if(res.status == 200){
+                const modelosFilter = modelos.filter(m => m.id != id)
+                setModelos(modelosFilter)
+                Swal.fire({
+                    title: "Modelo eliminado con exito!",
+                    icon: "success"
+                });
+            }else{
+                Swal.fire({
+                    title: "Ocurrio un error al eliminar el modelo.",
+                    icon: "Error"
+                });
+            }
+            setIsLoading(false)
+        })
+        
+    }
+
     return (
+        isLoading ? <LoadingSpinner/> :
         <div className="list">
             {editForm ?
                 <div className='overlay'>
-                    <AdmiAddModelForm modelo={modelo} isEdit={true} id={modelo.id}/>
+                    <AdmiAddModelForm modelo={modelo} isEdit={true} setEditForm={setEditForm} id={modelo.id}/>
                 </div> : null
             }
             {editCategoria ?
@@ -119,10 +162,10 @@ const AdminListModels = () => {
                             <div>
                                 <span>{m.marca.marca + " " + m.modelo}</span>
                             </div>
-                            <div>
-                                <button style={{margin: "0 10px"}} onClick={() => handleEliminar(m.id)}>Eliminar</button>
-                                <button style={{margin: "0 10px"}} onClick={() => handleEdit(m)}>Editar</button>
-                                <button style={{margin: "0 10px"}} onClick={() => handleEditCategoria(m.id)}>Agregar Categoria</button>
+                            <div className='vehicle-properties-actions'>
+                                <button onClick={() => handleEliminar(m.id)}>Eliminar</button>
+                                <button onClick={() => handleEdit(m)}>Editar</button>
+                                <button onClick={() => handleEditCategoria(m.id)}>Agregar Categoria</button>
                             </div>
                         </div>
                     ))

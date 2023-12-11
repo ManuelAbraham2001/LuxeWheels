@@ -42,9 +42,6 @@ const Admin = () => {
                         </div>
                     </a>
                 </div>
-                <div className="mobile-device">
-                    <span>Sitio no disponible</span>
-                </div>
             </div>
         </>
     )

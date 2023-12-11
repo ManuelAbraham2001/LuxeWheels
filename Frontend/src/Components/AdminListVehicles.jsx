@@ -62,7 +62,7 @@ const AdminListVehicles = () => {
             <div className="list">
                 {isEdit ? 
                     <div className="overlay">
-                        <AdminAddVehicleForm vehicle={vehicle} isEdit={isEdit} id={vehicle.id}/>
+                        <AdminAddVehicleForm vehicle={vehicle} isEdit={isEdit} setIsEdit={setIsEdit} id={vehicle.id}/>
                     </div> : null
                 }
                 <div className='vehicle-list'>
@@ -88,9 +88,9 @@ const AdminListVehicles = () => {
                                 <div>
                                     <span>{v.modelo.marca.marca + " " + v.modelo.modelo + " " + v.anio.anio}</span>
                                 </div>
-                                <div>
-                                    <button style={{margin: "0 10px"}} onClick={() => handleEliminar(v.id)}>Eliminar</button>
-                                    <button style={{margin: "0 10px"}} onClick={() => handleEditar(v)}>Edtiar</button>
+                                <div className='vehicle-properties-actions'>
+                                    <button onClick={() => handleEliminar(v.id)}>Eliminar</button>
+                                    <button onClick={() => handleEditar(v)}>Edtiar</button>
                                 </div>
                             </div>
                         ))

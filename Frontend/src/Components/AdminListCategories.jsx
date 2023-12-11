@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles/Categories.css'
+import LoadingSpinner from './LoadingSpinner'
 
 const AdminListCategories = () => {
 
@@ -43,15 +44,30 @@ const AdminListCategories = () => {
 
     const handleEliminar = id => {
         // console.log(id);
+        setIsLoading(true)
         fetch(`http://3.135.246.162/api/categorias/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: "Bearer " + token
             }
-        }).then(res => console.log(res.status))
+        }).then(res => {
+            if(res.status == 200){
+                Swal.fire({
+                    title: "Categoria eliminada con exito!",
+                    icon: "success"
+                });
+            }else{
+                Swal.fire({
+                    title: "Ocurrio un error al eliminar la categoria.",
+                    icon: "Error"
+                });
+            }
+            setIsLoading(false)
+        })
     }
 
     return (
+        isLoading ? <LoadingSpinner/> :
         <>
             <main className="table">
                 {alerta.estado ?

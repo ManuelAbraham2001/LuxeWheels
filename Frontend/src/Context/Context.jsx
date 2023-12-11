@@ -87,8 +87,6 @@ const Context = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     //const [favs, setFavs] = useState(initialFavState)
-
-
     useEffect(() => {
 
         dispatch({ type: 'GET_VEHICLES', payload: dataJson });

@@ -6,6 +6,7 @@
   overflow-y: auto;
   min-height: 100vh;
   margin-bottom: 20px;
+  width: 100%;
   /* Deja espacio para el footer */
 }
 
@@ -14,13 +15,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Fondo amarillo */
   border: 1px solid #ccc;
   border-radius: 10px;
-  /* Bordes redondeados */
   padding: 20px;
   margin-bottom: 20px;
   text-align: center;
+  width: 50%;
 }
 
 .add-vehicle-form {
@@ -123,8 +123,69 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  max-width: 600px;
+  /* max-width: 600px; */
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 10px;
+}
+
+.add-vehicle-container#modelo-edit{
+  margin: 20px 0;
+  width: 100%;
+  height: 80vh;
+  overflow: auto;
+}
+
+.add-vehicle-container#vehicle-edit{
+  margin: 20px 0;
+  width: 70%;
+  height: 90vh;
+  overflow: auto;
+}
+
+.add-vehicle-container#caracteristica-form{
+  margin: 20px 0;
+  width: 90%;
+  overflow: auto;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+
+  .sectionAddVehicle{
+    width: 100%;
+  }
+
+  .add-vehicle-container{
+    margin: 20px 0;
+    width: 80%;
+  }
+
+  .add-vehicle-container#vehicle-edit{
+    margin: 20px 0;
+    width: 80%;
+    height: 80vh;
+    overflow: auto;
+  }
+
+  .add-vehicle-container#modelo-edit{
+    margin: 20px 0;
+    width: 90%;
+    height: 80vh;
+    overflow: auto;
+  }
+  
+  .add-vehicle-form-input-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .add-vehicle-form-input label, .input-precio label{
+    width: 100%;
+    text-align: start;
+  }
+
+  .add-vehicle-form-input{
+    justify-content: space-between;
+    flex-direction: column;
+  }
 }

@@ -142,13 +142,14 @@ const Home = () => {
         return idsProductosFavoritos.includes(idProducto) ? (
             <img className='fav'
                 onClick={() => handleFav(idProducto)}
-                style={{ width: "200px !important", cursor: "pointer" }}
+                style={{ width: "40px", height: "40px", cursor: "pointer" }}
                 src={isFavorito ? isFav : noFav}
                 alt={isFavorito ? "Favorito" : "No favorito"}
             />
         ) : (
             <img
                 className='fav'
+                style={{ width: "40px", height: "40px", cursor: "pointer" }}
                 onClick={() => handleFav(idProducto)}
                 src={isFavorito ? isFav : noFav}
                 alt={isFavorito ? "Favorito" : "No favorito"}
@@ -251,7 +252,7 @@ const Home = () => {
                     <p>¡Encuentra el vehículo perfecto para tu próxima aventura con nuestro servicio de alquiler de vehículos! Explora una amplia variedad de opciones, desde autos compactos ideales para la ciudad hasta espaciosas SUVs para viajes en familia</p>
                 </div>
                 <div className='buscador-form'>
-                    <div style={{ width: "40%" }} className='buscador-form-input'>
+                    <div id='react-datepicker' className='buscador-form-input'>
                         {/* <input value={busqueda} onChange={(e) => handleBusqueda(e.target.value)} type="text" /> */}
                         <ReactSearchAutocomplete
                             items={feedbackOptions}
@@ -294,23 +295,29 @@ const Home = () => {
                 {isFilter && (
                     <div className='filter-container'>
                         <div className='filter-results'>
-                            <span>Mostrando resultados: {filterElements} de {totalElements}</span>
+                            <span id='results'>Mostrando resultados: {filterElements} de {totalElements}</span>
                             <div className="categorias">
-                                <h3>Categorias</h3>
-                                {categorias.map((c) => (
-                                    <div>
-                                        <span>{c.categoria}</span>
-                                        <input
-                                            onChange={() => handleAddCategorias(c.categoria)}
-                                            value={c.categoria}
-                                            key={c.id}
-                                            checked={selectedCategorias.includes(c.categoria)}
-                                            type='checkbox'></input>
-                                    </div>
-                                ))}
-                                <button onClick={() => { filterRequest(selectedCategorias), setLoading(true) }}>Aplicar filtros</button>
+                                <div>
+                                    <h3>Categorias</h3>
+                                </div>
+                                <div className='checkboxs'>
+                                    {categorias.map((c) => (
+                                        <div>
+                                            <input
+                                                onChange={() => handleAddCategorias(c.categoria)}
+                                                value={c.categoria}
+                                                key={c.id}
+                                                checked={selectedCategorias.includes(c.categoria)}
+                                                type='checkbox'></input>
+                                                <span>{c.categoria}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div>
+                                    <button onClick={() => { filterRequest(selectedCategorias), setLoading(true) }}>Aplicar filtros</button>
+                                    <button onClick={() => { loadVehicles(), setLoading(true), setSelectedCategorias([]) }}>Eliminar filtros</button>
+                                </div>
                             </div>
-                            <button onClick={() => { loadVehicles(), setLoading(true), setSelectedCategorias([]) }}>Eliminar filtros</button>
                         </div>
                     </div>
                 )}

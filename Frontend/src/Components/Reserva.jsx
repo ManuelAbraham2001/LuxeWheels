@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { jwtDecode } from 'jwt-decode';
 import './styles/Reserva.css'
 import { format } from 'date-fns';
 
@@ -19,12 +18,9 @@ const Reserva = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [popUp, setPopup] = useState(false)
     const [auto, setAuto] = useState({});
-    const [userInfo, setUserInfo] = useState({
-        nombre: "",
-        apellido: "",
-        email: ""
-    })
-
+    const token = localStorage.getItem("jwt")
+    const [userInfo, setUserInfo] = useState({})
+    const [verMas, setVerMas] = useState(false)
 
     useEffect(() => {
 
@@ -34,14 +30,18 @@ const Reserva = () => {
         }
 
         setAuto(location.state.auto)
-        const decoded = jwtDecode(location.state.token);
-        const name = decoded.nombre.split(" ");
-        const info = {
-            nombre: name[0],
-            apellido: name[1],
-            email: decoded.sub
+
+        if (token != null) {
+            fetch("http://3.135.246.162/api/usuarios/userinfo", {
+                method: "GET",
+                headers: {
+                    authorization: "Bearer " + token,
+                    "content-type": "application/json"
+                }
+            }).then(res => res.json())
+                .then(data => setUserInfo(data))
         }
-        setUserInfo(info)
+
 
         fetch(`http://3.135.246.162/api/reservas/${location.state.auto.id}`, {
             method: 'GET',
@@ -113,7 +113,7 @@ const Reserva = () => {
                 setExcludeDates([...excludeDates, { start: new Date(fechas.inicio), end: new Date(fechas.fin + 'T23:59:59') }])
                 setIsLoading(false)
                 setPopup(true)
-            }else if(res.status === 409){
+            } else if (res.status === 409) {
                 setDateRange([])
                 setError(true)
                 setIsLoading(false)
@@ -137,10 +137,51 @@ const Reserva = () => {
                 {error ? <div className="overlay">
                     <div className="reserva-popup">
                         <span style={{ color: "#ff0000", fontWeight: 'bold' }}>Error</span>
-                        <h1 style={{fontSize: "24px"}}>Lo sentimos, al parecer las fechas seleccionadas no se encuentran disponibles. Por favor seleccione otro rango de fechas.</h1>
+                        <h1 style={{ fontSize: "24px" }}>Lo sentimos, al parecer las fechas seleccionadas no se encuentran disponibles. Por favor seleccione otro rango de fechas.</h1>
                         <button onClick={() => setError(false)}>Volver a seleccionar fechas</button>
                     </div>
                 </div> : null}
+
+                {verMas ?
+
+                    <div className='overlay'>
+                        <div className="reserva-datos-usuario reserva-overlay">
+                            <div className='usuario-inputs-container'>
+                                <div className='usuario-input'>
+                                    <label>Nombre</label>
+                                    <input type="text" disabled value={userInfo.nombre} />
+                                </div>
+                                <div className='usuario-input'>
+                                    <label>Apellido</label>
+                                    <input type="text" disabled value={userInfo.apellido} />
+                                </div>
+                            </div>
+                            <div className='usuario-inputs-container'>
+                                <div className='usuario-input'>
+                                    <label>Correo Electronico</label>
+                                    <input type="text" disabled value={userInfo.email} />
+                                </div>
+                                <div className='usuario-input'>
+                                    <label>Documento</label>
+                                    <input type="text" disabled value={userInfo.documento} />
+                                </div>
+                            </div>
+                            <div className='usuario-inputs-container'>
+                                <div className='usuario-input'>
+                                    <label>Fecha de nacimiento</label>
+                                    <input type="text" disabled value={userInfo.fechaNacimiento} />
+                                </div>
+                                <div className='usuario-input'>
+                                    <label>Telefono</label>
+                                    <input type="text" disabled value={userInfo.telefono} />
+                                </div>
+                            </div>
+                            <div className='reserva-ver-mas'>
+                                    <button onClick={() => setVerMas(!verMas)}>Cerrar</button>
+                                </div>
+                        </div>
+                    </div>
+                    : null}
 
                 <div className='reserva-container'>
                     <div className='reserva-bloque-izquierdo'>
@@ -182,6 +223,9 @@ const Reserva = () => {
                                         <label>Comentarios (Opcional)</label>
                                         <input type="text" />
                                     </div>
+                                </div>
+                                <div className='reserva-ver-mas'>
+                                    <button onClick={() => setVerMas(!verMas)}>Ver mas</button>
                                 </div>
                             </div>
                         </div>

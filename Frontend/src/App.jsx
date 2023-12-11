@@ -22,6 +22,7 @@ import Politicas from './Routes/Politicas';
 import Reserva from './Components/Reserva';
 import UserInfo from './Components/UserInfo';
 import AdminListModels from './Components/AdminListModels';
+import SliderImagesGallery from './Components/SliderImagesGallery';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -48,6 +49,7 @@ const App = () => {
                         <Route path="/favs" element = {<Favs/>}/>
                         <Route path="/reservar" element = {<Reserva/>}/>
                         <Route path="/perfil" element = {<UserInfo/>}/>
+                        <Route path='/imagenes' element={<SliderImagesGallery/>}></Route>
                     </Route>
                     <Route path="/detail/:id" element={<Detail/>} />
 

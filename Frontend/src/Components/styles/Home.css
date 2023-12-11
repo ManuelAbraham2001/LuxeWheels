@@ -5,35 +5,19 @@
   justify-content: center;
   width: 100%;
 }
+
+.card-grid#favs-user{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: none;
+  width: 100%;
+}
+
 .disabled-day {
   background-color: red;
   color: #999999;
   cursor: not-allowed;
 }
-
-/*
-
-.card {
-
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  width: 200px;
-
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-}
-
-.card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-*/
 
 .contenedor {
   display: flex;
@@ -109,11 +93,19 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 90%;
+}
+
+.buscador-form-input#react-datepicker{
   width: 50%;
 }
 
 .buscador-title{
   color: white;
+}
+
+.wrapper{
+  z-index: 1 !important;
 }
 
 .buscador-title p{
@@ -136,6 +128,13 @@ main {
   display: flex;
   flex-direction: column;
   margin: 20px 0;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.categorias button{
+  margin: 10px 0;
 }
 
 .btn-buscar {
@@ -179,12 +178,19 @@ main {
   flex-direction: column;
 }
 
+.filter-results span#results{
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
 .filter-results button{
-  background-color: rgb(212, 65, 65);
+  background-color: #FFBE3F;
   color: white;
   font-weight: bold;
-  border: 2px solid rgb(190, 0, 0);
+  border: 2px solid #ffaf0e;
   border-radius: 5px;
+  margin: 10px 0;
 }
 
 .fechas{
@@ -230,8 +236,6 @@ main {
 }
 
 
-
-
 @media (max-width: 768px) {
 
   .buscador-form{
@@ -239,7 +243,15 @@ main {
     width: 100%;
   }
 
+  .buscador-form-input#react-datepicker{
+    width: 100%;
+  }
+
   .buscador-form-input{
+    width: 100%;
+  }
+
+  .favs, .btn-fav{
     width: 100%;
   }
 

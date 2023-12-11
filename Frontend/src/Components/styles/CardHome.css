@@ -1,56 +1,55 @@
 .card {
-  display: flex;
-  gap: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
+    display: flex;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .card img {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-  border-radius: 5px;
-  object-fit: cover;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
-.card-content img{
-  width: 76px;
+.card-content img {
+    width: 40px !important;
+    height: 40px !important;
 }
-
 
 .card-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-content button {
-  width: 100%;
-  background-color: #FFBE3F;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-  margin:5px
+    width: 100%;
+    background-color: #FFBE3F;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .card-content button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 
 .card:hover {
-  border: 0.5px solid rgb(206, 217, 142);
+    border: 0.5px solid rgb(206, 217, 142);
 }
 
 
@@ -65,88 +64,175 @@
 */
 
 .card-image {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-  width: 200px;
-  height: auto;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 200px;
+    height: auto;
+    flex-wrap: wrap;
 }
 
-.favoritoCartel{
-  background-color: #FFBE3F;
-  padding: 20px;
-  border-radius: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.favoritoCartel h1{
-  max-width: 60%;
-}
-
-.acciones{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.acciones button, .acciones a{
-  background-color: #000000;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 5px;
-  margin: 10px 0;
-  font-weight: bold;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-    width: 600px;
-  }
-}
-
-@media (max-width: 1800px) {
-
-  .card-grid {
-    display: grid !important;
-    grid-template-columns: 25% !important;
-    place-items: center;
-    justify-content: center;
-  }
-
-  .card {
-    flex-direction: column;
-    width: 300px;
-  }
-
-  .card-content img{
-    width: 20px;
-  }
-  
-  
-  .card-content-info{
-    width: 100%;
+.favoritoCartel {
+    background-color: #FFBE3F;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    font-size: 10px;
-  }
-  
-  .card-content button {
-    width: 100%;
-    background-color: #FFBE3F;
+    align-items: center;
+}
+
+.favoritoCartel h1 {
+    max-width: 60%;
+}
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.acciones button,
+.acciones a {
+    background-color: #000000;
     color: white;
-    border: none;
-    padding: 5px 10px;
+    padding: 15px 25px;
     border-radius: 5px;
-    text-transform: uppercase;
+    margin: 10px 0;
     font-weight: bold;
-    font-size: 12px;
-    margin:5px
-    
-  }
+    width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+    .card {
+        flex-direction: column;
+    }
+
+    .card img {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .home-container {
+        flex-direction: column;
+    }
+
+    .categorias {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkboxs {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        gap: 20px;
+    }
+
+    .checkboxs>div {
+        display: flex;
+        align-items: center;
+        font-size: 1em;
+    }
+
+    .filter-results button {
+        margin: 10px !important;
+    }
+
+    .card-grid {
+        display: grid !important;
+        grid-template-columns: 100% !important;
+        place-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    .home-container {
+        flex-direction: column;
+    }
+
+    .categorias {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkboxs {
+        display: flex;
+        margin: 10px 0;
+        gap: 20px;
+    }
+
+    .checkboxs>div {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .filter-results button {
+        margin: 10px !important;
+    }
+
+    .card-grid {
+        display: grid !important;
+        grid-template-columns: 100% !important;
+        place-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1800px) {
+
+    .card-grid {
+        display: grid !important;
+        grid-template-columns: 100% !important;
+        place-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .card {
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    .card-content img {
+        width: 20px;
+    }
+
+    .card-content-info {
+        width: 100%;
+        display: flex;
+        font-size: 16px;
+    }
+
+    .card-content button {
+        width: 100%;
+        background-color: #FFBE3F;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        margin: 0 !important;
+    }
 }

@@ -1,10 +1,11 @@
 .list{
-    height: 80vh;
+    /* height: 80vh; */
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 29px;
 }
 
 .vechicle-card{
@@ -18,7 +19,7 @@
 
 .vehicle-list, .vehicle-properties{
     display: flex;
-    width: 50%;
+    width: 90%;
     text-align: center;
     justify-content: space-around;
     align-items: center;
@@ -47,6 +48,28 @@
 
 }
 
+.vehicle-properties button{
+    margin: 0 10px;
+}
+
 .vehicle-properties button:hover{
     cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .list{
+        overflow: auto;
+    }
+    .vehicle-properties{
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .vehicle-properties-actions{
+        margin: 10px 0;
+    }
+
+    .vehicle-properties-actions button{
+        margin: 10px 10px;
+    }
 }

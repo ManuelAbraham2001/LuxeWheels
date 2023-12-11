@@ -90,6 +90,10 @@
     flex-direction: column;
 }
 
+.reserva-overlay{
+    width: 60%;
+}
+
 .usuario-inputs-container{
     display: flex;
     gap: 10px;
@@ -143,6 +147,23 @@
     border: 2px solid #FFBE3F;
     border-radius: 10px;
     color: white;
+}
+
+.reserva-ver-mas{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 20px;
+}
+
+.reserva-ver-mas button{
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFBE3F;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 @media (max-width: 1200px) {

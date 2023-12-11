@@ -1,8 +1,3 @@
-
-
-/*  */
-
-
 .right-block {
   display: flex;
   align-items: center;
@@ -94,6 +89,10 @@
 
 @media (max-width: 768px) {
   .nav-menu {
+    display: none;
+  }
+
+  .user-info-nav{
     display: none;
   }
 

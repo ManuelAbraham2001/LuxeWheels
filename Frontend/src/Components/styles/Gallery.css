@@ -1,5 +1,5 @@
-.gallery-main{
-  padding: 20px;
+.gallery-main {
+    padding: 20px;
 }
 
 .gallery-container {
@@ -7,54 +7,68 @@
     width: 100%;
     grid-template-columns: repeat(2, 3fr);
     gap: 10px;
-  }
-  
-  .main-img {
+}
+
+.main-img {
     flex: 1;
     height: 100%;
     display: flex;
     align-items: stretch;
-  }
-  
-  .main-img img {
+}
+
+.main-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
-  }
-  
-  .img-grid {
+}
+
+.img-grid {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-  }
-  
-  .grid-item img {
+}
+
+.grid-item img {
     max-width: 100%;
     height: 100%;
     border-radius: 10px;
-    object-fit: cover; 
-  }
-  
-  .ver-mas{
+    object-fit: cover;
+}
+
+.ver-mas {
     width: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
     margin-top: 10px;
-  }
+}
 
-  .ver-mas a{
+.ver-mas button {
     background-color: #FFBE3F;
     color: #fff;
     padding: 10px 50px;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
-  }
-  
-  @media (max-width: 768px) {
+    border: none;
+}
+
+.cerrar-galeria {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    padding: 10px;
+}
+
+.react-slideshow-container button {
+    background-color: #FFBE3F !important;
+    margin: 0 20px !important;
+}
+
+
+@media (max-width: 768px) {
 
     .gallery-container {
         display: flex;
@@ -62,10 +76,9 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-      }
+    }
 
     .img-grid {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
-  }
-  
+}
