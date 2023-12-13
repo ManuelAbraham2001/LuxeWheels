@@ -12,9 +12,8 @@ main.table {
     height: 10%;
     background-color: #fff4;
     padding: .8rem 1rem;
-
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 

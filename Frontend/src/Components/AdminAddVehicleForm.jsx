@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/AdminAddVehicleForm.css'
 import LoadingSpinner from './LoadingSpinner'
 import Swal from 'sweetalert2';
+import svg from './../../public/images/arrow-left-solid.svg'
 
 const AdminAddVehicleForm = ({ vehicle, isEdit, setIsEdit, id }) => {
     const [images, setImages] = useState([]);
@@ -192,6 +193,11 @@ const AdminAddVehicleForm = ({ vehicle, isEdit, setIsEdit, id }) => {
     return (
         isLoading ? <LoadingSpinner /> :
             <section className='sectionAddVehicle'>
+                <div className="admin-arrow-back">
+                    <a href="/admin">
+                        <img src={svg} />
+                    </a>
+                </div>
                 <div className='add-vehicle-container' id={isEdit ? 'vehicle-edit' : null}>
 
                     <h2>{isEdit ? "Actualizar vehiculo" : "Agregar vehiculo"}</h2>
@@ -199,7 +205,7 @@ const AdminAddVehicleForm = ({ vehicle, isEdit, setIsEdit, id }) => {
                         <div className="add-vehicle-form-input-container">
                             <div className='add-vehicle-form-input modelo-marca'>
                                 <label>Modelo:</label>
-                                <select  style={{padding: "5px"}}
+                                <select style={{ padding: "5px" }}
                                     value={formData.modelo}
                                     onChange={(e) => handleInputs("modelo", e.target.value)}
                                 >
@@ -294,10 +300,11 @@ const AdminAddVehicleForm = ({ vehicle, isEdit, setIsEdit, id }) => {
                             </div>
                         </div>
 
-                        <div style={{ padding: "10px" }} className="add-vehicle-form-input-container">
+                        <div style={isEdit ? { display: "flex", flexDirection: "column", padding: "10px" } : { padding: "10px" }} className="add-vehicle-form-input-container">
                             <button type="button" onClick={handleAddVehicle} className="submit-button">
                                 {isEdit ? "Actualizar vehiculo" : "Agregar vehiculo"}
                             </button>
+                            {isEdit ? <button type="button" onClick={() => setIsEdit(false)} className="submit-button">Cancelar</button> : null}
                         </div>
 
                     </form>

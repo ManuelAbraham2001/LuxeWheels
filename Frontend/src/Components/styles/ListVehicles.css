@@ -8,6 +8,17 @@
     padding: 29px;
 }
 
+.list#list-modelos{
+    margin: 10px 0;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 29px;
+}
+
 .vechicle-card{
     margin-top: 20px;
     width: 100%;

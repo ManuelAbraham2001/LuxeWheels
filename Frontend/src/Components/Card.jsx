@@ -37,12 +37,12 @@ const Card = ({ auto, renderizarIcono }) => {
         <>
             {auto && (
                 <div key={auto.id} className="card">
-                    <img src={auto.fotos[0]?.url || img} alt={(auto.modelo.marca.marca || "") + " " + (auto.modelo.modelo || "") + " " + (auto.anio?.anio || "")} />
+                    <img src={auto.fotos[0]?.url || img} alt={(auto.modelo?.marca.marca || "") + " " + (auto.modelo?.modelo || "") + " " + (auto.anio?.anio || "")} />
                     <div className="card-content" style={{ width: "100%" }}>
                         <div style={{display: "flex", flexDirection: "column", alignItems: "start"}}>
                             <div className="card-content-info" style={{ textAlign: "left", display: "flex", justifyContent: "space-between", width: "100%" }}>
                                 <h3 style={{margin: 0}}>
-                                    {(auto.modelo.marca.marca || "") + " " + (auto.modelo.modelo || "") + " " + (auto.anio?.anio || "")}
+                                    {(auto.modelo?.marca.marca || "") + " " + (auto.modelo?.modelo || "") + " " + (auto.anio?.anio || "")}
                                 </h3>
                                 {favIcon}
                                 {/* {renderizarIcono(auto.id, handleFav)} */}

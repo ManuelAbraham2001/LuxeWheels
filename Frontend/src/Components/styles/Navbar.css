@@ -54,20 +54,20 @@
 .right-block button {
   background-color: black;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 30px;
   margin-left: 10px;
   cursor: pointer;
   border-radius: 5px;
 }
 
-.right-block button.nav-button {
-  width: 184px;
-  height: 44px;
-}
 
-.burger-menu {
+/* .right-block button.nav-button {
+
+} */
+
+/* .burger-menu {
   display: none;
-}
+} */
 
 .logo-container {
   width: 110px;
@@ -92,18 +92,17 @@
     display: none;
   }
 
-  .user-info-nav{
-    display: none;
+  .navbar{
+    padding: 10px;
   }
 
-  .burger-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .right-block button {
+    margin: 5px 0;
   }
 
-  .right-block {
-    display: none;
+  .right-block{
+    flex-direction: column;
   }
+
 }
 

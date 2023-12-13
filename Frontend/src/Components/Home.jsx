@@ -40,21 +40,22 @@ const Home = () => {
     const [startDate, endDate] = dateRange;
     const [maxDate, setMaxDate] = useState(null)
     const [isMobile, setIsMobile] = useState(false)
-    const feedbackOptions = [
-        { id: 1, name: 'Ford' },
-        { id: 2, name: 'Volkswagen' },
-        { id: 3, name: 'Fiat' },
-        { id: 4, name: 'Peugeot' },
-        { id: 5, name: 'Chevrolet' },
-        { id: 6, name: 'Toyota' },
-        { id: 7, name: 'Tesla' },
-        { id: 8, name: 'Amarok' },
-        { id: 9, name: 'Tiguan' },
-        { id: 10, name: 'Volkswagen Tiguan' },
-        { id: 11, name: 'Volkswagen Amarok' },
-        { id: 12, name: 'Peugeot 208' },
-        { id: 13, name: 'Chevrolet Onix' },
-    ];
+    const [feedbackOptions, setFeedbackOptions] = localStorage.getItem("feedbackOptions") ?  useState(JSON.parse(localStorage.getItem("feedbackOptions")))  : useState([])
+    // const feedbackOptions = [
+    //     { id: 1, name: 'Ford' },
+    //     { id: 2, name: 'Volkswagen' },
+    //     { id: 3, name: 'Fiat' },
+    //     { id: 4, name: 'Peugeot' },
+    //     { id: 5, name: 'Chevrolet' },
+    //     { id: 6, name: 'Toyota' },
+    //     { id: 7, name: 'Tesla' },
+    //     { id: 8, name: 'Amarok' },
+    //     { id: 9, name: 'Tiguan' },
+    //     { id: 10, name: 'Volkswagen Tiguan' },
+    //     { id: 11, name: 'Volkswagen Amarok' },
+    //     { id: 12, name: 'Peugeot 208' },
+    //     { id: 13, name: 'Chevrolet Onix' },
+    // ];
     const [feedback, setFeedback] = useState('');
     const { state, dispatch } = useRentacarStates()
 
@@ -109,6 +110,18 @@ const Home = () => {
         })
             .then(res => res.json())
             .then(data => setCategorias(data))
+
+        if (!localStorage.getItem('feedbackOptions')) {
+            fetch("http://3.135.246.162/api/modelo/feedback", {
+                method: "GET",
+            })
+            .then(res => res.json())
+            .then(data => {
+                const feedback = data.map((d, index) => ({id: index, name: d}))
+                setFeedbackOptions(feedback)
+                localStorage.setItem('feedbackOptions', JSON.stringify(feedback))
+            })
+        }
 
         const handleResize = () => {
             if (window.innerWidth <= 768) {
@@ -309,7 +322,7 @@ const Home = () => {
                                                 key={c.id}
                                                 checked={selectedCategorias.includes(c.categoria)}
                                                 type='checkbox'></input>
-                                                <span>{c.categoria}</span>
+                                            <span>{c.categoria}</span>
                                         </div>
                                     ))}
                                 </div>

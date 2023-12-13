@@ -3,6 +3,7 @@ import './styles/ListVehicles.css'
 import Paginacion from './Paginacion';
 import LoadingSpinner from './LoadingSpinner';
 import AdminAddVehicleForm from './AdminAddVehicleForm'
+import svg from './../../public/images/arrow-left-solid.svg'
 
 const AdminListVehicles = () => {
 
@@ -60,6 +61,11 @@ const AdminListVehicles = () => {
     return (
         <>
             <div className="list">
+            <div className="admin-arrow-back">
+                    <a href="/admin">
+                        <img src={svg} />
+                    </a>
+                </div>
                 {isEdit ? 
                     <div className="overlay">
                         <AdminAddVehicleForm vehicle={vehicle} isEdit={isEdit} setIsEdit={setIsEdit} id={vehicle.id}/>
@@ -86,7 +92,7 @@ const AdminListVehicles = () => {
                                     <span>{v.id}</span>
                                 </div>
                                 <div>
-                                    <span>{v.modelo.marca.marca + " " + v.modelo.modelo + " " + v.anio.anio}</span>
+                                    <span>{v.modelo.marca.marca + " " + v.modelo.modelo + " " + v.anio?.anio}</span>
                                 </div>
                                 <div className='vehicle-properties-actions'>
                                     <button onClick={() => handleEliminar(v.id)}>Eliminar</button>

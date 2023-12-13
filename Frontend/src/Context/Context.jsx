@@ -25,25 +25,6 @@ const reducer = (state, action) => {
             
         case 'SWITCH_THEME':
             return { ...state, theme: state.theme === '' ? 'dark' : '' };
-        case 'LOGIN':
-
-            fetch("http://3.135.246.162/api/auth/login", {
-                method: 'POST',
-                body: JSON.stringify(action.payload.user),
-                headers: {
-                    "content-type": "application/json"
-                }
-            }).then(res => res.json())
-                .then(data => {
-                    localStorage.setItem('jwt', data.token)
-                    if (!state.isAuthenticated) {
-                        return { ...state, isAuthenticated: true, user: action.payload.user };
-                    }
-                }).then(() => {
-                    window.location.href = '/';
-                })
-
-            return state;
         case 'LOGOUT':
             localStorage.removeItem('jwt');
             localStorage.removeItem('user');

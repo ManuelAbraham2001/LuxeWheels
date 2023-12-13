@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import Swal from 'sweetalert2'
+import svg from './../../public/images/arrow-left-solid.svg'
 
 const AdminAddCaracteristicas = () => {
 
@@ -24,10 +25,6 @@ const AdminAddCaracteristicas = () => {
     useEffect(() => {
         getCaracteristias()
     }, [])
-
-    useEffect(() => {
-        console.log(imagen);
-    }, [imagen])
 
     const getCaracteristias = () => {
         fetch("http://3.135.246.162/api/caracteristicas", {
@@ -134,6 +131,11 @@ const AdminAddCaracteristicas = () => {
     return (
         isLoading ? <LoadingSpinner /> :
             <>
+                <div style={{ zIndex: 2 }} className="admin-arrow-back">
+                    <a href="/admin">
+                        <img src={svg} />
+                    </a>
+                </div>
                 <main className="table">
                     <section className="table__header">
                         <div style={{ width: "95%", display: "flex", justifyContent: "end", margin: "0 auto" }}>

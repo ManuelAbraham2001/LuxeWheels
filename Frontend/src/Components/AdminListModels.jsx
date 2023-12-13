@@ -5,6 +5,7 @@ import Paginacion from './Paginacion'
 import LoadingSpinner from './LoadingSpinner'
 import AdmiAddModelForm from './AdminAddModelForm'
 import Swal from 'sweetalert2'
+import svg from './../../public/images/arrow-left-solid.svg'
 
 const AdminListModels = () => {
 
@@ -120,7 +121,7 @@ const AdminListModels = () => {
 
     return (
         isLoading ? <LoadingSpinner/> :
-        <div className="list">
+        <div id='list-modelos' className="list">
             {editForm ?
                 <div className='overlay'>
                     <AdmiAddModelForm modelo={modelo} isEdit={true} setEditForm={setEditForm} id={modelo.id}/>
@@ -128,7 +129,7 @@ const AdminListModels = () => {
             }
             {editCategoria ?
                 <div className='overlay'>
-                    <div style={{background: "#FFBE3F", padding: "20px", display: "flex", flexDirection: "column", justifyItems: "center", width: "20%", borderRadius: "10px", textAlign: "center"}}>
+                    <div className='form-agregar-categoria' style={{background: "#FFBE3F", padding: "20px", display: "flex", flexDirection: "column", justifyItems: "center", borderRadius: "10px", textAlign: "center"}}>
                         <h2 style={{marginTop: 0}}>Agregar categoria</h2>
                         <select onChange={handleSelectCategoria} style={{padding: "5px", outline: "none"}}>
                             <option disabled selected>Seleccionar</option>
@@ -140,6 +141,11 @@ const AdminListModels = () => {
                 </div> : null
             }
             <div className='vehicle-list'>
+            <div className="admin-arrow-back">
+                    <a href="/admin">
+                        <img src={svg} />
+                    </a>
+                </div>
                 <div>
                     <span>ID</span>
                 </div>

@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import LoadingSpinner from './LoadingSpinner';
 import Favs from '../Routes/Favs'
 import Paginacion from './Paginacion';
+import Swal from 'sweetalert2';
 
 const UserInfo = () => {
     const reformatDate = dateString => {
@@ -27,15 +28,14 @@ const UserInfo = () => {
     }
 
     const handleResenia = (id, rate) => {
+
+        setIsLoading(true)
+
         const payload = {
             resenia: resenia,
             calificacion: rate,
             fecha: format(date, "yyyy-MM-dd")
         }
-
-        console.log(payload);
-
-        // return;
 
         fetch(`http://3.135.246.162/api/resenias/${id}`, {
             method: "POST",
@@ -44,7 +44,20 @@ const UserInfo = () => {
                 "authorization": "Bearer " + token,
                 "content-type": "application/json"
             }
-        }).then(res => res.json())
+        }).then(res => {
+            setIsLoading(false)
+            if (res.status === 200) {
+                Swal.fire({
+                    title: "Reseña agregada con exito!",
+                    icon: "success"
+                }).then(() => window.location.reload())
+            } else {
+                Swal.fire({
+                    title: "Ocurrio un error al agregar la reseña.",
+                    icon: "Error"
+                }).then(() => window.location.reload())
+            }
+        })
     }
 
     useEffect(() => {

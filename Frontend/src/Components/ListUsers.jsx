@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 import './styles/listUsers.css'
 import Swal from 'sweetalert2';
+import svg from './../../public/images/arrow-left-solid.svg'
 
 const ListUsers = () => {
 
@@ -42,7 +43,7 @@ const ListUsers = () => {
         setIsLoading(true)
 
         const isAdding = !user.roles.some((rol) => rol.rol === roleToAdd);
-    
+
         fetch(`http://3.135.246.162/api/rol/${isAdding ? 'add' : 'remove'}/${id}`, {
             method: "POST",
             headers: {
@@ -50,12 +51,12 @@ const ListUsers = () => {
             }
         }).then(res => {
 
-            if(res.status != 200 && !isAdding){
+            if (res.status != 200 && !isAdding) {
                 Swal.fire({
                     title: "Ocurrio un error al eliminar el administrador.",
                     icon: "Error"
                 });
-            }else if(res.status != 200 && isAdding){
+            } else if (res.status != 200 && isAdding) {
                 Swal.fire({
                     title: "Ocurrio un error al agregar el administrador.",
                     icon: "Error"
@@ -91,52 +92,57 @@ const ListUsers = () => {
             }
             setIsLoading(false)
         })
-    
+
     }
-    
+
     const toggleAdmin = (user) => {
         callApiAddRemoveRole(user, user.id, "ROLE_ADMIN");
     };
 
     return (
-        isLoading ? <LoadingSpinner/> :
-        <>
-            <main className="table">
-                <section className="table__header">
-                    <h1>Usuarios</h1>
-                </section>
-                <section className="table__body">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Documento</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map(u => (
-                                <tr key={u.id}>
-                                    <td>{u.id}</td>
-                                    <td>{u.nombre + " " + u.apellido}</td>
-                                    <td>{u.email}</td>
-                                    <td>{u.documento}</td>
-                                    <td>
-                                        <div>
-                                            <button onClick={() => toggleAdmin(u)} className={u.roles.some((rol) => rol.rol === "ROLE_ADMIN") ? "noAdmin" : "admin"}>
-                                                {buttonAdmin(u)}
-                                            </button>
-                                        </div>
-                                    </td>
+        isLoading ? <LoadingSpinner /> :
+            <>
+                <div style={{zIndex: 2}} className="admin-arrow-back">
+                    <a href="/admin">
+                        <img src={svg} />
+                    </a>
+                </div>
+                <main className="table">
+                    <section className="table__header">
+                        <h1>Usuarios</h1>
+                    </section>
+                    <section className="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Documento</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-        </>
+                            </thead>
+                            <tbody>
+                                {users.map(u => (
+                                    <tr key={u.id}>
+                                        <td>{u.id}</td>
+                                        <td>{u.nombre + " " + u.apellido}</td>
+                                        <td>{u.email}</td>
+                                        <td>{u.documento}</td>
+                                        <td>
+                                            <div>
+                                                <button onClick={() => toggleAdmin(u)} className={u.roles.some((rol) => rol.rol === "ROLE_ADMIN") ? "noAdmin" : "admin"}>
+                                                    {buttonAdmin(u)}
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+            </>
     )
 }
 

@@ -8,6 +8,17 @@
     gap: 20px;
 }
 
+.admin-arrow-back {
+
+    position: absolute;
+    left: 2%;
+    top: 15%;
+}
+
+.admin-arrow-back img {
+    width: 20px;
+}
+
 .menu-option {
     background-color: #FFBE3F;
     padding: 50px 100px;
@@ -54,7 +65,7 @@
 
 }
 
-@media (min-width: 768px) and (max-width: 1200px){
+@media (min-width: 768px) and (max-width: 1200px) {
     .admin-menu {
         margin: 10px 0;
         height: 100vh;

@@ -9,8 +9,8 @@ import { format } from 'date-fns';
 const Reserva = () => {
 
     const location = useLocation();
-    const [excludeDates, setExcludeDates] = useState([])
-    const [dateRange, setDateRange] = useState([null, null]);
+    const [excludeDates, setExcludeDates] = useState(location.state.excludeDates)
+    const [dateRange, setDateRange] = useState([location.state.start, location.state.end]);
     const [startDate, endDate] = dateRange;
     const [maxDate, setMaxDate] = useState(null)
     const [error, setError] = useState(false)
@@ -42,20 +42,20 @@ const Reserva = () => {
                 .then(data => setUserInfo(data))
         }
 
+        setIsLoading(false)
 
-        fetch(`http://3.135.246.162/api/reservas/${location.state.auto.id}`, {
-            method: 'GET',
-            headers: {
-                'content-type': "application/json"
-            }
-        }).then(res => res.json())
-            .then(data => {
-                const reservas = data
-                const auxFechas = reservas.map(f => ({ start: new Date(f.inicio), end: new Date(f.cierre + 'T23:59:59') }))
-                setExcludeDates(auxFechas)
-                setIsLoading(false);
-                console.log(userInfo);
-            })
+        // fetch(`http://3.135.246.162/api/reservas/${location.state.auto.id}`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'content-type': "application/json"
+        //     }
+        // }).then(res => res.json())
+        //     .then(data => {
+        //         const reservas = data
+        //         const auxFechas = reservas.map(f => ({ start: new Date(f.inicio), end: new Date(f.cierre + 'T23:59:59') }))
+        //         setExcludeDates(auxFechas)
+        //         setIsLoading(false);
+        //     })
 
         const handleResize = () => {
             if (window.innerWidth <= 1700) {
@@ -80,6 +80,7 @@ const Reserva = () => {
         const excludeDatesFilter = excludeDates.map(fecha => fecha.start)
         const fechasFuturas = excludeDatesFilter.filter(fecha => fecha.getTime() > nuevaFecha.getTime());
         setMaxDate(fechasFuturas[0])
+        console.log(fechasFuturas);
         setDateRange(date)
     }
 
@@ -256,7 +257,7 @@ const Reserva = () => {
                                     {endDate == null ? null : format(endDate, "dd/MM/yyyy")}
                                 </div>
                             </div>
-                            <button onClick={handleReservar} className='reservar-button'>Confirmar reserva</button>
+                            <button disabled={startDate == null || endDate == null ? true : false} style={startDate == null || endDate == null ? { background: "#ffd480", cursor: "not-allowed" } : null} onClick={handleReservar} className='reservar-button'>Confirmar reserva</button>
                         </div>
                     </div>
                 </div>

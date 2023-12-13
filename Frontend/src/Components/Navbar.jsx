@@ -77,9 +77,9 @@ const Navbar = () => {
                 </div>
             </Link>
 
-            <div className="burger-menu">
+            {/* <div className="burger-menu">
                 <img src="/images/icon-hamburger.svg" />
-            </div>
+            </div> */}
 
             <div className="user-info-nav">
                 <div className="right-block">

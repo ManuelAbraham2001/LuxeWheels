@@ -65,7 +65,6 @@ const Favs = ({isUserPage}) => {
             />
         )
     };
-    console.log(isLoading);
     return (
         <>
             {isLoading ? (
@@ -79,7 +78,7 @@ const Favs = ({isUserPage}) => {
                         </div>
                     </>
                 ) : (
-                    <div style={{ background: "white", padding: "20px", marginTop: "20px", borderRadius: "10px" }}>
+                    <div style={{ background: "white", padding: "20px", marginTop: "20px", borderRadius: "10px", height: "100vh" }}>
                         <h1>No has agregado ningún vehículo a favoritos.</h1>
                     </div>
                 )

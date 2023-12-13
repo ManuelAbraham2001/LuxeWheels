@@ -6,7 +6,6 @@ import SliderImagesGallery from './SliderImagesGallery';
 
 
 const Gallery = ({ fotos }) => {
-    console.log(fotos);
 
     const [gallery, toggleGallery] = useState(false);
 

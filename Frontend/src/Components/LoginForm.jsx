@@ -2,95 +2,111 @@
 import './styles/login.css'; // Importa los estilos CSS o SCSS según tu elección
 import React, { useState, useEffect } from 'react';
 import { useRentacarStates } from '../Context/Context'
-import  { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { state, dispatch } = useRentacarStates();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [enviado, setEnviado] = useState(false);
-  const [errorEmail, setErrorEmail] =useState(false);
-  const [errorPassword, setErrorPassword] = useState(false)
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { state, dispatch } = useRentacarStates();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [enviado, setEnviado] = useState(false);
+    const [errorEmail, setErrorEmail] = useState(false);
+    const [errorPassword, setErrorPassword] = useState(false)
 
-  const validarEmail = (email) => {
+    const [errorEmailMessage, setErrorEmailMessage] = useState("Coloque un email valido(Ej:ejemplo@email.com)")
+    const [errorPasswordMessage, setErrorPasswordMessage] = useState("La contraseña debe contener 5 digitos o más")
 
-    const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const validarEmail = (email) => {
 
-      return regexEmail.test(email);
-  }
-  
-  const handleLogin = () => {
-    // const isAuthenticationSuccessful = email === 'usuario@example.com' && password === '1234';
-      // Cambia el estado de la sesión
-    setEnviado(false)
-    setErrorEmail(false)
-    setErrorPassword(false)
+        const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if(validarEmail(email) == true && password.length >= 5) {
-      setEnviado(true)
-      setErrorEmail(false)
-      setErrorPassword(false)
-
-    } else if (validarEmail(email) == false && password.length >=5) {
-      setErrorEmail(true)
-      setErrorPassword(false)
-    }else if(validarEmail(email) == true && password.length < 5){
-      setErrorEmail(false)
-      setErrorPassword(true)
-    }else if(validarEmail(email) == false && password.length < 5){
-      setErrorEmail(true)
-      setErrorPassword(true)
+        return regexEmail.test(email);
     }
 
-      dispatch({ type: 'LOGIN',payload: {
-        user: {
-          email: email,
-          password: password // para sacar del back
-        },
-      },});
-      console.log(`Iniciar sesión con ${email} y ${password}`);
+    const handleLogin = () => {
+        // const isAuthenticationSuccessful = email === 'usuario@example.com' && password === '1234';
+        // Cambia el estado de la sesión
+        setEnviado(false)
+        setErrorEmail(false)
+        setErrorPassword(false)
 
-  };
+        if (validarEmail(email) == true && password.length >= 5) {
+            setEnviado(true)
+            setErrorEmail(false)
+            setErrorPassword(false)
 
-  const errorEmailMessage =  <h3 style={{color: 'red'}}>Coloque un email valido(Ej:ejemplo@email.com)</h3>;
-  const errorPasswordMessage =  <h3 style={{color: 'red'}}>La contraseña debe contener 5 digitos o más</h3>;
+        } else if (validarEmail(email) == false && password.length >= 5) {
+            setErrorEmail(true)
+            setErrorPassword(false)
+        } else if (validarEmail(email) == true && password.length < 5) {
+            setErrorEmail(false)
+            setErrorPassword(true)
+        } else if (validarEmail(email) == false && password.length < 5) {
+            setErrorEmail(true)
+            setErrorPassword(true)
+        }
+
+        fetch("http://3.135.246.162/api/auth/login", {
+            method: 'POST',
+            body: JSON.stringify({email: email, password: password}),
+            headers: {
+                "content-type": "application/json"
+            }
+        }).then(res => {
+            if (res.status != 200) {
+                console.log('asd');
+                setErrorPasswordMessage("Credenciales invalidas.")
+                setErrorPassword(true)
+            }
+            return res.json()
+        })
+            .then(data => {
+                localStorage.setItem('jwt', data.token)
+                if (!state.isAuthenticated) {
+                    return { ...state, isAuthenticated: true, user: {email: email, password: password} };
+                }
+            }).then(() => {
+                window.location.href = '/';
+            })
+    };
 
 
-  return (
-    <div style={{display: "flex", flexDirection: "column"}} className="background-image">
-      {location.state?.message ?  <h1 style={{color: "white", background: "red", padding: "10px", borderRadius: "10px"}}>{location.state?.message}</h1> : null}
-      <div className="add-vehicle-container">
-        <div className="add-vehicle-form">
-          <h2>Iniciar Sesión</h2>
-          <label className="label-field">Email:</label>
-          <input
-            className="input-field"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errorEmail && <p className="error-message">{errorEmailMessage}</p>}
 
-          <label className="label-field">Contraseña:</label>
-          <input
-            className="input-field"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errorPassword && <p className="error-message">{errorPasswordMessage}</p>}
 
-          <button className="submit-button" onClick={handleLogin}>
-            Iniciar Sesión
-          </button>
+    return (
+        <div style={{ display: "flex", flexDirection: "column" }} className="background-image">
+            {location.state?.message ? <h1 style={{ color: "white", background: "red", padding: "10px", borderRadius: "10px" }}>{location.state?.message}</h1> : null}
+            <div id='login-form' className="add-vehicle-container">
+                <div className="add-vehicle-form">
+                    <h2>Iniciar Sesión</h2>
+                    <label className="label-field">Email:</label>
+                    <input
+                        className="input-field"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    {errorEmail && <p className="error-message">{<h3 style={{ color: 'red' }}>{errorEmailMessage}</h3>}</p>}
+
+                    <label className="label-field">Contraseña:</label>
+                    <input
+                        className="input-field"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    {errorPassword && <p className="error-message">{<h3 style={{ color: 'red' }}>{errorPasswordMessage}</h3>}</p>}
+
+                    <button className="submit-button" onClick={handleLogin}>
+                        Iniciar Sesión
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default LoginForm;

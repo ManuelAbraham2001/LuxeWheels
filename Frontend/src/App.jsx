@@ -23,6 +23,7 @@ import Reserva from './Components/Reserva';
 import UserInfo from './Components/UserInfo';
 import AdminListModels from './Components/AdminListModels';
 import SliderImagesGallery from './Components/SliderImagesGallery';
+import WhatsappButton from './Components/WhatsappButton';
 
 const App = () => {
     // const token = localStorage.getItem("jwt")
@@ -59,6 +60,7 @@ const App = () => {
                         <Route path="/login" element={<LoginForm />} />
                     </Route>
                 </Routes>
+                <WhatsappButton />
                 <Footer />
             </div>
         </>

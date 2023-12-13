@@ -111,3 +111,10 @@
     margin-left: 10px;
     transition: var(--speed);
   }
+
+  @media (max-width: 768px) {
+
+    .dropdown-menu{
+      right: 8px;
+    }
+  }

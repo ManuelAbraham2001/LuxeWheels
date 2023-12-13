@@ -12,10 +12,27 @@ main.table {
     height: 10%;
     background-color: #fff4;
     padding: .8rem 1rem;
-
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+}
+
+.table__header#table-categorias{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.table__header#table-categorias button{
+    color: white;
+    background-color: #FFBE3F;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .table__header .input-group {
