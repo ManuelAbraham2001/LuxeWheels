@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -44,12 +46,20 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) throws JsonProcessingException {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtil.generarToken(authentication);
-        JwtResponse jwtResponse = new JwtResponse(token);
-        return ResponseEntity.ok().body(jwtResponse);
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtUtil.generarToken(authentication);
+            JwtResponse jwtResponse = new JwtResponse(token);
+            return ResponseEntity.ok().body(jwtResponse);
+        } catch (UsernameNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Contraseña incorrecta");
+        } catch (JsonProcessingException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error");
+        }
     }
 
     @PostMapping("/resend")

@@ -18,7 +18,6 @@ public class ModeloController {
     public ResponseEntity<?> crear(@RequestBody CrearModeloDTO modelo){
         return ResponseEntity.ok(modeloService.crear(modelo));
     }
-
     @GetMapping
     public ResponseEntity<?> listarTodos(){
         return ResponseEntity.ok(modeloService.listarTodos());
@@ -39,6 +38,11 @@ public class ModeloController {
     public ResponseEntity<?> agregarCategoria(@PathVariable Long id, @RequestParam String categoria){
         modeloService.agregarCategoria(categoria, id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/feedback")
+    public ResponseEntity<?> feedbackOptions(){
+        return ResponseEntity.ok(modeloService.feedBack());
     }
 
     @DeleteMapping("/{id}")

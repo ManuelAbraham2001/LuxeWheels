@@ -113,6 +113,11 @@ public class ModeloServiceImpl implements ModeloService{
         modeloRepository.deleteById(id);
     }
 
+    @Override
+    public List<String> feedBack() {
+        return modeloRepository.feedBackOptions();
+    }
+
     private <T, R extends JpaRepository<T, Long>> void agregarElementos(List<String> nuevosElementos, List<T> elementosExistentes, R repository, Function<String, T> findByFunction) {
         for (String nuevoElemento : nuevosElementos) {
             boolean elementoEncontrado = elementosExistentes.stream()

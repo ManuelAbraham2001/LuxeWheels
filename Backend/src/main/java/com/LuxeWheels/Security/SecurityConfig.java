@@ -45,7 +45,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://c3-equipo5.s3-website.us-east-2.amazonaws.com/"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Access-Control-Allow-Origin"));
 
@@ -77,6 +77,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/usuarios/favoritos/**").authenticated()
                                 .requestMatchers("/api/usuarios/reservas").authenticated()
                                 .requestMatchers("/api/modelo").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/api/modelo/feedback").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/caracteristicas").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/caracteristicas").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/auth/resend").permitAll()

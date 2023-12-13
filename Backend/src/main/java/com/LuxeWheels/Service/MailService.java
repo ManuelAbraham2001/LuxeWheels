@@ -65,10 +65,10 @@ public class MailService {
         String htmlContent = "<html>\n" +
                 "<body>\n" +
                 "    <h1>Detalles de Reserva</h1>" +
-                "    <p>Estimado <strong> " + usuario.getNombre() + " </strong>,</p>\n" +
-                "    <p>Le informamos que se ha realizado una reserva para el siguiente producto:</p>\n" +
-                "    <h2>Producto Reservado</h2>\n" +
-                "    <p><strong>Producto:</strong>" + vehiculo.getModelo().getMarca().getMarca() + " " + vehiculo.getModelo().getModelo() + " " + vehiculo.getAnio() + "</p>\n" +
+                "    <p>Estimado <strong> " + usuario.getNombre() + "</strong>,</p>\n" +
+                "    <p>Le informamos que se ha realizado una reserva para el siguiente vehiculo:</p>\n" +
+                "    <h2>Vehiculo Reservado</h2>\n" +
+                "    <p><strong>Vehiculo: </strong>" + vehiculo.getModelo().getMarca().getMarca() + " " + vehiculo.getModelo().getModelo() + " " + vehiculo.getAnio().getAnio() + "</p>\n" +
                 "    <h2>Detalles de la Reserva</h2> " +
                 "    <p><strong>Fecha y Hora de la Reserva:</strong> " + fecha + "</p>\n" +
                 "    <h2>Información de Contacto del Proveedor</h2>" +

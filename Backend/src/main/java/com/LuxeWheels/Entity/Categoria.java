@@ -34,6 +34,11 @@ public class Categoria {
         this.categoria = categoria;
     }
 
+    public Categoria(String categoria, String descripcion) {
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+    }
+
     public Categoria(String categoria, String descripcion, String url) {
         this.categoria = categoria;
         this.descripcion = descripcion;

@@ -13,4 +13,6 @@ public interface ModeloService {
     Page<Modelo> listarPaginados(int pagina);
     void agregarCategoria(String categoria, Long id);
     void eliminar(Long id);
+
+    List<String> feedBack();
 }

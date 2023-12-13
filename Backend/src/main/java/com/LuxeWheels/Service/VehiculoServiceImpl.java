@@ -158,9 +158,9 @@ public class VehiculoServiceImpl implements VehiculoService{
         if(vehiculo.getPrecio() != vehiculoDTO.getPrecio()){
             vehiculo.setPrecio(vehiculoDTO.getPrecio());
         }
-        if(!vehiculo.getDescripcion().equals(vehiculoDTO.getDescripcion())){
-            vehiculo.setDescripcion(vehiculo.getDescripcion());
-        }
+
+        vehiculo.setDescripcion(vehiculoDTO.getDescripcion());
+
 
         vehiculoRepository.save(vehiculo);
 
